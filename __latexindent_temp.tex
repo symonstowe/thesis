@@ -1,0 +1,244 @@
+% FILE:    thesis_main.tex 
+% AUTHOR:  Symon Stowe 
+% DATE:    2020-01-06
+%--------------------------------------------------------
+% !TEX program = lualatex
+% !BIB program = biber
+
+% Define style of document
+%\documentclass[12pt,twoside]{report}
+\documentclass[12pt]{report}
+\usepackage{amsmath} 
+
+% BIBER
+\usepackage{csquotes}
+\usepackage[american]{babel}
+\usepackage[
+backend=biber,
+style=apa,
+giveninits=true,
+doi=false,
+isbn=false,
+url=false,
+citestyle=authoryear,
+maxbibnames=19,
+apamaxprtauth=99,
+maxcitenames=2,
+uniquename=false,
+uniquelist=false
+]{biblatex}
+
+\DeclareLanguageMapping{american}{american-apa}
+
+\renewbibmacro*{name:andothers}{% Based on name:andothers from biblatex.def
+  \ifboolexpr{
+    test {\ifnumequal{\value{listcount}}{\value{liststop}}}
+    and
+    test \ifmorenames
+  }
+    {\ifnumgreater{\value{liststop}}{1}
+       {\finalandcomma}
+       {}%
+     \andothersdelim\bibstring[\emph]{andothers}}
+    {}}
+\addbibresource{chapter_2/refs.bib}
+\newcommand{\citeauthorandyear}[2][]{
+   \citeauthor{#2} (\citeyear[#1]{#2})}
+\renewcommand*{\nameyeardelim}{\addcomma\space} % Remove this line if you don't want the comma in citations
+
+% Shortcuts for the perfusion paper
+\newcommand{\PVi}{{\rm P_{Vf}}}
+\newcommand{\PAa}{{\rm P_{At}}}
+\newcommand{\PAi}{{\rm P_{Af}}}
+\newcommand{\PVa}{{\rm P_{Vt}}}
+\newcommand{\PBi}{{\rm P_{B}}}
+\newcommand{\yB}{\mathbf{y}}
+\newcommand{\vB}{\mathbf{v}}
+\newcommand{\uB}{\mathbf{u}}
+\newcommand{\xB}{\mathbf{x}}
+\newcommand{\xH}{\hat{\mathbf{x}}}
+\newcommand{\nB}{\mathbf{n}}
+\newcommand{\CB}{\mathbf{C}}
+\newcommand{\FB}{\mathbf{F}}
+\newcommand{\JB}{\mathbf{J}}
+\newcommand{\DB}{\mathbf{D}}
+\newcommand{\EX}{\mathrm{E}}
+\newcommand{\IB}{\mathbf{I}}
+\newcommand{\LB}{\mathbf{L}}
+\newcommand{\MB}{\mathbf{M}}
+\newcommand{\RB}{\mathbf{R}}
+\newcommand{\qB}{\mathbf{q}}
+\newcommand{\QB}{\mathbf{Q}}
+\newcommand{\VB}{\mathbf{V}}
+\newcommand{\WB}{\mathbf{W}}
+\newcommand{\sG}{\boldsymbol{\sigma}}
+\newcommand{\gG}{\boldsymbol{\gamma}}
+\newcommand{\GG}{\boldsymbol{\Gamma}}
+\newcommand{\SG}{\boldsymbol{\Sigma}}
+\newcommand{\LG}{\boldsymbol{\Lambda}}
+
+\usepackage{fancyref}    
+
+% Define margins of document
+\sloppy
+\usepackage{geometry}
+\geometry{verbose,letterpaper} %,tmargin=20mm,bmargin=20mm,lmargin=20mm,rmargin=20mm}
+% TODO how to we make the margins alternate like they should be in a book?
+% TODO different print vs online versions with different margins?
+
+% Set overall spacing
+\usepackage{setspace}
+\doublespacing
+%\onehalfspacing   
+
+% Shrink list spacing
+% shrink the list environments
+\usepackage{enumitem}
+\setlist{noitemsep}
+\setlist{nolistsep}
+
+% Blank pages
+\usepackage{afterpage}
+
+\newcommand\blankpage{%
+    \null
+    \thispagestyle{empty}%
+    \addtocounter{page}{-1}%
+    \newpage}
+
+%List of abbreviations
+\usepackage[acronym,nomain,nonumberlist]{glossaries}
+
+\newacronym{eit}{EIT}{electrical impedance tomography}
+\newacronym{mse}{MSE}{mean squared error}
+\newacronym{fwhm}{FWHM}{full width half max}
+\newacronym{sv}{SV}{stroke volume}
+\newacronym{lv}{LV}{left ventricular}
+\newacronym{svv}{SVV}{stroke volume variation}
+\newacronym{co}{CO}{cardiac output}
+\newacronym{fem}{FEM}{finite element model}
+\newacronym{ct}{CT}{computed tomography}
+\newacronym{mri}{MRI}{magnetic resonance imaging}
+\newacronym{ards}{ARDS}{acute respiratory distress syndrome}
+\newacronym{pet}{PET}{positron emission tomography}
+\newacronym{spect}{SPECT}{single photon emission computed tomography}
+\makeglossaries
+
+% Include packages for manipulating figures/tables
+\usepackage{epsfig} 
+
+% Different font size in captions
+\usepackage{/Users/symonstowe/thesis/proposal/tex/ccaption}
+\captionnamefont{\bf \footnotesize}
+\captiontitlefont{\footnotesize}
+\captionwidth{130mm}
+\changecaptionwidth
+
+% Define page numbering scheme
+\pagenumbering{roman}
+
+% Make the table of contents clickable
+\usepackage{hyperref}
+
+% For the papers in appendix
+\usepackage{pdfpages}
+
+% Start of document
+\begin{document}
+
+% Define aliases
+\newcommand{\pbox}{\parbox}
+
+% Figures and Tables
+\newtheorem{fig}{Figure}
+\newtheorem{tab}{Table}
+
+% Counter commands
+\setcounter{page}{1}
+\setcounter{chapter}{0}
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{3}
+
+% BODY OF TEXT 
+% Include the following files in main document
+\normalsize
+
+% START OF THESIS
+% TITLE PAGE
+\include{title/title}
+\afterpage{\blankpage}
+\phantomsection
+% DEDICATION
+\include{dedication/dedication}
+\afterpage{\blankpage}
+
+% LIST OF ABBREVIATIONS and SYMBOLS
+%\addcontentsline{toc}{chapter}{List of Abbreviations}
+%\include{abbrev_body}
+%\addcontentsline{toc}{chapter}{List of Symbols}
+%\include{symbol_body}
+% TODO pageskip TODO maybe!!
+% ABSTRACT
+
+\addcontentsline{toc}{chapter}{Abstract}
+\include{abstract/abstract}
+\newpage
+%\thispagestyle{empty}
+%\clearpage\mbox{}\clearpage
+% TODO is there a next left page command?
+% ACKNOWLEDGEMENTS
+%\addcontentsline{toc}{chapter}{Acknowledgements}
+%\include{acknowledgements}
+
+% CONTENTS, FIGURES, TABLES
+\markboth{Contents}{Contents}
+\phantomsection
+\addcontentsline{toc}{chapter}{Contents}
+\tableofcontents
+\pagebreak
+
+\markboth{List of Figures}{List of Figures}
+\phantomsection
+\addcontentsline{toc}{chapter}{List of Figures}
+\listoffigures
+\pagebreak
+
+\markboth{List of Tables}{List of Tables}
+\phantomsection
+\addcontentsline{toc}{chapter}{List of Tables}
+\listoftables
+\pagebreak
+
+\markboth{List of Acronyms}{List of Acronyms}
+\phantomsection
+\addcontentsline{toc}{chapter}{list of Acronyms}
+\printglossary[type=\acronymtype,title=List of Acronyms]
+\pagebreak
+
+% Page Headings
+% Chapter headings are in chapter files
+\pagestyle{headings}
+\pagenumbering{arabic}
+
+% MAIN FILES
+\include{intro/intro}
+\include{chapter_2/chapter_2}
+%\include{chapter3/chapter3_body}
+%\include{chapter4/chapter4_body}
+%\include{chapter5_body}
+%\include{chapter6_body}
+
+% BIBTEX
+\markboth{Bibliography}{Bibliography}
+\addcontentsline{toc}{chapter}{Bibliography}
+%\bibliography{/home/cgomez/Documents/thesis/references/thesis}
+\begin{singlespace}
+  \setlength\bibitemsep{2pt}
+  \printbibliography
+\end{singlespace}
+
+\appendix 
+\include{appendix/appendix_body}
+
+
+\end{document}
