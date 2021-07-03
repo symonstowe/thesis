@@ -103,7 +103,7 @@ uniquelist=false
 \newcommand\blankpage{%
     \null
     \thispagestyle{empty}%
-    \addtocounter{page}{-1}%
+    %\addtocounter{page}{-1}%
     \newpage}
 
 %List of abbreviations
@@ -178,17 +178,18 @@ uniquelist=false
 %\addcontentsline{toc}{chapter}{List of Symbols}
 %\include{symbol_body}
 % TODO pageskip TODO maybe!!
-% ABSTRACT
 
-\addcontentsline{toc}{chapter}{Abstract}
+% ABSTRACT
+%\markboth{Abstract}{Abstract}
 \include{abstract/abstract}
-\newpage
-%\thispagestyle{empty}
-%\clearpage\mbox{}\clearpage
-% TODO is there a next left page command?
+\addcontentsline{toc}{chapter}{Abstract}
+\afterpage{\blankpage}
+
 % ACKNOWLEDGEMENTS
-%\addcontentsline{toc}{chapter}{Acknowledgements}
-%\include{acknowledgements}
+%\markboth{Acknowledgements}{Acknowledgements}
+\include{acknowledgements/acknowledgements}
+\addcontentsline{toc}{chapter}{Acknowledgements}
+\afterpage{\blankpage}
 
 % CONTENTS, FIGURES, TABLES
 \markboth{Contents}{Contents}
