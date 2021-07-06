@@ -50,10 +50,15 @@ uniquelist=false
        {}%
      \andothersdelim\bibstring[\emph]{andothers}}
     {}}
-\addbibresource{chapter_2/refs.bib}
+\addbibresource{refs.bib}
 \newcommand{\citeauthorandyear}[2][]{
    \citeauthor{#2} (\citeyear[#1]{#2})}
 \renewcommand*{\nameyeardelim}{\addcomma\space} % Remove this line if you don't want the comma in citations
+\DeclareCiteCommand{\citeyear}
+    {}
+    {\bibhyperref{\printfield{year}}}
+    {\multicitedelim}
+    {}
 
 % Shortcuts for the perfusion paper
 \newcommand{\PVi}{{\rm P_{Vf}}}
@@ -91,6 +96,10 @@ uniquelist=false
 \newcommand{\JB}{{\mbox{\bf J}}} 
 \newcommand{\vB}{{\mbox{\bf v}}}
 
+% Define a TODO and Comment
+\newcommand{\TODO}[1]{ \textsf{\color{red}{{TODO: \\ #1}}} }
+\newcommand{\COMMENT}[1]{ \textsf{\color{blue}{{COMMENT: #1}}} }
+
 \usepackage{fancyref}    
 
 % Define margins of document
@@ -102,7 +111,7 @@ uniquelist=false
 
 % Set overall spacing
 \usepackage{setspace}
-\doublespacing
+%\doublespacing
 %\onehalfspacing   
 
 % Shrink list spacing
@@ -241,7 +250,7 @@ uniquelist=false
 \include{chapter_2/chapter_2}
 \include{chapter_3/chapter_3}
 %\include{chapter4/chapter4_body}
-%\include{chapter5_body}
+%\include{chapter_5/chapter_5}
 %\include{chapter6_body}
 
 % BIBTEX

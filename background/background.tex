@@ -7,19 +7,55 @@ This section briefly reviews the current techniques for lung perfusion and hemod
 monitoring, and provides a general overview 
 of the state of 3D EIT as used for thoracic imaging and monitoring.
 
+\section{Electrical Impedance Tomography}
+
 \subsection{Impedance Imaging}
-Impedance imaging has been in use since the early 1900s in the geophysical community used as a technique to image
-below the earth's surface~\parencite{Allaud1977}. 
-In biomedical applications
-EIT leverages electrical conductivity, permittivity and impedance properties of 
-tissues and fluids within the body to compute conductivity distributions and generate images. 
+Impedance imaging has been in use since the early 1900s for geophisical applications.  
+Originally introduced as a technique to image below the earth’s surface, 
+current was transmitted between two electrodes placed into the ground and any 
+anomalies in subsurface conductivity produced deviation 
+in the equipotential lines. 
+Including current injections and measurements from multiple locations and using known 
+electrical properties of geological structures Conrad Schlumberger identified
+features of underground geological structures~\parencite{allaud_schlumberger_1977}.
+
+These same techniques can be applied in biomedical applications where
+voltage is measured on an array of body surface electrodes 
+while current is applied between select electrode pairs. 
 Due to impedance differences associated with biological tissues and their physiological 
 function~\parencite{Geddes1967,McAdams1995}
 EIT has been proposed for a wide range of applications from thoracic monitoring to neuronal and 
 brain imaging~\parencite{Holder1992,Frerichs2016}. 
+
+\subsection{Bioimpedance}
+
+\TODO{
+    Discuss high and low frequencies and the impednace of the tissues of interest  \\
+    What constrasts are easy and which are interesting?
+    }
+
+\subsection{Forward Problem}
+
+\subsection{Imaging Techniques}
+
+\TODO{
+    Time Difference \\
+    Frequency Difference \\
+    Absolute \\ 
+}
+
+
+
+Using the quasi-static 
+formulations of Maxwell's equations, the potential distribution $u$ can be used 
+compute the conductivity $\rho$ and generate images.
+
+
 % TODO in the thesis go into absolute imaging vs time difference imaging in depth here!!!
 Imaging the absolute difference in tissue impedance is challenging due to the non-linear trajectory of 
 electrical current, individual anatomy and difference in electrode contact impedance. 
+
+
 Time difference EIT uses a reference frame to image the change in conductivity between 
 two points in time and allows for imaging of functional activity such as the inflation of the lungs 
 and the flow of blood.

@@ -9,6 +9,12 @@
 %\documentclass[12pt,twoside]{report}
 \documentclass[12pt]{report}
 \usepackage{amsmath} 
+\usepackage{wasysym}
+\usepackage{amssymb}
+\usepackage{amsbsy}
+\usepackage{graphicx}
+\usepackage{multirow}
+\usepackage{tikz}
 
 % BIBER
 \usepackage{csquotes}
@@ -28,6 +34,9 @@ uniquename=false,
 uniquelist=false
 ]{biblatex}
 
+% Declare a todo comment
+
+
 \DeclareLanguageMapping{american}{american-apa}
 
 \renewbibmacro*{name:andothers}{% Based on name:andothers from biblatex.def
@@ -41,10 +50,15 @@ uniquelist=false
        {}%
      \andothersdelim\bibstring[\emph]{andothers}}
     {}}
-\addbibresource{chapter_2/refs.bib}
+\addbibresource{refs.bib}
 \newcommand{\citeauthorandyear}[2][]{
    \citeauthor{#2} (\citeyear[#1]{#2})}
 \renewcommand*{\nameyeardelim}{\addcomma\space} % Remove this line if you don't want the comma in citations
+\DeclareCiteCommand{\citeyear}
+    {}
+    {\bibhyperref{\printfield{year}}}
+    {\multicitedelim}
+    {}
 
 % Shortcuts for the perfusion paper
 \newcommand{\PVi}{{\rm P_{Vf}}}
@@ -53,14 +67,14 @@ uniquelist=false
 \newcommand{\PVa}{{\rm P_{Vt}}}
 \newcommand{\PBi}{{\rm P_{B}}}
 \newcommand{\yB}{\mathbf{y}}
-\newcommand{\vB}{\mathbf{v}}
+%\newcommand{\vB}{\mathbf{v}}
 \newcommand{\uB}{\mathbf{u}}
 \newcommand{\xB}{\mathbf{x}}
 \newcommand{\xH}{\hat{\mathbf{x}}}
 \newcommand{\nB}{\mathbf{n}}
-\newcommand{\CB}{\mathbf{C}}
+%\newcommand{\CB}{\mathbf{C}}
 \newcommand{\FB}{\mathbf{F}}
-\newcommand{\JB}{\mathbf{J}}
+%\newcommand{\JB}{\mathbf{J}}
 \newcommand{\DB}{\mathbf{D}}
 \newcommand{\EX}{\mathrm{E}}
 \newcommand{\IB}{\mathbf{I}}
@@ -69,13 +83,22 @@ uniquelist=false
 \newcommand{\RB}{\mathbf{R}}
 \newcommand{\qB}{\mathbf{q}}
 \newcommand{\QB}{\mathbf{Q}}
-\newcommand{\VB}{\mathbf{V}}
+%\newcommand{\VB}{\mathbf{V}}
 \newcommand{\WB}{\mathbf{W}}
 \newcommand{\sG}{\boldsymbol{\sigma}}
 \newcommand{\gG}{\boldsymbol{\gamma}}
 \newcommand{\GG}{\boldsymbol{\Gamma}}
 \newcommand{\SG}{\boldsymbol{\Sigma}}
 \newcommand{\LG}{\boldsymbol{\Lambda}}
+\newcommand{\VB}{{\mbox{\bf V}}}
+\newcommand{\YB}{{\mbox{\bf Y}}}
+\newcommand{\CB}{{\mbox{\bf C}}}
+\newcommand{\JB}{{\mbox{\bf J}}} 
+\newcommand{\vB}{{\mbox{\bf v}}}
+
+% Define a TODO and Comment
+\newcommand{\TODO}[1]{ \textsf{\color{red}{{TODO: \\ #1}}} }
+\newcommand{\COMMENT}[1]{ \textsf{\color{blue}{{COMMENT: #1}}} }
 
 \usepackage{fancyref}    
 
@@ -88,7 +111,7 @@ uniquelist=false
 
 % Set overall spacing
 \usepackage{setspace}
-\doublespacing
+%\doublespacing
 %\onehalfspacing   
 
 % Shrink list spacing
@@ -223,10 +246,11 @@ uniquelist=false
 
 % MAIN FILES
 \include{intro/intro}
+\include{background/background}
 \include{chapter_2/chapter_2}
-%\include{chapter3/chapter3_body}
+\include{chapter_3/chapter_3}
 %\include{chapter4/chapter4_body}
-%\include{chapter5_body}
+%\include{chapter_5/chapter_5}
 %\include{chapter6_body}
 
 % BIBTEX
@@ -239,7 +263,7 @@ uniquelist=false
 \end{singlespace}
 
 \appendix 
-\include{appendix/appendix_body}
+%\include{appendix/appendix_body}
 
 
 \end{document}

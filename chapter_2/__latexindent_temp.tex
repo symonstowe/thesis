@@ -1,6 +1,7 @@
 \chapter{Comparison of bolus- and filtering-based EIT measures of lung perfusion in an animal model}
 
-\begin{abstract}
+%\begin{abstract}
+\section{Summary}
     \emph{Objective:} Two main functional imaging approaches have been used to measure regional lung perfusion 
     using Electrical Impedance Tomography (EIT): venous injection of a hypertonic saline contrast
     agent and imaging of its passage through the heart and lungs, and digital filtering 
@@ -19,7 +20,7 @@
     \emph{Significance:} Our results indicate the potential for use of
     filtering-based EIT measures of heart-frequency activity as a non-invasive
     proxy for contrast agent injection-based measures of lung perfusion. 
-\end{abstract}
+%\end{abstract}
 
 \section{Introduction}
 
@@ -27,46 +28,46 @@ Electrical Impedance Tomography (EIT) uses electrical stimulation and measuremen
 body surface to reconstruct images of internal conductivity
 distribution and its changes.
 The most common application of EIT, experimentally and clinically,
-has been for imaging of the thorax~\parencite{Frerichs2017}.
+has been for imaging of the thorax~\parencite{frerichs_chest_2017}.
 Using a ring of electrodes around the chest, EIT is able to calculate
 images of impedance changes in the abdomen.
 Although most research has focused on
 imaging of ventilation, there is significant interest in imaging
-cardiovascular phenomena with EIT~\parencite{Adler2012,Leonhardt2012}. 
+cardiovascular phenomena with EIT~\parencite{adler_whither_2012,leonhardt_electrical_2012}. 
 
 EIT has been evaluated for its ability to measure cardiac output and
-lung perfusion since the early 90s~\parencite{Eyuboglu1989,Blottt1992,Frerichs2002}. % TODO FIX ACCENT
-Since then, various configurations of EIT have been evaluated~\parencite{Borges2012,Nguyen2015}.
+lung perfusion since the early 90s~\parencite{eyuboglu_vivo_1989,zadehkoochak_pulmonary_1992,frerichs_regional_2002}.
+Since then, various configurations of EIT have been evaluated~\parencite{borges_regional_2012,nguyen_perfusion_2015}.
 The effect of posture on EIT images
-was evaluated by\citeauthorandyear{Reifferscheid2011}, who showed that changing posture
+was evaluated by\citeauthorandyear{reifferscheid_regional_2011}, who showed that changing posture
 introduces a large and reproducible variability into ventilation distribution as imaged by EIT.
 Based on results showing a common relationship between the effect of gravity and perfusion in both children and
-adults~\parencite{Bhuyan1989},
+adults~\parencite{bhuyan_effects_1989},
 in newborns we expect to see a comparable directional change in perfusion due to the changes in
 posture.
-Recently,\citeauthorandyear{Braun2018} evaluated EIT's ability to monitor
+Recently,\citeauthorandyear{braun_accuracy_2018} evaluated EIT's ability to monitor
 cardiac output, showing that EIT is more reliable for monitoring
 cardiac output trends than absolute cardiac output.
 EIT has also been investigated for
-monitoring of systemic blood pressure~\parencite{Sola2011}, and 
-for monitoring of pulmonary arterial pressure~\parencite{Proenca2017}.
+monitoring of systemic blood pressure~\parencite{sola_non-invasive_2011}, and 
+for monitoring of pulmonary arterial pressure~\parencite{proenca_noninvasive_2017}.
 
 EIT measurements are sensitive to blood movement in
 two main ways. First, it is possible to image the transit of the
 contrast agent through the heart and lungs via a conductivity-contrasting
 bolus into the veins and second, through
 digital filtering of the time series of EIT images at the heart
-frequency~\parencite{Leathard1994}.
+frequency~\parencite{leathard_comparison_1994}.
 While multiple EIT measures of perfusion are used, their relationship is 
 not well understood.
 It is currently unclear to what degree pulsatile impedance changes
 represent blood flow, and how
 they limit the potential for heart-frequency filtering to correctly estimate
-the true perfusion~\parencite{Nguyen2012}.
+the true perfusion~\parencite{nguyen_review_2012}.
 
 Injection of a contrast agent to measure regional lung perfusion has been compared with 
 electron beam computed tomography (EBCT) and determined to be feasible 
-for measuring perfusion across different animals~\parencite{Frerichs2002}.
+for measuring perfusion across different animals~\parencite{frerichs_regional_2002}.
 Perfusion measurement via conductivity contrasts has the advantage of measuring the true perfusion,
 but requires placement of a catheter to 
 introduce the contrast agent.
@@ -90,14 +91,14 @@ but for the safety of the patient the apnoea was limited to 30\,s.
 In healthy human subject of less than one year old it 
 takes a mean of 118\,s 
 for the blood oxygen saturation levels to drop below
-90\%~\parencite{Xue1996}, however
+90\%~\parencite{fu_study_1996}, however
 the length of safe apnoea is much shorter for the sick preterm infant.
 The time period was chosen based on experience in the lab showing 
 that 30\,s seconds was
 not associated with bradycardia or desaturation to less than 90\% blood oxygen saturation.
 
 There is a debate within the EIT community about the meaning of
-heart-frequency EIT signals~\parencite{Frerichs2017, Adler2017a}. 
+heart-frequency EIT signals~\parencite{frerichs_chest_2017,adler_electrical_2017}. 
 Not all perfusion results in a
 cardiac-frequency change (for example, continuous blood flow in capillaries),
 and
@@ -109,20 +110,20 @@ Those who prefer ``pulsatility'' or ``heart-frequency fEIT image'' seek to empha
 filtered signals are not ``perfusion'' (although they may be related).
 While these pulsatility based EIT images are clearly not a direct measure of
 perfusion, the signals appear to be useful and are often measured and 
-reported~\parencite{Bartocci1999,Halter2008,Moens2014,Ericsson2016}. 
+reported~\parencite{bartocci_cerebral_1999,halter_imaging_2008,moens_variety_2014,ericsson_effect_2016}. 
 To the authors' knowledge, no systematic comparison of
 frequency-based perfusion measures has been published.
 
 The heart-frequency signal can be derived from
 frequency filtering or ensemble averaging.
 Frequency-filtering uses a filter to isolate the frequency of heart-frequency conductivity changes,
-and was introduced by\citeauthorandyear{Blottt1992} and\citeauthorandyear{Leathard1994}. 
+and was introduced by\citeauthorandyear{zadehkoochak_pulmonary_1992} and\citeauthorandyear{leathard_comparison_1994}. 
 Frequency filtering is susceptible
 to interference from ventilation when the heart rate is at a harmonic
 of the breathing rate.
 Ensemble averaging is another filtering approach which
 averages signals at a synchronized time, for example at the QRS 
-peak~\parencite{Bartocci1999, Deibele2008}. The impedance change due to each heart 
+peak~\parencite{bartocci_cerebral_1999,deibele_dynamic_2008}. The impedance change due to each heart 
 beat is aligned and averaged to give a single heart-related impedance change,
 representative of all heart-beats in the segment.
 
@@ -146,7 +147,7 @@ a study to determine a baseline for
 lung damage due to gas ventilation in neonatal lambs. 
 This is part of an effort to establish total liquid ventilation (TLV) as a less-injurious 
 ventilation strategy for the delicate lungs of neonatal 
-subjects~\parencite{Sage2018}. In order to induce changes in ventilation 
+subjects~\parencite{sage_assessing_2018}. In order to induce changes in ventilation 
 and perfusion patterns, 
 posture changes were made between supine, prone, left and right lateral positions. 
 
@@ -195,7 +196,7 @@ injection protocol was repeated and EIT recordings were captured.
 \begin{flushright}
 \includegraphics[width=0.8\textwidth]{chapter_2/imgs/fig-methodsOverview.pdf}
 \end{flushright}
-\caption{\label{fig:methods}%
+\caption[Overview of the EIT analysis methods]{\label{fig:methods}%
 This figure is a schematic overview of analysis methods for EIT perfusion. 
 The upper
 curve illustrates the global EIT signal during a period of ventilation
@@ -225,7 +226,7 @@ after 1.5 hours of ventilation and prone to supine positioning changes after
 2 hours.
 
 EIT images were 
-reconstructed using GREIT \parencite{Adler2009}, %(Adler \etal 2009), 
+reconstructed using GREIT \parencite{adler_greit_2009}, %(Adler \etal 2009), 
 which
 calculates a reconstruction matrix $\RB$ from which
 the reconstructed image is calculated as $\xH = \RB \yB$,
@@ -247,7 +248,7 @@ The linear reconstruction matrix $\RB
 $ is calculated from a
 finite element model of the body and electrode geometry
 $F(\cdot)$ and covariance estimates of the image, $\SG_t$, 
-noise, $\SG_n$ \parencite{Grychtol2016}, %(Grychtol \etal 2016), 
+noise, $\SG_n$ \parencite{grychtol_3d_2016}, %(Grychtol \etal 2016), 
 and
 a spatial filtering matrix, $\DB$.
 
@@ -297,7 +298,7 @@ Apnoea regions were selected as the total time that ventilation was arrested, in
 and had a duration of 30s. The ventilation data was selected as 30s of data immediately preceding the 
 induction of apnoea.
 Regions of interest including lung, and heart areas in the images were defined by the lamb model
-provided in EIDORS~\parencite{Adler2017b}.
+provided in EIDORS~\parencite{adler_eidors_2017}.
 
 \subsubsection{Bolus injection image $(\PBi)$}
 
@@ -308,7 +309,7 @@ The mean of 10 images including and immediately preceding the bolus injection we
 as the reference to which all bolus images were reconstructed from. 
 To image perfusion, the point with maximum decline in impedance over 
 the sum of the pixels in the lung region relative to the reference was selected based on the methods 
-presented by \citeauthorandyear{Frerichs2002}.
+presented by \citeauthorandyear{frerichs_regional_2002}.
 In~\fref{fig:methodsBolus} this was found at the point marked ``perfusion''. 
 This method was used as the standard perfusion 
 measuring technique
@@ -318,7 +319,7 @@ against which the other methods were compared.
 \begin{flushright}
 \includegraphics[width=0.8\textwidth]{chapter_2/imgs/fig-methodsBolus.pdf}
 \end{flushright}
-\caption{\label{fig:methodsBolus}%
+\caption[Selection of the bolus signal]{\label{fig:methodsBolus}%
 The method used to select the perfusion point from the bolus injection is shown 
 in the figure above. The point with the widest spread of high conductivity was 
 selected as the point of perfusion, shown here at 1.6 seconds after the contrast 
@@ -365,7 +366,7 @@ the maximum change in impedance related to pulsatile activity in the lungs was c
 \begin{flushright}
 \includegraphics[width=0.8\textwidth]{chapter_2/imgs/fig-methodsFrequency.pdf}
 \end{flushright}
-\caption{\label{fig:freqAnalysis}
+\caption[Frequency analysis methods]{\label{fig:freqAnalysis}
 Frequency analysis methodology used for obtaining a perfusion image 
 from the time series data. Steps are: 
 A) to reconstruct the images from time series measurements; 
@@ -400,7 +401,7 @@ in~\fref{fig:timeAnalysis}.
 \begin{flushright}
 \includegraphics[width=0.8\textwidth]{chapter_2/imgs/fig-methodsTime.pdf}
 \end{flushright}
-\caption{\label{fig:timeAnalysis}%
+\caption[Ensemble averaging analysis]{\label{fig:timeAnalysis}%
 Illustration of the stages of the ensemble averaging process:
 A) an ensemble average of all heartbeats over the time frame is taken from the 
 summed global signal; and 
@@ -429,7 +430,7 @@ representing the distance between the two images.
 
 To determine the significance of the change in bolus between postures
 and methods, the Cohen's d score was calculated to quantify the effect size of
-the change in the centre of mass of the perfusion image~\parencite{Cohen1988}.  
+the change in the centre of mass of the perfusion image~\parencite{cohen_statistical_1977}.  
 This was calculated as the difference between two means over the pooled standard deviation. 
 Where the difference between the two means is: $\mu_1-\mu_2$, and the pooled
 standard deviation is: ${\sqrt{\frac{(n_1-1)s^2_1+(n_2-1)n_2s^2_1}{n_1+n_2-2}}}$. 
@@ -447,7 +448,7 @@ denotes a separate posture.
 \begin{flushright}
 \includegraphics[width=0.8\textwidth]{chapter_2/imgs/fig-resultsJaccard.pdf}
 \end{flushright}
-\caption{\label{fig:resultsJaccard}%
+\caption[Jaccard index scores]{\label{fig:resultsJaccard}%
 Jaccard scores for each method and animal in the comparison. Frequency 
 filtering and ensemble averaging methods performed on the same data segment are 
 connected by solid lines. Red lines and markers indicate apnoea data sections, 
@@ -472,7 +473,7 @@ The center of mass of the perfusion
 measure images using the bolus injection method had a Cohen's d score of less than 0.1 
 between posture changes
 indicating that there is an insignificant or trivial difference in the means relative
-to the standard deviation \parencite{Cohen1988}. 
+to the standard deviation \parencite{cohen_statistical_1977}. 
 To demonstrate the visually observable changes due to posture change and the 
 high similarities that can be observed between filtering- and bolus-based 
 perfusion estimates, frequency filtered images from 
@@ -482,7 +483,7 @@ animal 4 are compared to bolus based methods in \fref{fig:discussionSample}.
 \begin{flushright}
 \includegraphics[width=0.7\textwidth]{chapter_2/imgs/fig-discussionSample.pdf}
 \end{flushright}
-\caption{\label{fig:discussionSample}%
+\caption[Example perfusion images]{\label{fig:discussionSample}%
 		This figure shows the tracking of perfusion for frequency filtering measures
 		of perfusion during apnoea and ventilation sections compared to bolus injection
 		for animal 4.
@@ -535,12 +536,12 @@ During the experiment the order of posture change was not randomised.
 While changes in ventilation due to posture change
 are not understood to have long term physiological effects, if there is a longer term
 effect of change in posture the lack of randomisation will impact the results. 
-\citeauthorandyear{Nguyen2015} were able to image perfusion changes due to induced 
+\citeauthorandyear{nguyen_perfusion_2015} were able to image perfusion changes due to induced 
 pulmonary embolisms and using the peak impedance change on dilution curves,
 however our data presented insufficient variance in perfusion induced by posture change to 
 complete a center of mass analysis. A higher statistical power 
 could potentially be achieved through initiating posture changes
-with more dramatic results in perfusion, such as upright to supine \parencite{Nakazato2010}.
+with more dramatic results in perfusion, such as upright to supine \parencite{nakazato_quantitative_2010}.
 
 Throughout the experiment, 
 the perfusion image was selected as the image containing 
@@ -549,7 +550,7 @@ in the lung region, which occurred
 at different relative times across animals and events. Many factors could affect this
 including belt positioning changes, and it could be a contributing factor 
 to the inconsistent trends in amplitude changes in the global image across methods.
-\citeauthorandyear{Borges2012}
+\citeauthorandyear{borges_regional_2012}
 compared EIT perfusion images using first-pass kinetics and 
 heart-frequency filtering based methods to perfusion measures using SPECT,
 finding that heart-frequency filtering
@@ -558,16 +559,16 @@ determined that there was no discernible relationship between the magnitude of t
 SPECT images and the heart-frequency images.
 This was consistent with the findings of this study that image amplitude of the bolus injection and 
 heart-frequency filtering-based methods was not consistent in all animals.
-This methodology presented by \citeauthorandyear{Borges2012}
+This methodology presented by \citeauthorandyear{borges_regional_2012}
 was not part of the comparison in this study as the edentification of the 
 perfusion signal due to the heart could not be consistently
 identified and removed across all animals.
 In two dimensions, heart-frequency and ventilation signals 
 have been used to identify the location 
 of the heart and lungs within the EIT electrode plane with known electrode 
-locations and anatomy~\parencite{Ferrario2012}, but in situations where the electrode 
+locations and anatomy~\parencite{ferrario_toward_2012}, but in situations where the electrode 
 location and anatomy is not precisely known EIT tends to perform poorly as a structural 
-imaging modality~\parencite{Adler2017a}.
+imaging modality~\parencite{adler_electrical_2017}.
 These challenges suggest that configurations with multiple planes of electrodes 
 may be better able to isolate and remove off-plane 
 pulsatility signals related to the heart.
