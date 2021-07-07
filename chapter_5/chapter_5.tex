@@ -1,17 +1,16 @@
 \chapter{Internal Electrodes}
-\subsection{The effects and uses of internal electrodes on 3D EIT image reconstructions}
+%\subsection{The effects and uses of internal electrodes on 3D EIT image reconstructions}
 
-\subsubsection{Motivation}
+\section{Motivation}
 One of the shortcomings of EIT is low sensitivity away from the electrodes. 
 For continuous monitoring of cardiac-related events an EIT protocol with an improved sensitivity 
 near the heart and innermost regions of the lings may improve results and imaging accuracy.
 
-\subsubsection{Problem}
 EIT has low sensitivity away from the electrodes which are typically placed on the body surface. 
 This chapter will investigate the use and application of internal electrodes and quantify the improvement 
 in sensitivity and image reconstruction accuracy in simulation.
 
-\subsubsection{Summary}
+\section{Summary}
 This chapter provides proof of principle of internal electrode configurations to 
 improve EIT sensitivity and reconstruction accuracy.
 The goal of this chapter is to determine the viability of internal electrode use through a series of simulations and phantom measurements then validate
@@ -20,7 +19,7 @@ the imaging ability using one or two animals.
 We expect to show that using internal electrodes increases the sensitivity of the measurements to internal impedance changes 
 and enables a higher resolution of image reconstructions in these central regions of the thorax. 
 
-\subsubsection{Simulations}
+\section{Simulations}
 To analyze the sensitivity changes due to different electrode 
 configurations finite element models (FEMs) of a cylindrical tank were 
 created with each of the tested electrode configurations. Figure~\ref{fig:tank_FEM} shows the four 
@@ -30,7 +29,7 @@ electrodes (3D(a)); a second 3D configuration of 2 layers of 15 electrodes
 plus 2 central internal electrodes inline with the electrode planes (3D(b)); and a final 3D configuration of 
 2 layers of 14 electrodes with 4 central internal electrodes evenly spaced between the electrode planes (3D(c)).
 
-\begin{figure}[!ht]
+\begin{figure}
 \centering
 \includegraphics[width=\textwidth]{chapter_5/imgs/FEM_Comparison.pdf}
 \caption[Internal electrode configurations]{4 configurations of electrodes were tested: 2D) a single ring of 32 electrodes; 
@@ -67,7 +66,7 @@ size based on visual inspection, but more simulations are required to quantify t
 Figure~\ref{fig:reconstruction_comparison}. The top row shows reconstructions with no additive noise, and the second row shows reconstructions on measurements with 5dB of 
 additive noise.
 
-\begin{figure}[!ht]
+\begin{figure}
 \centering
 \includegraphics[width=\textwidth]{chapter_5/imgs/Image_Comparison.pdf}
 \caption[Internal electrode simulation reconstructions]{The top row shows reconstructions with no additive noise, and the second row shows reconstructions on measurements with 5dB of
@@ -79,7 +78,7 @@ Preliminary results shown in Figure~\ref{fig:internal_sensitivity} show internal
 typical 2D and 3D configurations with only external electrodes. 
 
 
-\begin{figure}[!ht]
+\begin{figure}
 \centering
 %\includegraphics[trim=0 65 0 400,clip,width=\textwidth]{chapter2/imgs/Sensitivity_Comparison_new.pdf}
 \includegraphics[width=\textwidth]{chapter_5/imgs/Sensitivity_Comparison_new.pdf}
@@ -101,7 +100,7 @@ The sensitivity of the proposed pattern was compared to the sensitivity profile 
 the basic ``skip 4'' injection and measurement pattern which has been found to 
 give good sensitivity in 2D and 3D external electrode configurations~\cite{Grychtol2016}.
 
-\begin{figure}[!ht]
+\begin{figure}
 \centering
 \includegraphics[width=\textwidth]{chapter_5/imgs/current_injection.pdf}
 \caption[Current injection patterns with internal electrodes]{A proposed current injection and measurement pattern for \acrshort{eit} imaging with 2 internal electrodes.
@@ -115,7 +114,7 @@ the 2 planes.}
 Using this injection pattern preliminary results show a further increase in sensitivity in the internal regions without increasing the measurement
 acquisition time. The sensitivity distribution for the new injection pattern is pictured in Figure~\ref{fig:modified_measurement_sens}.
 
-\begin{figure}[!ht]
+\begin{figure}
 \centering
 \includegraphics[width=\textwidth]{chapter_5/imgs/Injection_Comparison.pdf}
 \caption[Sensitivity using internal electrodes with modified injection patterns]{A comparison between the sensitivity distributions for a typical ``skip 4'' injection pattern pictured on the left (3D(b)) and 
@@ -140,7 +139,7 @@ Building on this work simulations will be used to answer more questions on the u
 \item Do internal electrodes pose any risk to patient safety?
 \end{itemize}
 
-\subsection{Phantom Measurements}
+\section{Phantom Measurements}
 Phantom measurements are used to asses the real-world performance 
 of the measurements and configurations 
 that were identified in simulations. Two non-conductive circular 
@@ -154,7 +153,11 @@ In addition to determining the real-world separability the phantom measurements 
 representing the heart region and determine the FWHM and MSE based on the measured location of the object within the phantom dimensions. 
 This will be compared to the results obtained through simulations.
 
-\subsection{Animal Data}
+\section{Motion Correction}
+
+\section{Inverse Source Localization}
+
+\section{Animal Data}
 
 Internal electrodes present the opportunity to obtain
 a significantly higher sensitivity and with motion correction 
@@ -192,7 +195,7 @@ high peep (10) and low peep (4).
 All breaths in each 30 second segment were 
 ensemble averaged to 
 give one representative breath for each scenario.
-\begin{figure}[H]
+\begin{figure}
 \centering
 % Use the following line with your images (pdf preferred)
 \includegraphics[width=.96\columnwidth]{chapter_5/imgs/lamb_sensitivity_profiles.pdf}
@@ -222,7 +225,7 @@ shown  below in fig.~\ref{fig:img_example}.
 With internal electrodes impedance changes at the cardiac frequency had a magnitude of 6.4\% \pm 4.35\%
 of the ventilation frequency and without internal electrodes the amplitude of the cardiac frequency
 was 0.8\% \pm 0.3\% of the ventilation frequency signal.
-\begin{figure}[H]
+\begin{figure}
 \centering
 % Use the following line with your images (pdf preferred)
 \includegraphics[width=.96\columnwidth]{chapter_5/imgs/lamb_imgs.pdf}

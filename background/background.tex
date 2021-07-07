@@ -1,6 +1,4 @@
 \chapter{Background}
-
-\section{TODO}
 this is short and needs a lot more detail and also figures.
 
 This section briefly reviews the current techniques for lung perfusion and hemodynamic
@@ -21,13 +19,22 @@ features of underground geological structures~\parencite{allaud_schlumberger_197
 
 These same techniques can be applied in biomedical applications where
 voltage is measured on an array of body surface electrodes 
-while current is applied between select electrode pairs. 
+while current is applied between select electrode pairs(\fref{fig:cur_equip_line}). 
 Due to impedance differences associated with biological tissues and their physiological 
 function~\parencite{Geddes1967,McAdams1995}
 EIT has been proposed for a wide range of applications from thoracic monitoring to neuronal and 
 brain imaging~\parencite{Holder1992,Frerichs2016}. 
 
+\begin{figure}
+   \includegraphics[width=\textwidth]{background/imgs/current_and_equipotential_lines.pdf}
+   \caption[Current and Equipotential lines]{\label{fig:cur_equip_line} 
+   (A) A body comprising tissues of different conductivity, (B) Electrodes are placed on the surface 
+   and current is injected between a pair or electrodes. The current pathways are indicated 
+   by the blue lines. (C) The resulting equipotential lines within the body.}
+\end{figure}
+
 \subsection{Bioimpedance}
+
 
 \TODO{
     Discuss high and low frequencies and the impednace of the tissues of interest  \\
@@ -35,6 +42,51 @@ brain imaging~\parencite{Holder1992,Frerichs2016}.
     }
 
 \subsection{Forward Problem}
+Using the quasi-static 
+formulations of Maxwell's equations, the potential distribution $u$ can be used 
+compute the conductivity $\rho$ and generate images.
+
+\subsection{Discretization and the Finite Element Method}
+
+\subsection{Image Reconstruction}
+
+\subsubsection{2D reconstruction}
+
+\subsubsection{3D Reconstruction}
+The majority of EIT measurements are done with a single ring of external electrodes but 
+in practice, electrical current cannot  be confined to a single plane
+and using a two dimensional electrode configuration can significantly
+impact the capabilities of \acrshort{eit}~\parencite{Rabbani1991}.
+The use of 3D electrode configurations in \acrshort{eit}
+was introduced in 1996~\parencite{Metherall1996} to overcome the 
+inherent limitations of 2D measurements, but it is still not widely used today.
+It is thought this is due to the increased complexity of 3D images
+and the subsequent analysis~\parencite{Grychtol2019}.
+
+It has been shown that externally placed 3D electrode configurations
+consisting of two electrode planes
+can improve the sensitivity distribution and image quality~\parencite{Grychtol2016},
+but there is still limited sensitivity in the central-most regions 
+of the chest.
+The concept of using internal esophageal electrodes has been presented
+previously~\parencite{Pilkington1989,Schuessler1995}
+as a method to improve internal sensitivity 
+and reconstruction quality,
+but has not been widely used or simulated.
+Several studies have shown that there may be several advantages to using an internal
+electrode in \acrshort{eit} recordings; 
+Measurements with an internal electrode have been 
+shown to reconstruct images equally as well as configurations with 
+twice as many external electrodes~\parencite{Schuessler1995},
+and have shown an increase in sensitivity in a central region 
+of interest~\parencite{Kwon2013,Czaplik2014,Farooq2014}.
+\subsubsection{GREIT}
+\subsubsection{Image Regularization}
+
+\subsection{Internal Electrodes}
+\subsubsection{Internal Reference Electrodes}
+\subsubsection{Inverse Source localization (time permitting)}
+
 
 \subsection{Imaging Techniques}
 
@@ -44,21 +96,30 @@ brain imaging~\parencite{Holder1992,Frerichs2016}.
     Absolute \\ 
 }
 
+\subsubsection{Absolute}
 
-
-Using the quasi-static 
-formulations of Maxwell's equations, the potential distribution $u$ can be used 
-compute the conductivity $\rho$ and generate images.
-
-
-% TODO in the thesis go into absolute imaging vs time difference imaging in depth here!!!
 Imaging the absolute difference in tissue impedance is challenging due to the non-linear trajectory of 
 electrical current, individual anatomy and difference in electrode contact impedance. 
 
+\subsubsection{Frequency Difference}
 
+\subsubsection{Time Difference}
 Time difference EIT uses a reference frame to image the change in conductivity between 
 two points in time and allows for imaging of functional activity such as the inflation of the lungs 
 and the flow of blood.
+
+
+
+
+
+
+% TODO in the thesis go into absolute imaging vs time difference imaging in depth here!!!
+
+\section{Lung perfusion monitoring}
+\subsection{Sensitivity to Blood Movement}
+\subsection{Contrast agent injection}
+\subsection{Frequency Filtering}
+
 
 Monitoring lung ventilation is one of the most
 established clinical uses of 
@@ -80,7 +141,6 @@ This document proposes methods and techniques to identify and isolate these impe
 to monitor lung perfusion and 
 aortic flow.
 
-\subsubsection{Lung perfusion monitoring}
 A perfusion scan is a technique for imaging the blood flow through the lungs
 and when compared with ventilation images can be used to detect pulmonary embolisms
 when a mismatch is identified. Clinically pulmonary perfusion is done using 
@@ -132,7 +192,7 @@ The use of 3D configurations to differentiation between pulsatile activity
 in the heart and lungs could allow for an improved perfusion measure 
 using EIT, and a means of continuously monitoring perfusion during ventilation.
 
-\subsubsection{Aortic flow monitoring}
+\section{Aortic flow monitoring}
 
 Continuous bedside monitoring appears to be one of the most
 promising future applications of \acrshort{eit} due to the high 
@@ -169,35 +229,7 @@ has additional clinical uses: it  can be used as a physiological landmark to ide
 the back of the lungs, and can be used to continuously monitor blood pressure by
 calculating the pulse transit time. 
 
-\subsubsection{3D \acrshort{eit}}
 
-The majority of EIT measurements are done with a single ring of external electrodes but 
-in practice, electrical current cannot  be confined to a single plane
-and using a two dimensional electrode configuration can significantly
-impact the capabilities of \acrshort{eit}~\parencite{Rabbani1991}.
-The use of 3D electrode configurations in \acrshort{eit}
-was introduced in 1996~\parencite{Metherall1996} to overcome the 
-inherent limitations of 2D measurements, but it is still not widely used today.
-It is thought this is due to the increased complexity of 3D images
-and the subsequent analysis~\parencite{Grychtol2019}.
-
-It has been shown that externally placed 3D electrode configurations
-consisting of two electrode planes
-can improve the sensitivity distribution and image quality~\parencite{Grychtol2016},
-but there is still limited sensitivity in the central-most regions 
-of the chest.
-The concept of using internal esophageal electrodes has been presented
-previously~\parencite{Pilkington1989,Schuessler1995}
-as a method to improve internal sensitivity 
-and reconstruction quality,
-but has not been widely used or simulated.
-Several studies have shown that there may be several advantages to using an internal
-electrode in \acrshort{eit} recordings; 
-Measurements with an internal electrode have been 
-shown to reconstruct images equally as well as configurations with 
-twice as many external electrodes~\parencite{Schuessler1995},
-and have shown an increase in sensitivity in a central region 
-of interest~\parencite{Kwon2013,Czaplik2014,Farooq2014}.
 
 \acrshort{eit} has been used clinically to monitor lung perfusion 
 in an animal model~\parencite{Leonhardt2012,Nguyen2012}, and it is theorized that 

@@ -15,6 +15,7 @@
 \usepackage{graphicx}
 \usepackage{multirow}
 \usepackage{tikz}
+\usepackage[linesnumbered,ruled,vlined]{algorithm2e}
 
 % BIBER
 \usepackage{csquotes}
@@ -33,9 +34,6 @@ maxcitenames=2,
 uniquename=false,
 uniquelist=false
 ]{biblatex}
-
-% Declare a todo comment
-
 
 \DeclareLanguageMapping{american}{american-apa}
 
@@ -96,6 +94,11 @@ uniquelist=false
 \newcommand{\JB}{{\mbox{\bf J}}} 
 \newcommand{\vB}{{\mbox{\bf v}}}
 
+\addto\captionsenglish{% Replace "english" with the language you use
+\renewcommand{\contentsname}%
+{Table of Contents}% change "Contents" (default) to "Table of Contents"
+}
+
 % Define a TODO and Comment
 \newcommand{\TODO}[1]{ \textsf{\color{red}{{TODO: \\ #1}}} }
 \newcommand{\COMMENT}[1]{ \textsf{\color{blue}{{COMMENT: #1}}} }
@@ -111,7 +114,7 @@ uniquelist=false
 
 % Set overall spacing
 \usepackage{setspace}
-%\doublespacing
+\doublespacing
 %\onehalfspacing   
 
 % Shrink list spacing
@@ -189,11 +192,13 @@ uniquelist=false
 % START OF THESIS
 % TITLE PAGE
 \include{title/title}
-\afterpage{\blankpage}
-\phantomsection
+\thispagestyle{empty}
+\cleardoublepage
+
 % DEDICATION
+\phantomsection
 \include{dedication/dedication}
-\afterpage{\blankpage}
+\cleardoublepage
 
 % LIST OF ABBREVIATIONS and SYMBOLS
 %\addcontentsline{toc}{chapter}{List of Abbreviations}
@@ -203,22 +208,21 @@ uniquelist=false
 % TODO pageskip TODO maybe!!
 
 % ABSTRACT
-%\markboth{Abstract}{Abstract}
-\include{abstract/abstract}
+\phantomsection
 \addcontentsline{toc}{chapter}{Abstract}
-\afterpage{\blankpage}
+\include{abstract/abstract}
+\cleardoublepage
 
 % ACKNOWLEDGEMENTS
 %\markboth{Acknowledgements}{Acknowledgements}
-\include{acknowledgements/acknowledgements}
+\phantomsection
 \addcontentsline{toc}{chapter}{Acknowledgements}
-\afterpage{\blankpage}
+\include{acknowledgements/acknowledgements}
+\cleardoublepage
 
 % CONTENTS, FIGURES, TABLES
-\markboth{Contents}{Contents}
-\phantomsection
-\addcontentsline{toc}{chapter}{Contents}
 \tableofcontents
+\addcontentsline{toc}{chapter}{Contents}
 \pagebreak
 
 \markboth{List of Figures}{List of Figures}
@@ -249,14 +253,13 @@ uniquelist=false
 \include{background/background}
 \include{chapter_2/chapter_2}
 \include{chapter_3/chapter_3}
-%\include{chapter4/chapter4_body}
-%\include{chapter_5/chapter_5}
-%\include{chapter6_body}
+\include{chapter_4/chapter_4}
+\include{chapter_5/chapter_5}
+\include{conclusion/conclusion}
 
 % BIBTEX
-\markboth{Bibliography}{Bibliography}
+\phantomsection
 \addcontentsline{toc}{chapter}{Bibliography}
-%\bibliography{/home/cgomez/Documents/thesis/references/thesis}
 \begin{singlespace}
   \setlength\bibitemsep{2pt}
   \printbibliography

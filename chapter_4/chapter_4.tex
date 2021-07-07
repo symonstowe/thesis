@@ -1,0 +1,105 @@
+\chapter{Custom Meshes from CT Images}
+
+\section{EIT for ARDS Patients}
+
+\section{A Segment Editor Program}
+
+\subsection{Automatic segmentation of the thorax}
+\begin{algorithm}[H]
+	\SetAlgoLined
+	\KwIn{image}
+	\KwOut{external boundary}
+		weiner filter\;
+		Set the lung intensity to 0\;
+		erode image using disk size 20\;
+		reconstruct on image from line 4\;
+		dilate with disk of size 20\;
+		reconstruct on image from line 6\;
+		binarize, thresh = 0.5\;
+		fill holes\;
+		close - disk of size 2\;
+		open using disk size 5\;
+		external boundary = largest object\;
+	\caption{Segment the external body boundary.}
+\end{algorithm}
+
+\subsection{Manual Segmentation Correction}
+
+\subsection{Mesh Generation}
+\subsubsection{Extruded Geomerty}
+\subsubsection{3D Lung Regions}
+
+
+\section{Evaluation on ARDS Patients}
+
+\subsection{Methods}
+\subsection{Results}
+Data from 4 ARDS patients with CT
+and EIT were used to develop a segmentation 
+and correction tool to identify 
+the lungs and boundary of the body.  
+Segmentation was done using the 4th intercostal space, 
+with 10 adjacent CT 
+slices to form an enclosed chest cavity. 
+The lungs
+and exterior boundary were identified by increasing the contrast
+and identifying an appropriate threshold.
+Each segmentation was downsampled to
+20 points that could be edited by the user in Matlab. The 
+mesh was generated using 
+\verb!ng_mk_extruded_model!~\cite{Grychtol2012} in EIDORS 
+3.10~\cite{Adler2019}. Images were reconstructed 
+using GREIT~\cite{Adler2009}. 
+The GI index was calculated using the method
+presented by Zhao et al.~\cite{Zhao2009} using the lung regions from the 
+forward model. A ventilated lung estimate was made using the
+segmentation as $\frac{A_{\text{ventilated lung}}}{A_{\text{total lung}}}$.
+%by dividing the area of healthy lung by 
+%the total lung area
+%from the automatic segmentation.
+
+\begin{figure}
+\centering
+% Use the following line with your images (pdf preferred)
+\includegraphics[width=\textwidth]{chapter_4/imgs/basic_vs_advanced_3_cropped.pdf}
+\caption{\label{fig:ct_mesh_breath}%
+Single breath using: A) generic model B) custom model
+}
+\end{figure}
+
+Results in fig.~\fref{fig:breath} show a reconstructed image 
+with more separable lungs in the enhanced model, and a mean GI index for each breath in the 
+1 minute 
+recording that follows 
+trend of the ventilated lung percentage in table~\ref{tbl:twocol}.
+
+\begin{table}
+  \centering
+  \caption{\label{tbl:twocol} %
+  Ventilated lung estimate vs. GI index scores.}
+  \begin{tabular}{|p{1.2cm}|p{1.5cm}|p{1.8cm}|p{1.7cm}|}
+    \hline
+  Subject & Ventilated lung (\%) &
+  GI (basic model) & GI (custom model) \\ \hline
+  1 & 99.9 & 0.353\pm0.004& 0.690\pm0.005 \\ 
+  2 & 85.5 & 0.640\pm0.022& 0.771\pm0.020  \\
+  3 & 79.6 & 0.695\pm0.007& 0.857\pm0.009  \\
+  4 & 27.0 & 0.614\pm0.011& 1.81\pm0.053 \\\hline
+  \end{tabular}
+  \vspace{-1em} 
+\end{table}
+
+
+\begin{figure}
+\centering
+% Use the following line with your images (pdf preferred)
+\includegraphics[width=\textwidth]{chapter_4/imgs/methods_figure.pdf}
+\caption{\label{fig:segment_overview}%
+An overview of the segmentation and editing process showing: 
+A) A sample raw CT which was thresholded, scaled and adjusted over several 
+adjacent slices to identify
+the lung regions and an enclosed rib area, and the resulting lung estimate; and
+B) A screen  capture of the manual mesh correction process and 2 views of the generated
+mesh.
+}
+\end{figure}
