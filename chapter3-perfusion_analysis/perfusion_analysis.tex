@@ -193,10 +193,9 @@ changing the positioning of the lamb from prone to supine as the bolus
 injection protocol was repeated and EIT recordings were captured.
 
 \begin{figure}
-\begin{flushright}
-\includegraphics[width=0.8\textwidth]{chapter_2/imgs/fig-methodsOverview.pdf}
-\end{flushright}
-\caption[Overview of the EIT analysis methods]{\label{fig:methods}%
+\centering
+\includegraphics[width=0.9\textwidth]{chapter3-perfusion_analysis/imgs/fig-methodsOverview.pdf}
+\caption[Overview of the EIT analysis methods]{
 This figure is a schematic overview of analysis methods for EIT perfusion. 
 The upper
 curve illustrates the global EIT signal during a period of ventilation
@@ -213,6 +212,7 @@ $\PAi$: pulsatility (perfusion) image during apnoea, calculated
 by frequency filtering EIT data during apnoea;
 $\PBi$: perfusion image from bolus, calculated between a 
 reference measure during apnoea and one during the bolus}
+\label{fig:methods}%
 \end{figure}
 
 \subsection{Data Acquisition and Image Reconstruction}
@@ -316,16 +316,16 @@ measuring technique
 against which the other methods were compared.
 
 \begin{figure}
-\begin{flushright}
-\includegraphics[width=0.8\textwidth]{chapter_2/imgs/fig-methodsBolus.pdf}
-\end{flushright}
-\caption[Selection of the bolus signal]{\label{fig:methodsBolus}%
+\centering
+\includegraphics[width=\textwidth]{chapter3-perfusion_analysis/imgs/fig-methodsBolus.pdf}
+\caption[Selection of the bolus signal]{
 The method used to select the perfusion point from the bolus injection is shown 
 in the figure above. The point with the widest spread of high conductivity was 
 selected as the point of perfusion, shown here at 1.6 seconds after the contrast 
 agent injection. The image series shows the conductivity contrast as the bolus 
 injection travels through the thorax.
 }
+\label{fig:methodsBolus}
 \end{figure}
 
 
@@ -358,15 +358,14 @@ Depending on the timing of the pulsatility-based changes within the selected sig
 the real component of frequency analysed image 
 did not correspond to the maximum conductivity 
 change in the lungs in every event.
-In order to correct this, each image was displayed along the axis that gave the maximum real component contained
+In order to correct this, each image was displayed along the axis 
+that gave the maximum real component contained
 within the lung region to ensure
 the maximum change in impedance related to pulsatile activity in the lungs was calculated.
 
 \begin{figure}
-\begin{flushright}
-\includegraphics[width=0.8\textwidth]{chapter_2/imgs/fig-methodsFrequency.pdf}
-\end{flushright}
-\caption[Frequency analysis methods]{\label{fig:freqAnalysis}
+\includegraphics[width=\textwidth]{chapter3-perfusion_analysis/imgs/fig-methodsFrequency.pdf}
+\caption[Frequency analysis methods]{
 Frequency analysis methodology used for obtaining a perfusion image 
 from the time series data. Steps are: 
 A) to reconstruct the images from time series measurements; 
@@ -379,6 +378,7 @@ to give greater weight to those closer to the center;
 H) I) select the image that will give the maximum real component contained
 in the lung region.
 }
+\label{fig:freqAnalysis}
 \end{figure}
 
 \subsubsection{Ensemble Averaging}
@@ -398,9 +398,8 @@ positive increase impedance within the lung region. This process is outlined
 in~\fref{fig:timeAnalysis}.
 
 \begin{figure}
-\begin{flushright}
-\includegraphics[width=0.8\textwidth]{chapter_2/imgs/fig-methodsTime.pdf}
-\end{flushright}
+\centering
+\includegraphics[width=\textwidth]{chapter3-perfusion_analysis/imgs/fig-methodsTime.pdf}
 \caption[Ensemble averaging analysis]{\label{fig:timeAnalysis}%
 Illustration of the stages of the ensemble averaging process:
 A) an ensemble average of all heartbeats over the time frame is taken from the 
@@ -445,9 +444,8 @@ indicate different methods performed on the same data segment, while each marker
 denotes a separate posture.
 
 \begin{figure}
-\begin{flushright}
-\includegraphics[width=0.8\textwidth]{chapter_2/imgs/fig-resultsJaccard.pdf}
-\end{flushright}
+\centering
+\includegraphics[width=\textwidth]{chapter3-perfusion_analysis/imgs/fig-resultsJaccard.pdf}
 \caption[Jaccard index scores]{\label{fig:resultsJaccard}%
 Jaccard scores for each method and animal in the comparison. Frequency 
 filtering and ensemble averaging methods performed on the same data segment are 
@@ -480,9 +478,8 @@ perfusion estimates, frequency filtered images from
 animal 4 are compared to bolus based methods in \fref{fig:discussionSample}.
 
 \begin{figure}
-\begin{flushright}
-\includegraphics[width=0.7\textwidth]{chapter_2/imgs/fig-discussionSample.pdf}
-\end{flushright}
+\centering
+\includegraphics[width=0.7\textwidth]{chapter3-perfusion_analysis/imgs/fig-discussionSample.pdf}
 \caption[Example perfusion images]{\label{fig:discussionSample}%
 		This figure shows the tracking of perfusion for frequency filtering measures
 		of perfusion during apnoea and ventilation sections compared to bolus injection

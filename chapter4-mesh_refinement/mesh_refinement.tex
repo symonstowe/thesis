@@ -153,7 +153,7 @@ for both Netgen and Gmsh.
 
 
 \begin{figure}
-   \includegraphics[width=\columnwidth]{chapter_3/imgs/sample_meshes.pdf}
+   \includegraphics[width=\columnwidth]{chapter4-mesh_refinement/imgs/sample_meshes.pdf}
    \caption[Example meshes for various refinement strategies]{\label{fig:sample_meshes} 
    Sample meshes generated with Netgen (top row)
    and Gmsh (bottom row). From left to right: (C1) the coarsest constant
@@ -162,7 +162,7 @@ for both Netgen and Gmsh.
 \end{figure}
 
 \begin{figure}
-  \includegraphics[width=\textwidth]{chapter_3/imgs/electrode_mesh_size_large.pdf}
+  \includegraphics[width=\textwidth]{chapter4-mesh_refinement/imgs/electrode_mesh_size_large.pdf}
   \caption[Mesh size surrounding the electrode]{\label{fig:electrode_mesh_size} A view of the electrode meshing for all constant-density meshes 
   in Netgen and Gmsh. The top two rows show all electrode faces and immediate surrounding
   surroundings from coarsest (C1) to finest (C7). C represents the constant mesh refinement and the number
@@ -190,7 +190,7 @@ as a percentage of the tank radius.
 This process is illustrated in \fref{fig:balanceMethods}.
  
 \begin{figure}
-  \includegraphics[width=\columnwidth]{chapter_3/imgs/balance_methods.pdf}
+  \includegraphics[width=\columnwidth]{chapter4-mesh_refinement/imgs/balance_methods.pdf}
   \caption[Balance point calculation method]{\label{fig:balanceMethods} A sketch of the process to determine the 
   balance point of generated meshes. A) the starting mesh; B) nodes between the
   electrode surface and the centre of the model are identified; C) the 
@@ -209,7 +209,7 @@ towards the electrodes, 19 meshes were generated for each software including 2 r
 to determine the optimal 
 node balance. Parameters global maxh and electrode maxh refer to the specified input parameters; the remaining 
 columns give parameters from the resulting meshes.}
-\input{chapter_3/mesh_table.tex}
+\input{chapter4-mesh_refinement/mesh_table.tex}
 \end{table}
 
 %The difference in meshing algorithms meant that the meshes did not have the same number
@@ -306,7 +306,7 @@ parameters. \fref{fig:results_sens_original} shows the sensitivity error between
 constant and refined meshes with respect to the number of nodes per electrode.  
 
 \begin{figure}
-  \includegraphics[width=\columnwidth]{chapter_3/imgs/sens_error_total.pdf}
+  \includegraphics[width=\columnwidth]{chapter4-mesh_refinement/imgs/sens_error_total.pdf}
   \caption[Mesh sensitivity error vs. elements per electrode]{\label{fig:results_sens_original} Sensitivity error of each mesh as a function 
   of the number of elements per electrode for both Netgen and Gmsh. The darkest lines indicate the
   constant mesh refinement, lighter lines indicate a larger maximum internal mesh size. The maximum
@@ -320,7 +320,7 @@ The resulting sensitivity profile near the electrodes more closely matched the r
 when refinement at the electrodes was higher. 
 
 \begin{figure}
-  \includegraphics[width=\columnwidth]{chapter_3/imgs/roi_methods_figure.pdf}
+  \includegraphics[width=\columnwidth]{chapter4-mesh_refinement/imgs/roi_methods_figure.pdf}
   \caption[Sensitivity distribution and regions of interest]{\label{fig:roiMethods} (A) Sensitivity distribution for the reference mesh
   (C15) generated in Gmsh with regions of interest used to compare between models. 
   (B) 3 sensitivity distributions in region E\textsuperscript{*} next to the electrodes: (i) Constant mesh M1
@@ -344,7 +344,7 @@ Across all meshes the measurement error when computing the voltage measurements 
 at less than 0.2\%.
 
 \begin{figure}
-  \includegraphics[width=\columnwidth]{chapter_3/imgs/m-mesh_sens_error_regions_split.pdf}
+  \includegraphics[width=\columnwidth]{chapter4-mesh_refinement/imgs/m-mesh_sens_error_regions_split.pdf}
   \caption[Sensitivity error with shifting node balance]{\label{fig:balance_sens}
   Resulting sensitivity error for Netgen (blue) and Gmsh (red) as the balance of the nodes
   was shifted towards the electrodes. From top to bottom: total sensitivity error, the sum of 
@@ -429,7 +429,7 @@ These additions fill an important need in EIT to allow for more accurate models
 of regions surrounding internal structures and electrodes, and 
 
 \begin{figure}
-  \includegraphics[width=\columnwidth]{chapter_3/imgs/advanced_mesh_combined.pdf}
+  \includegraphics[width=\columnwidth]{chapter4-mesh_refinement/imgs/advanced_mesh_combined.pdf}
     \caption[Advanced mesh example of an internal probe]{\label{fig:adv_mesh} Example FEMs of a probe entering a bone from the surrounding 
     tissue. Refinement is specified around the electrodes and tissue interfaces near the probe.}
 \end{figure}
