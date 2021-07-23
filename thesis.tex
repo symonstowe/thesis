@@ -35,6 +35,10 @@ uniquename=false,
 uniquelist=false
 ]{biblatex}
 
+\AtEveryBibitem{%
+  \clearfield{note}%
+}
+
 \DeclareLanguageMapping{american}{american-apa}
 
 \renewbibmacro*{name:andothers}{% Based on name:andothers from biblatex.def
@@ -261,7 +265,7 @@ uniquelist=false
 \phantomsection
 \addcontentsline{toc}{chapter}{Bibliography}
 \begin{singlespace}
-  \setlength\bibitemsep{2pt}
+  \setlength\bibitemsep{5pt}
   \printbibliography
 \end{singlespace}
 
