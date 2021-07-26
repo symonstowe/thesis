@@ -1,57 +1,192 @@
 \chapter{Introduction}
 
-Electrical impedance tomography (EIT) is an imaging modality that uses an arrangement of electrodes to simultaneously apply 
+Electrical impedance tomography (\acrshort{eit}) is an imaging modality that uses an arrangement 
+of electrodes to simultaneously apply 
 stimulation currents and measure 
-the resulting electric potentials. Measurements of potential at the electrodes are used in conjunction with 
+the resulting electric potentials. Measurements of potential at the 
+electrodes are used in conjunction with 
 prior information to reconstruct images 
-of the internal conductivity. In biomedical applications, the variance in conductivity between different 
-tissue types and fluids within the body enables non-invasive imaging of functional activity using electrodes on the 
-body surface.
+of the internal conductivity. In biomedical applications, 
+the variance in conductivity between different 
+tissue types and fluids enables non-invasive 
+imaging of functional activity using electrodes on the 
+body surface. 
 
-As electrical current travels through the body it diffuses away from the electrodes,
-travelling in three dimensions along the path of least resistance. 
-EIT is most sensitive to impedance changes close to the electrodes 
-and along the path of the injected current.
-%When reconstructing a single tomographic slice,   
-%off-plane impedance changes from a three-dimensional volume project 
-%onto a two-dimensional plane yielding more than one solution.
-This document proposes a thesis that investigates the use of novel 3D electrode 
-configurations and injection patterns to maximize sensitivity and improve continuous monitoring 
-of cardiopulmonary measures using EIT.
+Thoracic EIT focuses on imaging cardiopulmonary activity
+using a belt of electrodes placed around the ribcage.
+In images of the chest, the signal is often dominated by 
+impedance changes due to air movement in the lungs. 
+The much smaller signals due to blood flow are of great interest for 
+continuous monitoring and diagnostic applications,
+but are challenging to identify. 
+
+This thesis explores techniques to improve sensitivity to blood movement, or perfusion,  
+in EIT through the development of novel meshing techniques and electrode configurations
+incorporating internal electrodes. 
+We investigate the current limitations of perfusion monitoring in 2D, and
+analyze novel meshing techniques and electrode placements for their 
+ability to improve thoracic imaging and increase sensitivity to blood flow. 
+
+\section{Motivation}
+\TODO{Briefly \\
+Why should we care?\\
+Why to we measure perfusion? \\
+What are the benefits if this technology works well? (increased sensitivity?) \\
+What are the benefits of using EIT for this?}
 
 \section{Problem}
 
-Electrical Impedance Tomography (EIT) is sensitive to perfusion 
-changes in tissue and the flow of blood in the thorax.
-The source of the impedance change is not well understood. 
-How does the magnitude of the impedance change due to perfusion
-compare to the impedance change due to motion in the thorax at the cardiac frequency? 
+EIT can be used to image blood movement in two ways. 
+First, it is possible to track the flow of blood using a 
+conductivity-contrasting agent injected into a vein or artery
+and second, filtering the signal to isolate cardiac-frequency 
+impedance changes. 
+Using a conductive bolus injection to image perfusion has been well established and 
+can give an easily detectable signal when using large volumes
+or high concentrations of the contrasting agent, but they do not 
+allow continuous monitoring and frequent injections may pose 
+risks to the patient.
+In thoracic EIT bolus injections also typically occur during apnea to 
+facilitate removal from the respiratory component.
+Filtering techniques for perfusion imaging are much more appealing for 
+monitoring applications as they are less invasive 
+and could be used continuously, but they present several challenges. 
 
+The primary challenge is the small amplitude of the signal. 
+Impedance changes related to cardiac activity are often an order of
+magnitude smaller than signals related to respiration and can be challenging to identify without additional signals like 
+an \acrfull{ecg}, and averaging many heartbeats together. When 
+averaging over several heartbeats, the ability of the system to 
+monitor in real time is greatly diminished. Additionally 
+there is some uncertainty surrounding the source of
+cardiac-frequency impedance changes. It is unclear to what 
+extent the impedance changes stem from pulsatile
+motion in the thorax compared to the movement of blood, 
+and if they can be used as a true measure of perfusion. 
 
+\acrshort{eit} is minimally invasive, requiring only 
+the application of electrodes to the body surface, but 
+does not have high sensitivity in the central regions 
+of the chest where perfusion changes are likely to occur.
+As electrical current travels through the body it diffuses away from 
+the electrodes,
+travelling in three dimensions along the paths of least resistance. 
+EIT is most sensitive to impedance changes close to the electrodes
+where the current density is highest, 
+and along the path of the injected current.
 
+The placement of electrodes internally has the 
+potential to increase current density and sensitivity in 
+the center of the thorax. 
+The benefits of internal electrodes have been simulated 
+in 2D showing great improvemets in reconstruction accuracy 
+and sensitivity~\parencite{tehrani_modelling_2012}, but 
+in practice there are several challenges to overcome. 
+Due to differences in physiology it is challenging to model
+the correct location of the internal electrodes between subjects
+and electrodes placed internally may move with relation 
+to the external electrodes during different physiological
+processes.  
+To accurately reconstruct images with internal electrodes 
+an accurate model is required with precise placement of electrodes
+and a model that matches the subject and is refined 
+to meet the accuracy requirements. 
+It is in part due to these challenges that internal electrodes 
+have not been widely used in real-world situations, and to our knowledge 
+no implementation of internal electrodes in conjunction 
+with a 3D arrangement of external electrodes has been used for \emph{in-vivo}
+imaging.
 
+The applications of an EIT system with increased sensitivity to perfusion changes
+in the thorax are extensive. Methods to monitor blood pressure non-invasively are 
+currently under development and could be greatly improved with increased sensitivity 
+near the region of interest. Increased sensitivity near the heart 
+could enable EIT to be realized as a low-cost solution to monitor and image
+hemodynamic activitiy more accurately.  
 
 \section{Thesis objectives}
-The following questions will be answered by the thesis:
-\begin{enumerate}
-	\item How do current methods of EIT lung perfusion imaging compare? (\emph{Chapter 2})
-	\item What advantages can internal electrode configurations provide? (\emph{Chapter 3})
-\item What advantage do alternative external electrode configurations provide
-	when monitoring aortic blood flow? (\emph{Chapter 4})
-\item How can a configuration that is better able to isolate cardiac activity
-	improve measures of lung perfusion and aortic flow in an animal model? (\emph{Chapter 5})
-\end{enumerate}
+The goal of this project is to improve sensitivity of EIT to perfusion using 
+improved mesh accuracy and custom electrode locations. This thesis approaches problem 
+from two angles (\fref{fig:goal}). We investigate both
+advanced meshing techniques, and novel electrode configurations
+with internal electrodes and their applications to improve thoracic EIT.
 
-\section{Contributions}
+\begin{figure}
+	\centering
+\begin{tikzpicture}
+<code goes here>
+\end{tikzpicture}\begin{tikzpicture}[
+  level 1/.style={sibling distance=50mm},
+  edge from parent/.style={->,draw},
+  >=latex]
 
+% root of the the initial tree, level 1
+\node[root] {Improve EIT measures of perfusion}
+% The first level, as children of the initial tree
+  child {node[level 2] (c1) {1) Evaluation of current perfusion monitoring}}
+  child {node[level 2] (c2) {2) Advanced meshing techniques}}
+  child {node[level 2] (c3) {3) Novel electrode positioning}};
 
-\section{Publications}
-Published works related to the thesis:
-\begin{itemize}
-	\item 
-\end{itemize}
+% The second level, relatively positioned nodes
+\begin{scope}[every node/.style={level 3}]
+\node [below of = c1, xshift=12pt, yshift=-27pt] (c11) {Bolus- vs 
+frequency-based measures of perfusion \emph{(\Fref{chap:chapter-3})}}; 
 
-Other projects:
-\begin{itemize}
-	\item \fullcite{stowe_monitoring_2019}.
-\end{itemize}
+\node [below of = c2, xshift=12pt, yshift=-19pt] (c21) 
+{Controlling mesh refinement\\ \emph{(\Fref{chap:chapter-4})}};
+\node [below of = c21, yshift=-25pt] (c22) 
+{Creating Custom meshes from CT images \emph{(\Fref{chap:chapter-5})}};
+\node [below of = c3, xshift=12pt, yshift=-12pt] (c31) 
+{Internal electrodes in 3D \emph{(\Fref{chap:chapter-6})}};
+\end{scope}
+
+% lines from each level 1 node to every one of its "children"
+\foreach \value in {1}
+  \draw[->] (c1.195) |- (c1\value.west);
+
+\foreach \value in {1,2}
+  \draw[->] (c2.195) |- (c2\value.west);
+
+\foreach \value in {1}
+  \draw[->] (c3.195) |- (c3\value.west);
+
+\end{tikzpicture}
+\caption[Overfiew of thesis objectives]{We aim to improve EIT measures of perfusion through 3 avenues.
+1) Comparing and investigating the limitaitons of existing perfusion imaging methods;
+2) Advancing meshing techniques; and 
+3) Using novel electrode locations consisting of a 3D external
+configuration with internal electrodes.}
+\label{fig:goal}
+\end{figure}
+
+%\section{Contributions}
+%The following 
+%
+%This thesis presents several contributions to the field of perfusion imaging and 
+%meshing in EIT.
+%
+%\COMMENT{OLD stuff}
+%The following questions will be answered by the thesis:
+%\begin{enumerate}
+%	\item How do current methods of EIT lung perfusion imaging compare? (\emph{Chapter 2})
+%	\item What advantages can internal electrode configurations provide? (\emph{Chapter 3})
+%	\item What advantage do alternative external electrode configurations provide
+%	when monitoring aortic blood flow? (\emph{Chapter 4})
+%	\item How can a configuration that is better able to isolate cardiac activity
+%	improve measures of lung perfusion and aortic flow in an animal model? (\emph{Chapter 5})
+%\end{enumerate}
+%
+%
+%\section{Publications}
+%Published works related to the thesis:
+%\begin{itemize}
+%	\item \fullcite{stowe_comparison_2019}
+%	\item \fullcite{stowe_effect_2020}
+%	\item \fullcite{stowe_generating_2021} 
+%\end{itemize}
+%
+%Other projects:
+%\begin{itemize}
+%	\item \fullcite{stowe_monitoring_2019}.
+%\end{itemize}
+%

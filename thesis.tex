@@ -17,6 +17,20 @@
 \usepackage{tikz}
 \usepackage[linesnumbered,ruled,vlined]{algorithm2e}
 
+% Draw stuff!!!!
+\usepackage{tikz}
+%\usetikzlibrary{shapes.geometric, arrows}
+\usetikzlibrary{arrows,shapes,positioning,shadows,trees}
+\tikzset{
+  basic/.style  = {draw, text width=5cm, drop shadow, font=\sffamily, rectangle},
+  root/.style   = {basic, rounded corners=2pt, thin, align=center,
+                   fill=cyan!50},
+  level 2/.style = {basic, rounded corners=2pt, thin,align=center, fill=cyan!20,
+                   text width=10em},
+  level 3/.style = {basic, rounded corners=2pt, thin, align=left, fill=green!15, 
+                   text width=8em}
+}
+
 % BIBER
 \usepackage{csquotes}
 \usepackage[american]{babel}
@@ -104,10 +118,10 @@ uniquelist=false
 }
 
 % Define a TODO and Comment
-\newcommand{\TODO}[1]{ \textsf{\color{red}{{TODO: \\ #1}}} }
+\newcommand{\TODO}[1]{ \textsf{\color{red}{{TODO: #1}}} }
 \newcommand{\COMMENT}[1]{ \textsf{\color{blue}{{COMMENT: #1}}} }
 
-\usepackage{fancyref}    
+\usepackage[plain]{fancyref}    
 
 % Define margins of document
 \sloppy
@@ -140,6 +154,7 @@ uniquelist=false
 \usepackage[acronym,nomain,nonumberlist]{glossaries}
 
 \newacronym{eit}{EIT}{electrical impedance tomography}
+\newacronym{ecg}{ECG}{electrocardiogram}
 \newacronym{mse}{MSE}{mean squared error}
 \newacronym{fwhm}{FWHM}{full width half max}
 \newacronym{sv}{SV}{stroke volume}

@@ -1,17 +1,109 @@
 \chapter{Internal Electrodes}
+\label{chap:chapter-6}
 %\subsection{The effects and uses of internal electrodes on 3D EIT image reconstructions}
 \emph{The sensitivity analysis work and preliminary animal reconstructions have
  been presented in part at: the 42nd Annual International Conference of the IEEE Engineering 
  in Medicine \& Biology Society (EMBC 2020)~\parencite{stowe_effect_2020}, and the 21st International Conference on Biomedical 
- Applications of Electrical Impedance Tomography (EIT 2021)~\parencite{stowe_using_2021}} \\
+ Applications of Electrical Impedance Tomography (EIT 2021)~\parencite{stowe_using_2021}.} \\
 
-Internal electrode have been suggested as a technique to increase sensitivity 
-
-One of the main challenges for continuous ventilation and perfusion monitoring has been
-the small smplitude of the cardiac signal from the surface 
-electrodes~\parencite{nguyen_review_2012}. % TODO 
+Currently the most common implementations of EIT in biomedical applications
+measure voltages and inject currents from the body surface using 
+one or two planes of electrodes. Internal electrodes are not used clinically
+despite promising simulation studies that have shown large improvements 
+in reconstruction accuracy and internal sensitivity in 2D. 
+In practice, EIT images with internal electrodes are challenging to interpret 
+as the measurements are prone to motion artefacts. 
+A shift in probe location between measurements,
+or modelling the probe location incorrectly can result in a 
+large reconstruction error. 
+In this chapter, we assess the sensitivity and accuracy benefits 
+of internal electrode imaging in 3D, and present 
+the effect of probe motion and localization error on reconstructions.
+We also present a reconstruction technique based on the single-step 
+Gauss–Newton algorithm reconstructing for both motion and 
+electrode locations in 2D~\parencite{soleimani_imaging_2006},
+to reduce the impact of motion artefacts
+on EIT images when using internal electrodes.
+In simulations on a tank model, \TODO{also have un processed tank data...}
+motion artefact due to electrode probe movement of up to 10\% of the 
+model radius was corrected.  
+This chapter explores the use of internal electrodes 
+in 3D and evaluates the potential to use esophageal electrodes to monitor
+ventilation and perfusion \emph{in-vivo}. 
 
 \section{Introduction}
+
+Currently the most common use of EIT is
+thoracic imaging, where it is used to image the movement
+of fluids due to cardiopulmonary activity.
+In the thorax the impedance signal is often dominated by 
+the lungs and the change in volume due to breathing 
+or ventilation. 
+As discussed in \fref{chap:chapter-3}, one of the main challenges 
+in perfusion imaging is the large difference in amplitude 
+between the ventilation and cardiac signals. 
+When using external electrodes, the respiratory amplitude is 
+often 10 times larger than the cardiac component [refs]. Techniques such as 
+breath holds or induced apnoea have been used to  reduce the
+amplitude of the respiratory signal [several refs], but they are not feasible for 
+long-term or continuous monitoring. 
+
+
+Internal electrode have been propsed several times as a method to increase 
+sensitivity in the 
+most central regions of the chest. 
+
+
+One of the shortcomings of thoracic EIT imaging is low sensitivity in the
+
+
+especially surrounding the
+heart where it is challenging to isolate cardiac activity and
+the signals are often overpowered by the ventilation signals
+from the boundary regions with higher sensitivity [1].
+
+The
+low sensitivity in central regions relative to the boundary
+limits the clinical applications of EIT, reducing the ability to
+accurately reconstruct and identify impedance changes due to
+the heart.
+
+External electrodes
+limit the sensitivity of EIT  
+there is limited sensitivity in the internal regions, making it challenging
+to identify the perfusion component of a signal dominated by ventilation.
+
+
+
+Past research in 2D identified a sixfold increase in the cardiac frequency 
+component of the EIT signal 
+when 2 of 16 total electrodes were placed in the 
+esophagus or trachea~\parencite{czaplik_application_2014}. It is not clear whether 
+the identified increase in cardiac-frequency amplitude stems from pulsatile 
+(motion-based), changes or whether these changes represent true perfusion. 
+
+
+Several works have shown that motion \TODO{ref from notes on percent electrode movement}
+
+the dfference in amplitude between 
+
+There is potential for clinical use of internal electrodes 
+to monitor ventilation, perfusion and 
+hemodynamic changes in the 
+intensive-care unit (ICU), where patients typically have
+breathing and feeding tubes in place.
+
+EIT applications in development include mechanical ventilation 
+guidance and monitoring[refs needed] perfusion monitoring [refs], 
+blood pressure monitoring [refs], and cardiovascular
+output [refs]. 
+One of the main challenges for continuous ventilation 
+and perfusion monitoring has been
+the small amplitude of the cardiac signal from the surface 
+electrodes~\parencite{nguyen_review_2012}. % TODO 
+
+
+
 EIT has low sensitivity away from the electrodes which are typically placed on the body surface. 
 This chapter will investigate the use and application of internal electrodes and quantify the improvement 
 in sensitivity and image reconstruction accuracy in simulation.
@@ -152,7 +244,7 @@ Building on this work simulations will be used to answer more questions on the u
 \end{itemize}
 
 \section{Phantom Measurements}
-Phantom measurements are used to asses the real-world performance 
+Phantom measurements are used to assess the real-world performance 
 of the measurements and configurations 
 that were identified in simulations. Two non-conductive circular 
 objects are placed and imaged at 4 different separations: 
