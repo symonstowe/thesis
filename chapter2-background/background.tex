@@ -27,6 +27,7 @@ EIT has been proposed for a wide range of applications from thoracic monitoring 
 brain imaging~\parencite{Holder1992,Frerichs2016}. 
 
 \begin{figure}
+    \centering
    \includegraphics[width=\textwidth]{chapter2-background/imgs/current_and_equipotential_lines.pdf}
    \caption[Current and Equipotential lines]{\label{fig:cur_equip_line} 
    (A) A body comprising tissues of different conductivity, (B) Electrodes are placed on the surface 
@@ -35,6 +36,7 @@ brain imaging~\parencite{Holder1992,Frerichs2016}.
 \end{figure}
 
 \section{Bioimpedance}
+\label{sec:bioimpedance}
 In thoracic imaging the most commonly measured 
 impedance changes occur due to movement 
 of air in the lungs, the flow of blood, and the motion of 
@@ -228,6 +230,7 @@ and are presented in the following section.
 \subsubsection{MRI}
 \subsubsection{CT}
 \subsubsection{Thermal diffusion}
+\subsubsection{contrast agent}
 \subsubsection{Ultrasound}
 \subsection{Electrical Impedance Tomography for Perfusion Monitoring}
 
@@ -255,15 +258,84 @@ These high frequencies are out of the range of most current EIT systems and
 frequency changes due to different lower frequencies are limited~\parencite{adler_electrical_2017}.
 This thesis uses time-difference EIT to images changes in movemnt and fluid volumes in teh thorax.
 
+\subsection{EIT measurements}
+EIT measurements are made on a number of external electrodes placed on the body sorface around
+a region of interest. In this thesis we focus on measurements of the thorax. The main aspects
+affecting EIT measurements are the electrodes places on the body surface and technical details 
+of the current and voltage that are required. 
+\subsubsection{Electrodes} \label{sec:electrodes}
+EIT is possible using \TODO{How mmuch here? If any? polarizing vs
+non polarizing? brief overview of CEM?}
+\TODO{electrode impedance on injection vs non-injection measurements}
+\TODO{Discuss how and why measurement on injecting electrodes are typically discarded also
+talk about this in electrode seciton}
+
+\subsubsection{Current injection and voltage measurement}
+To calculate impedance three main conisderations must be made with regard to the 
+injected current: the frequency, amplitude and pattern. 
+
+Low frequency currents will 
+prefferentially pass around cells through the extracellular
+fluid due to the high capacitive componenet of the cell 
+membrane~\parencite{foster_whole-body_1996}, wheras high frequency currents will be 
+more affected by the capacitive 
+componenet~\parencite{holder_electrical_2004}. 
+Since EIT requires a linear relationship between the measured voltages and 
+tissue impedance to produce valid reconstructions,
+it is important to select frequencies of less than 1 MHz to ensure that cell 
+and neural membrane is not the dominant factor in the impedance 
+measurements~\parencite{barber_applied_1984}.
+Impedance measurements below 100 KHz have shown to be primarily rsitive on lung
+tissue~\parencite{witsoe_electrical_1967}, and most EIT systems use
+frequencies between 10 kHz and 1 Mhz~\parencite{holder_electrical_2004}.
+
+The selection of current amplitudes is selected based on the \TODO{Ask Andy}.
+
+The pattern of current injection and voltage measurement is commonly refered to in EIT 
+as the stimulation and measuremnt pattern. Typically a current is injected between two electrodes
+while the resulting voltages are measured between asjacent pairs. The two most common injection 
+patterns are adjacent, and ``skip 4''. Examples of these measurement patterns are shown in 
+\fref{fig:stim_meas_bkgnd} on a 16 electrode system. The terms adjacent and skip 4 describe 
+the space between pairs of injecting or measurement electrodes. 
+Regardless of the pattern, a frame of EIT data is generated in the same way. 
+Current is injected between a pair of electrodes as voltage is measured between all 
+remaining pairs, then current is injected between the next pair of electrodes and
+voltages are measured again. This results in voltage measurements on each electrode 
+pair for every current injection. For a 16 electrode system this results in 
+256 measurements in each frame. For a 32 electrode system there are 1024. As mentioned in 
+\fref{sec:electrodes}, voltage measurements made on the stimulating electrodes
+are often removed resulting in 208 measurements per frame on a 16
+electrode system, and 928 measurements per frame on a 32 electrode system.  
+
+\begin{figure}
+    \includegraphics[width=\textwidth]{chapter2-background/imgs/common_stim_meas_patterns.pdf}
+    \caption[Adjacent and "skip 4" stimulation patterns]{\label{fig:stim_meas_bkgnd} 
+    Two common stimulation patterns are simulated on a simple human model showin in 
+    \fref{fig:cur_equip_line}. Injected current is shown in blue and the resulting equipotential 
+    lines are shown in red.
+    (A) An exmaple of an adjacent stimulation pattern. Current is injected between 
+    pairs of adjacent electrodes. For each current injection voltage is 
+    measured between all sequential pairs. 
+    (B) An example of the ``skip 4'' injection pattern. Current is injected between every
+    5\textsuperscript{th} electrode skipping 4 between the injecting electrodes. 
+    during each current injection, voltage measurements are made using the same skip 4 
+    pattern between each of the 16 electrodes and their corresponding pair. 
+    A single frame of data is generated by all measurements made for each possible injection
+    pattern. For 16 electrodes this results in 256 meaasurements.}
+ \end{figure}
+
+\subsection{Image Reconstruction}
+
+
 \subsection{Forward Problem}
-Using the quasi-static 
+Using the static 
 formulations of Maxwell's equations, the potential distribution $u$ can be used 
 compute the conductivity $\rho$ and generate images.
+We are able to use the static form of Maxwell's equations 
 % Derivation and explanation here
 
 \subsection{Discretization and the Finite Element Method}
 
-\subsection{Image Reconstruction}
 
 \subsubsection{2D reconstruction}
 
@@ -300,9 +372,9 @@ of interest~\parencite{Kwon2013,Czaplik2014,Farooq2014}.
 
 \subsubsection{Image Regularization}
 
-\subsubsection{Motion Correction}
 
 \subsection{Internal Electrodes}
+\subsubsection{Motion Correction} \label{sec:motion_correction}
 \subsubsection{Internal Reference Electrodes}
 \subsubsection{Inverse Source localization (time permitting)}
 

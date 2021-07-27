@@ -144,6 +144,12 @@ uniquelist=false
 % Blank pages
 \usepackage{afterpage}
 
+\usepackage{verbatim}
+
+\usepackage{amsfonts}
+\usepackage{booktabs}
+\usepackage{siunitx}
+
 \newcommand\blankpage{%
     \null
     \thispagestyle{empty}%
@@ -176,7 +182,7 @@ uniquelist=false
 \usepackage{./style/ccaption}
 \captionnamefont{\bf \footnotesize}
 \captiontitlefont{\footnotesize}
-\captionwidth{130mm}
+\captionwidth{140mm}
 \changecaptionwidth
 
 % Define page numbering scheme
@@ -274,7 +280,8 @@ uniquelist=false
 \include{chapter4-mesh_refinement/mesh_refinement}
 \include{chapter5-CT_to_mesh/CT_to_mesh}
 \include{chapter6-internal_electrodes/internal_electrodes}
-\include{chapter7-conclusion/conclusion}
+\include{chapter7-internal_elec_motion/internal_elec_motion}
+\include{chapter8-conclusion/conclusion}
 
 % BIBTEX
 \phantomsection
