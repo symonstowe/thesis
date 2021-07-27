@@ -285,6 +285,15 @@ The resulting model is shown in \fref{fig:internal_lamb_model}.
 Images were reconstruted with 4 methods. The 3 methods discussed in \fref{sec:3_methods}, 
 and GREIT~\parencite{grychtol_3d_2016}.
 
+\subsubsection{Pulsatile amplitude}
+To measure the advantage provided by internal electrodes with regards to pulsatility detection, 
+a fast fourrier transform (\acrshort{fft}) of each signal was calculated. 
+The cardiosynchronous component was selected as the highest 
+the amplitude near the recorded heartrate range of 65-80 bpm.
+This was divided by the amplitude of the ventilation frequency, which was the largest
+low frequency amplitude in the FFT. 
+This was repeated for all 12 recordings across 3 animals.
+
 \section{Results}
 The following section presents the results for both simulation and 
 \emph{in-vivo} work.
@@ -385,6 +394,19 @@ slight improvement in lung distinguishability and a slight reduction
 in noise surrounding the internal electrode. There is limited difference between the
 two methods accounting for motion on the electrode.
 
+The ratio of cardiosynchronous to respiratory rate impedance signals is shown below in 
+\fref{fig:amplitude_ratio}. The results show a mugh higher amplitude of the cardiopulmonary 
+signal relative to ventilation when internal electrodes are used.
+
+\begin{figure}
+    \centering
+	\includegraphics[width=\textwidth]{chapter7-internal_elec_motion/imgs/amplitude_ratio.pdf} 
+	\caption[Results of the probe location correction]{\label{fig:amplitude_ratio} 
+	The cardiosynchronous signal component was divided by the ventilation frequency 
+	componenent to compare the detectability of the pulsatile changes. The ratio was compared 
+	for measuremnts using only external electrodes, all electrodes, and internal electrodes only.}
+\end{figure}~
+
 \section{Discussion}
 
 This chapter aimed to provide a technique to reduce noise due to motion on internal
@@ -431,4 +453,31 @@ noise metrics.
 In cases of less than 1 percent error in probe location, there was very little 
 difference between 
 the two motion correction algorithms with regards to 
-reconstruction accuracy of the object. 
+reconstruction accuracy of the object. Despite this there was still a slight reduction 
+in background noise in the image. 
+
+Despite the sucess of the probe correction algorithm with regards to location accuracy 
+and noise reduction there are several limitations to its use. The most significant is 
+the increased modelling time required. This method required an extra model, and inverse 
+solution compared to the single step solutions. For simple models such as 
+a tank the added time difference
+is small, but for complex models this could increase reconstruction time drastically. 
+When several frames are reconstructed each one requires a unique model 
+with a modified probe location increasing the time required significantly. 
+To reduce the overall time, correcting the probe location only when it is above 1
+percent of the model width may be helpful. The benefits of 
+the probe localization technique are 
+not substantial at this level of movement to be required. 
+Additionally in the images presented and recorded there was not seen to be significant
+probe movement. It is not yet clear what the typical movement of the electrode probe 
+is expected to be in the esophagus. 
+
+Previous studies with internal electrodes showed that there were also
+cases where contact impedance of the probe was not ideal for electrodes
+placed on the breathing and feeding tubes~\parencite{czaplik_application_2014}.
+The electrode used was shown to have good contact impedance on the SenTec Pioneer
+Set interface, but the current design protrudes slightly from the tube and may be challenging to 
+integrate into a clinical esophageal or tracheal tube. 
+
+\TODO{Add as many references as we can find and discuss the amplitudes then proofread}
+
