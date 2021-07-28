@@ -1,16 +1,31 @@
 \chapter{Custom EIT Meshes}
 \label{chap:chapter-5}
 
+\emph{This work has been presented in part at: 
+ the 21st International Conference on Biomedical 
+ Applications of Electrical Impedance Tomography (EIT 2021)~\parencite{stowe_generating_2021}.} 
+
+\section*{Acknowledgement}
+\emph{Tidal Medical funded the work presented in this chapter.}
+
 \section{Introduction}
+
+
+\subsection{Background}
+\subsubsection{ARDS}
+\subsubsection{EIT for ARDS monitoring}
+\subsubsection{Custom mesh generation}
+\subsection{Motivation}
+
+limitation  of meshing - briwef(1 par sum )
 
 With EIT it is suggested that more accurate models make a more accurate image\dots
 The more closely 
 
-\section{EIT for ARDS Patients}
+\section{Methods}
 
-\section{A Segment Editor Program}
-
-\subsection{Automatic segmentation of the thorax}
+\subsection{Segment editor}
+\subsubsection{Automatic segmentation of the thorax}
 \begin{algorithm}[H]
 	\SetAlgoLined
 	\KwIn{image}
@@ -29,17 +44,15 @@ The more closely
 	\caption{Segment the external body boundary.}
 \end{algorithm}
 
-\subsection{Manual Segmentation Correction}
+\subsubsection{Manual Segmentation Correction}
 
 \subsection{Mesh Generation}
 \subsubsection{Extruded Geomerty}
 \subsubsection{3D Lung Regions}
 
+\subsection{Evaluation on ARDS patients}
 
-\section{Evaluation on ARDS Patients}
-
-\subsection{Methods}
-\subsection{Results}
+\section{Results}
 Data from 4 ARDS patients with CT
 and EIT were used to develop a segmentation 
 and correction tool to identify 
@@ -59,7 +72,10 @@ using GREIT~\cite{Adler2009}.
 The GI index was calculated using the method
 presented by Zhao et al.~\cite{Zhao2009} using the lung regions from the 
 forward model. A ventilated lung estimate was made using the
-segmentation as $\frac{A_{\text{ventilated lung}}}{A_{\text{total lung}}}$.
+segmentation with equation \fref{eq:ventilated_lung_est}.
+\begin{equation}\label{eq:ventilated_lung_est}
+	\frac{A_{\text{ventilated lung}}}{A_{\text{total lung}}}
+\end{equation}.
 %by dividing the area of healthy lung by 
 %the total lung area
 %from the automatic segmentation.

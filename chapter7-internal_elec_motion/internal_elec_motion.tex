@@ -1,5 +1,11 @@
 \chapter{Internal Electrode Motion}
 \label{chap:chapter-7}
+
+\emph{Preliminary animal reconstructions have
+ been presented in part at: 
+ the 21st International Conference on Biomedical 
+ Applications of Electrical Impedance Tomography (EIT 2021)~\parencite{stowe_using_2021}.} 
+
 \section{Introduction}
 As discussed in \fref{sec:bioimpedance}, several factors contribute towards
 the cardiosynchronous signal in EIT. One of the largest contributions 
@@ -18,7 +24,11 @@ but in time difference EIT these effects are minimized~\parencite{adler_electric
 The larger problem appears 
 to be the 
 movement of the internal probe relative to the external electrodes between
-measurements.
+measurements. Recent work by~\citeauthorandyear{nguyen_electrical_2020}
+reviewed the potential aplication of internal electrodes in cardio 
+radiofrequency ablation and discussed the need for an analysis 
+of the effect of heart motion on the internal electrode, and a solution 
+to correct for its impact on EIT reconstructions.
 
 Movement correction algorithms using the movement jacobian have been 
 designed in 2D 
@@ -32,7 +42,7 @@ has been used in this chapter as a proof of concept.
 A more detailed explanation of this jacobian calculation method is presented in 
 \fref{sec:motion_correction} of the background.
 As an internal probe moves towards one side of a model the distance between the 
-probe and the external electrodes changes. This results less impedance where the distance 
+probe and the external electrodes changes. This results in less impedance where the distance 
 has decreased, and a higher impedance where the distance has increased. Without knowing 
 the new probe location we can minimize the effect of this error, but there still remains 
 a mismatch between the modelled and actual probe locations. 
@@ -217,7 +227,7 @@ using \fref{eq:motion_rm}
 with an updated jacobian based on the new probe location. 
 
 
-\section{Image comparison}
+\subsection{Image comparison}
 To simplify processing of the reconstructions, 10 images between the 
 external electrode planes were averaged together to generate a 2D 
 representation of the 3D data. This did not allow for analysis of movement in the vertical 
@@ -264,6 +274,13 @@ The tube radius was 0.5 cm. The constructed probe is shown in \fref{fig:probe_de
 	The electrodes are glued in place and wires run down the hollow centre
 	of the tube to connect to the EIT system.}
  \end{figure}
+
+\subsubsection{Electrode placment}
+The ewes were shaved and 28 silver-silver chloride electrodes were placed in 2 rows immedeately behind the front
+legs with 10 cm seperation and equal spacing around the thorax. 
+The esophageal probe was alligned with the electrodes externally and the required
+depth was marked. The electrode probe was then coated in a conductive gel for lubraction and inserted in the 
+esophagus up to the marked point.
 
 \subsubsection{Ovine model}
 An internal probe was added to an ovine model by adapting the 
@@ -501,7 +518,7 @@ during biopsy procedures, and suggested that the increased proximity to the
 tissue could allow more physiological information to be obtained. A more complete 
 evaluation is required to measure the benefits of internal electrodes in 3D compared 
 to typical external configurations. The previously seen lung distinguishability
-and larger cardiosynchronous signal amplitude found in 2D\parencite{czaplik_application_2014} 
+and larger cardiosynchronous signal amplitude found in 2D~\parencite{czaplik_application_2014} 
 have been repeated with this 3D configuration, but it is still unclear to what 
 degree these signal changes may be useful. 
 
