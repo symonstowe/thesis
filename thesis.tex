@@ -121,7 +121,18 @@ uniquelist=false
 \newcommand{\TODO}[1]{ \textsf{\color{red}{{TODO: #1}}} }
 \newcommand{\COMMENT}[1]{ \textsf{\color{blue}{{COMMENT: #1}}} }
 
+\usepackage[section]{placeins}
+
 \usepackage[plain]{fancyref}    
+\newcommand*{\fancyrefapplabelprefix}{app}
+
+\fancyrefaddcaptions{english}{%
+  \providecommand*{\frefappname}{appendix}%
+  \providecommand*{\Frefappname}{Appendix}%
+}
+
+\frefformat{plain}{\fancyrefapplabelprefix}{\frefappname\fancyrefdefaultspacing#1}
+\Frefformat{plain}{\fancyrefapplabelprefix}{\Frefappname\fancyrefdefaultspacing#1}
 
 % Define margins of document
 \sloppy
@@ -159,27 +170,32 @@ uniquelist=false
 %List of abbreviations
 \usepackage[acronym,nomain,nonumberlist]{glossaries}
 
-
+\newacronym{ards}{ARDS}{acute respiratory distress syndrome}
 \newacronym{bpm}{bpm}{beats per minute}
-\newacronym{eit}{EIT}{electrical impedance tomography}
+\newacronym{ct}{CT}{computed tomography}
 \newacronym{ecg}{ECG}{electrocardiogram}
-\newacronym{mse}{MSE}{mean squared error}
-\newacronym{fwhm}{FWHM}{full width half max}
-\newacronym{sv}{SV}{stroke volume}
-\newacronym{lv}{LV}{left ventricular}
-\newacronym{svv}{SVV}{stroke volume variation}
+\newacronym{eit}{EIT}{electrical impedance tomography}
 \newacronym{co}{CO}{cardiac output}
 \newacronym{fem}{FEM}{finite element model}
+\newacronym{gi}{GI}{global inhomogeneity}
+\newacronym{gui}{GUI}{graphical user interface}
 \newacronym{fft}{FFT}{fast fourrier transform}
-\newacronym{ct}{CT}{computed tomography}
+\newacronym{fwhm}{FWHM}{full width half max}
+\newacronym{lv}{LV}{left ventricular}
 \newacronym{mri}{MRI}{magnetic resonance imaging}
-\newacronym{ards}{ARDS}{acute respiratory distress syndrome}
+\newacronym{mse}{MSE}{mean squared error}
+\newacronym{peep}{PEEP}{positive end-expiratory pressure}
 \newacronym{pet}{PET}{positron emission tomography}
 \newacronym{spect}{SPECT}{single photon emission computed tomography}
+\newacronym{sv}{SV}{stroke volume}
+\newacronym{svv}{SVV}{stroke volume variation}
 \makeglossaries
 
 % Include packages for manipulating figures/tables
 \usepackage{epsfig} 
+
+% Appendix stuff
+\usepackage[toc,page]{appendix}
 
 % Different font size in captions
 \usepackage{./style/ccaption}
@@ -294,8 +310,8 @@ uniquelist=false
   \printbibliography
 \end{singlespace}
 
-\appendix 
-%\include{appendix/appendix_body}
+%\appendix 
+\include{chapter9-appendix/appendix}
 
 
 \end{document}

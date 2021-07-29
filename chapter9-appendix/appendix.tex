@@ -1,0 +1,31 @@
+\begin{appendices}
+\chapter{Algorithms} \label{app:appendix-algos}
+
+\section{External boundary}
+The following steps were used to segment the external boundary 
+from a single slice 
+of a CT image using Matlab 2021b  
+with the image processing toolbox:
+
+\begin{algorithm}[H]
+	\SetAlgoLined
+	\KwIn{image}
+	\KwOut{external boundary}
+		weiner filter\;
+		Set the lung intensity to 0\;
+		erode image using disk size 20\;
+		reconstruct on image from line 4\;
+		dilate with disk of size 20\;
+		reconstruct on image from line 6\;
+		binarize, thresh = 0.5\;
+		fill holes\;
+		close using disk size = 2\;
+		open using disk size = 5\;
+		external boundary = largest object\;
+	\caption{Segment the external body boundary.}
+\end{algorithm}
+
+
+\section{Ribcage}
+\section{Lungs}
+\end{appendices}
