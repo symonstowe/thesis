@@ -363,29 +363,35 @@ with a 2D arrangement of 16 electrodes placed at the
 Draeger EIT system. 
 All patients were on mechanical ventilation
 at the time of recordings, but the exact 
-ventilation parameters are unknown.
+ventilation parameters were unknown.
 
-To evaluate the effect of the custom models on GI index, 
-the scores were computed on 
-the generic male model and the custom EIT model generated 
-using the segmentation tool.
+To evaluate the effect of the custom models on lung sensitivity 
+the center of mass was computed for both the ventilation region detected in 
+CT images, and the breath volume reconstruced in CT images. 
+The center of mass was calculated from EIT images by removing all 
+positive changes in the image, then locating the center of mass 
+of all pixels that were over 50\% of the ventilation signal amplitude. 
 
-The GI index was calculated using the method
-presented by Zhao et al.~\cite{zhao_evaluation_2009} 
-using the lung regions from the 
-forward model. 
-An estimate of ventilated lung area ($A_V$) relative to the 
-total lung area was calculated from the CT images  
-by dividing the area of the total lung over the ventilated
-lung area 
-(\fref{eq:ventilated_lung_est}).
-\begin{equation}\label{eq:ventilated_lung_est}
-	A_V = \frac{A_{\text{ventilated lung}}}{A_{\text{total lung}}}
-\end{equation}
-
-This was used to determine if the calculated index
-followed the same trend as the percentage of total lung
-that was ventilated in the CT image.
+%The GI index was also calculated
+%between the generic and custom models with 2D extruded geometry.
+%The GI index was calculated using the method
+%presented by Zhao et al.~\cite{zhao_evaluation_2009} 
+%using the lung regions from the 
+%forward model. 
+%An estimate of ventilated lung area ($A_V$) relative to the 
+%total lung area was calculated from the CT images  
+%by dividing the area of the total lung over the ventilated
+%lung area 
+%(\fref{eq:ventilated_lung_est}).
+%\begin{equation}\label{eq:ventilated_lung_est}
+%	A_V = \frac{A_{\text{ventilated lung}}}{A_{\text{total lung}}}
+%\end{equation}
+%
+%This was used to determine if the calculated index
+%followed the same trend as the percentage of total lung
+%that was ventilated in the CT image.
+%The GI index was not calculated for the cylindrical model due 
+%to the poor reconstruction accuracy, and the 3D lung model was 
 
 \section{Results}
 
@@ -436,65 +442,77 @@ for subect C (in \fref{fig:lung-seg-results}).
 	}
 \end{figure}
 
+For each patient there was a single EIT recording ranging from 30 -- 60 seconds in length.
+To determine the improvement for the new customized meshes the ventilation pattern 
+from the CT image was compared to the reconstructed ventilaton on 4 types of models.
+The 4 types of meshes compared are pictured in \fref{fig:fem-results}: The first mesh was
+cylindrical with approximate lung regions, the second mesh was a genertic model 
+for an adult thorax, and the final two meshes were created from the segmentations. 
+To compare the performace across all models, the center of mass from the 
+ventilated region from the CT images was compared to the center of mass of the reconstructed 
+breaths.
 
 
 
-
-
-
-
-
-Data from 4 ARDS patients with CT
-and EIT were used to develop a segmentation 
-and correction tool to identify 
-the lungs and boundary of the body.  
-Segmentation was done using the 4th intercostal space, 
-with 10 adjacent CT 
-slices to form an enclosed chest cavity. 
-The lungs
-and exterior boundary were identified by increasing the contrast
-and identifying an appropriate threshold.
-Each segmentation was downsampled to
-20 points that could be edited by the user in Matlab. The 
-mesh was generated using 
-\verb!ng_mk_extruded_model!~\cite{Grychtol2012} in EIDORS 
-3.10~\cite{Adler2019}. Images were reconstructed 
-using GREIT~\cite{Adler2009}. 
-
-
-\begin{figure}
-\centering
-% Use the following line with your images (pdf preferred)
-\includegraphics[width=\textwidth]{chapter5-CT_to_mesh/imgs/basic_vs_advanced_3_cropped.pdf}
-\caption{\label{fig:ct_mesh_breath}%
-Single breath using: A) generic model B) custom model
-}
-\end{figure}
-
-Results in figure~\fref{fig:breath} show a reconstructed image 
-with more separable lungs in the enhanced model, and a mean GI index for each breath in the 
-1 minute 
-recording that follows 
-trend of the ventilated lung percentage in table~\ref{tbl:twocol}.
-
-\begin{table}
-  \centering
-  \caption{\label{tbl:twocol} %
-  Ventilated lung estimate vs. GI index scores.}
-  \begin{tabular}{|p{1.2cm}|p{1.5cm}|p{1.8cm}|p{1.7cm}|}
-    \hline
-  Subject & Ventilated lung (\%) &
-  GI (basic model) & GI (custom model) \\ \hline
-  1 & 99.9 & 0.353$\pm$0.004& 0.690$\pm$0.005 \\ 
-  2 & 85.5 & 0.640$\pm$0.022& 0.771$\pm$0.020  \\
-  3 & 79.6 & 0.695$\pm$0.007& 0.857$\pm$0.009  \\
-  4 & 27.0 & 0.614$\pm$0.011&  1.81$\pm$0.053 \\\hline
-  \end{tabular}
-  \vspace{-1em} 
-\end{table}
 
 \section{Discussion}
 
-The goal of this chapter was to design a tool to make custom meshes of 
+\section{Summary}
 
-$\sigma$
+
+
+%\TODO{Delete the rest of this?}
+%Data from 4 ARDS patients with CT
+%and EIT were used to develop a segmentation 
+%and correction tool to identify 
+%the lungs and boundary of the body.  
+%Segmentation was done using the 4th intercostal space, 
+%with 10 adjacent CT 
+%slices to form an enclosed chest cavity. 
+%The lungs
+%and exterior boundary were identified by increasing the contrast
+%and identifying an appropriate threshold.
+%Each segmentation was downsampled to
+%20 points that could be edited by the user in Matlab. The 
+%mesh was generated using 
+%\verb!ng_mk_extruded_model!~\cite{Grychtol2012} in EIDORS 
+%3.10~\cite{Adler2019}. Images were reconstructed 
+%using GREIT~\cite{Adler2009}. 
+%
+%
+%\begin{figure}
+%\centering
+%% Use the following line with your images (pdf preferred)
+%\includegraphics[width=\textwidth]{chapter5-CT_to_mesh/imgs/basic_vs_advanced_3_cropped.pdf}
+%\caption{\label{fig:ct_mesh_breath}%
+%Single breath using: A) generic model B) custom model
+%}
+%\end{figure}
+%
+%Results in figure~\fref{fig:breath} show a reconstructed image 
+%with more separable lungs in the enhanced model, and a mean GI index for each breath in the 
+%1 minute 
+%recording that follows 
+%trend of the ventilated lung percentage in table~\ref{tbl:twocol}.
+%
+%\begin{table}
+%  \centering
+%  \caption{\label{tbl:twocol} %
+%  Ventilated lung estimate vs. GI index scores.}
+%  \begin{tabular}{|p{1.2cm}|p{1.5cm}|p{1.8cm}|p{1.7cm}|}
+%    \hline
+%  Subject & Ventilated lung (\%) &
+%  GI (basic model) & GI (custom model) \\ \hline
+%  1 & 99.9 & 0.353$\pm$0.004& 0.690$\pm$0.005 \\ 
+%  2 & 85.5 & 0.640$\pm$0.022& 0.771$\pm$0.020  \\
+%  3 & 79.6 & 0.695$\pm$0.007& 0.857$\pm$0.009  \\
+%  4 & 27.0 & 0.614$\pm$0.011&  1.81$\pm$0.053 \\\hline
+%  \end{tabular}
+%  \vspace{-1em} 
+%\end{table}
+%
+%\section{Discussion}
+%
+%The goal of this chapter was to design a tool to make custom meshes of 
+%
+%$\sigma$
