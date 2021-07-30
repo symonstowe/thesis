@@ -345,7 +345,8 @@ were selected as the lung.
 
 To generate a generic mesh for comparison the \verb!mk_library_model! function in 
 EIDORS was used which has available geometry for a cylindrical model with lung regions
-and a genertic model of a human thorax.
+and a genertic model of a human thorax. The conductivity of the lung regions was set to 
+0.7 of the background model conductivity.
 
 All images were reconstructed using GREIT for 2D
 imaging ~\parencite{adler_greit_2009}. For the GREIT 
@@ -365,12 +366,16 @@ All patients were on mechanical ventilation
 at the time of recordings, but the exact 
 ventilation parameters were unknown.
 
-To evaluate the effect of the custom models on lung sensitivity 
+To evaluate the effect of the custom models on lung sensitivity,
 the center of mass was computed for both the ventilation region detected in 
 CT images, and the breath volume reconstruced in CT images. 
 The center of mass was calculated from EIT images by removing all 
 positive changes in the image, then locating the center of mass 
 of all pixels that were over 50\% of the ventilation signal amplitude. 
+The breath used for calculated was an ensemble average representative breah 
+of all breaths in the signal.
+The error in center of mass was calculated between the EIT reconstruced breath 
+and the CT segmentation in the number of pixels.
 
 %The GI index was also calculated
 %between the generic and custom models with 2D extruded geometry.
@@ -425,7 +430,6 @@ The segmentaiton results show that there is good identification of the
 ventilated lung region from the automatic segmentation. The estimated lung regions also helped to 
 give starting approximations for the lungs and decrease required manual 
 correction time when there was limited ventilated lung in the available CT image.
-
 Sample meshes generated from the segmented images are shown in \fref{fig:fem-results} 
 for subect C (in \fref{fig:lung-seg-results}).
 
@@ -433,8 +437,8 @@ for subect C (in \fref{fig:lung-seg-results}).
 	\centering
 	% Use the following line with your images (pdf preferred)
 	\includegraphics[width=\textwidth]{chapter5-CT_to_mesh/imgs/fem_models_PT04.pdf}
-	\caption[]{\label{fig:fem-results}%
-	example meshes and electrode locations for subject B (from \fref{fig:lung-seg-results}).
+	\caption[Custom and generic meshes]{\label{fig:fem-results}%
+	Example meshes and electrode locations for subject C (from \fref{fig:lung-seg-results}).
 	Model (A) is circular with lung regions. Model (B) uses the generic chest model from EIDORS 
 	and models (C) and (D) use the custom segmentation boundaries. Model (C) uses 2D lung boundaries 
 	from the 4th intersoctal space extruded for the model height. Model (D) selects all elements
@@ -452,10 +456,85 @@ To compare the performace across all models, the center of mass from the
 ventilated region from the CT images was compared to the center of mass of the reconstructed 
 breaths.
 
+\begin{figure}
+	\centering
+	% Use the following line with your images (pdf preferred)
+	\includegraphics[width=\textwidth]{chapter5-CT_to_mesh/imgs/center_of_vent_PT04.pdf}
+	\caption[Example ventilation distributions]{\label{fig:c-of-m-results}%
+	Example ventilation distribution for subject C (from \fref{fig:lung-seg-results}).
+	Column A and B are the generic models from the EIDORS library. 
+	Columns C and D show the custom models with 2D lungs (C) and 3D lung regions (D).
+	Column E shows the distribution of the ventilated lung as segmented from the CT image. 
+	}
+\end{figure}
 
+Reconstructed images in \fref{fig:c-of-m-results}
+show a very limited difference in ventilated regions 
+and center of mass between custom and generic models. There is a 
+noticible change in ventiltion distribution using the circular model, but the 
+generic thorax model and the custom model show very similar results. 
+There is a slight shape difference between the generic thorax model 
+and custom models, but there is very little measureable difference. 
 
+The error in center of mass across all models for all subjects was calculated and is 
+shown in \fref{fig:c-of-m-error}. The error is estimated as the distance in pixels 
+between the venter of mass of the ventilated lung from the CT estimate and the 
+center of mass of the reconstruced breath. 
+
+\begin{figure}
+	\centering
+	% Use the following line with your images (pdf preferred)
+	\includegraphics[width=\textwidth]{chapter5-CT_to_mesh/imgs/error_boxplot.pdf}
+	\caption[Example ventilation distributions]{\label{fig:c-of-m-error}%
+	Example ventilation distribution for subject C (from \fref{fig:lung-seg-results}).
+	Column A and B are the generic models from the EIDORS library. 
+	Columns C and D show the custom models with 2D lungs (C) and 3D lung regions (D).
+	Column E shows the distribution of the ventilated lung as segmented from the CT image. 
+	}
+\end{figure}
+
+The center of mass error was not significantly different across all models for each of the subjects. 
+The average error for the circular model was slightly higher than the customized geomerty, but for 
+all models the center of mass, and shape of the ventilation distribution was similar. It is not clear 
+that custom models improved reconstruction accuracy of breath reconstrucionts in the EIT images. 
+There are several factors that may contribute to this. 
 
 \section{Discussion}
+The goal of this chapter was to create a tool to automatically segment CT images from ARDS patients 
+to improve lung sensetivity to improve individualized ventilation monitoring. 
+An automatic sesgmentatino algorithm was developped to give a baseline segmentation of the lungs which 
+gave an accurate starting point of the tru lung boundary. A tool for manual correction was designed 
+that enabled quick, accurate corrections of automatically generated CT images. 
+Segmented images were used to generate meshes with accurate boundary  shapes and lung outlines. 
+
+Although it has been shown that accurate models of the boundary and lung improve measures of
+GI index~\parencite{yang_lung_2021}, the models with improved boundary accuracy in this chapter 
+did not show this improvement. One factor that was different between the two studies was the value 
+of lung conductivity. \citeauthorandyear{yang_lung_2021} used a conductivity value of 1.3 for the lung 
+tissue relative to the model background. This is atypical since the conductivity of lung tissue is 
+considerably lower than other tissues in the body. In this chapter using a value of 
+1.3 times the background 
+conductivity did not improve the center of mass error across custom models.
+
+There are several other factors that may contribute to the mismatch between the 
+CT ventilation and the EIT imaged ventilation. 
+First, the difference in posture and condition between the CT and the EIT image 
+was not known. The EIT belt was not in position during the CT scan, so  there was potential that the
+patient position and posture were slightly changed. Although this may contribute to a sligtly different
+shape of the thorax, it is not likely to drastically change the boundary of the chest cavity. 
+One of the larger factors is likely the unknown locations of the electrodes. Since the exact location 
+of the electrode is unknown, the 16 electrodes were placed evenly around the thorax. 
+Incorrect electrode locations can have a large impact on the resulting EIT
+image, resulting in artefacs and lower reconstruction accuracy \parencite{boyle_impact_2011}
+Since the CT images aquired 
+contain spatial information, there is potential to improve accuracy of the 
+electrode placement on the models. The eit system used has several available belts with 
+different alactrode spacing, and points of attachment. If the user was able to select 
+the belt used, and the attachment point or tightness, the electrode locaitons could be more easliy 
+approximated. Alternatively, an image or CT with the electrode belt in place could allow
+precise estimation of the electrode location and spacing. 
+
+
 
 \section{Summary}
 
