@@ -1,29 +1,14 @@
 \chapter{FEM mesh refinement for 3D EIT}
 \label{chap:chapter-4}
 
-%\begin{abstract}
-\section{Summary}
-In this paper we examine the requirement for mesh refinement around 
-electrodes in Electrical Impedance Tomography (EIT). 
-While it has been recommended that  models be refined around the electrodes, where current
-density and sensitivity are highest,  the level of refinement required is poorly understood. 
-Using a set number of nodes, we investigate the optimal distribution 
-between the electrodes and 
-the volume of a model. 
-A balance point is used to measure the difference in distribution between the electrode and the centre of
-the model.
-To calculate this, all nodes contained between the surface of a selected electrode and the centre of the model 
-were identified and the mean position of nodes along the container axis was computed. 
-%A balance point was defined as the mean distance of all nodes along the axis 
-%of a container encompassing all points between the centre of the model and the surface of a selected electrode.
-We compare refinement strategies across commonly used meshing software in EIT and compare the 
-model sensitivity error to an ultra-fine reference mesh. 
-In a tank model, for a fixed number of nodes, error in the sensitivity calculation is minimized 
-when the balance point of the nodes is n  85\% of the tank radius and the node density dissipates evenly 
-from the electrode surface to the centre of the model. Using this method sensitivity error was decreased 
-in all regions with high sensitivity. This node distribution technique  enables the generation  of accurate 
-meshes with fewer nodes that can reduce measurement error and computing time. 
-%\end{abstract}
+\section{Motivation}
+This thesis proposes the use of novel 3D electrode configurations 
+and internal electrodes to improve sensitivity to 
+cardiosynchronous activity. Unlike surface electrode configurations, these 
+modles will have a very high 
+sensitivity in the center of a model where mesh refinement can be challenging. 
+In this chapter we explore the need for mesh refinement with regard
+to sensitivity accuracy. 
 
 \section{Introduction}
 Electrical Impedance Tomography (EIT) reconstructs images of 
@@ -107,7 +92,7 @@ $\bf J$.
 We built a cylindrical model in Gmsh and Netgen which was parameterized so that multiple
 different combinations of mesh refinement were possible.
 These results were compared to a very high density meshes which was considered the gold standard.
-% TODO ADD THE FOLLOWING IN THE INTRO
+The format of the geometry files used to generate these meshes can be seen in \fref{app:geo_stuff}.
 
 \subsection{Mesh Generation}
 A cylinder ($\diameter=0.5$~m, height $h=0.25$~m) with four square electrodes 
@@ -130,7 +115,7 @@ in Matlab 2019b
 Meshes of different sizes were generated with Netgen and Gmsh by manipulating the desired
 maximum edge length (maxh parameter) for the entire domain and the electrodes.
 Two  mesh analyses were performed. For the first
-mesh maximum element lengths were
+mesh, maximum element lengths were
 chosen such as to divide the electrode side of 5~cm into an integer number of
 segments of equal size. 
 The maximum mesh element length ranged from 1 to 7 subdivisions of the electrode 
@@ -145,10 +130,14 @@ R1-R7 is referred to as refinement A where the internal element max size was 5 c
 B had an internal mesh size of 4 cm, C was 3 cm and D was 2 cm.
 The numeric value in the mesh 
 ID indicated the number of subdivisions per electrode edge. 
-In Netgen the mesh decay was not controllable, but in Gmsh the size was set 
+In Netgen the mesh decay was not easily controlledbeyone selecting a refinement 
+level from 1 to 5, but in Gmsh the size was set 
 to increase evenly from the surface of the electrode to the centre of the model.
-\fref{fig:sample_meshes} shows example meshes of coarse, fine and refined
-meshes. \fref{fig:electrode_mesh_size} shows the generated mesh structure for 
+It should be possible to replicate this mesh density distributionin Netgen by using a 
+seperate mesh density file that specifies the required density at each point in the geometry,
+but this technique is not widely used due to its complexity.
+\Fref{fig:sample_meshes} shows example meshes of coarse, fine and refined
+meshes. \Fref{fig:electrode_mesh_size} shows the generated mesh structure for 
 constant refinement meshes around the electrode 
 for both Netgen and Gmsh. 
 
@@ -266,6 +255,8 @@ of interest for the centre (C), at the electrode (E) and between the centre and 
 (I). The resulting sensitivity for the reference mesh calculated with Gmsh and the 
 selected regions of interest is presented in \fref{fig:roiMethods}.
 
+The sensitivity error is the absolute difference in total sensetivity 
+for the selected region with reference to the ultra-fine model.
 
 %\subsection{Meshing errors}
 %We compare the meshes in terms of the value of the voltage measurement between
@@ -314,7 +305,6 @@ constant and refined meshes with respect to the number of nodes per electrode.
   internal mesh sizes are as follows: refinement A - 5 cm; refinement B - 4 cm; refinement C - 3 cm;
   refinement D - 2 cm.}
 \end{figure}
-
 
 Example sensitivity profiles for the M-series meshes are shown in \fref{fig:roiMethods}.
 The resulting sensitivity profile near the electrodes more closely matched the reference case 
@@ -460,14 +450,36 @@ ideal placement of a given number of nodes to reduce model errors.
 % error near the electrode was better than C2, while deeper in the medium it was
 % on par with C5.  It produced measurement error of only 0.11~mV.
 
+%\section{Conclusion}
+%
+%In summary, as expected, refinement of  meshes near electrodes 
+%does improve model accuracy in terms of sensitivity.
+%We recommend that, for each EIT imaging case, required model accuracy be
+%determined from an analysis of the system, 
+%and to minimize the sensitivity error in the forward solution 
+%the balance of the nodes should be approximately 
+%85\% towards the radius of the
+%model when the dissipation of mesh refinement is constant. 
 
-\section{Conclusion}
-
-In summary, as expected, refinement of  meshes near electrodes 
-does improve model accuracy in terms of sensitivity.
-We recommend that, for each EIT imaging case, required model accuracy be
-determined from an analysis of the system, 
-and to minimize the sensitivity error in the forward solution 
-the balance of the nodes should be approximately 
-85\% towards the radius of the
-model when the dissipation of mesh refinement is constant. 
+\section{Summary}
+In this paper we examine the requirement for mesh refinement around 
+electrodes in Electrical Impedance Tomography (EIT). 
+While it has been recommended that  models be refined around the electrodes, where current
+density and sensitivity are highest,  the level of refinement required is poorly understood. 
+Using a set number of nodes, we investigate the optimal distribution 
+between the electrodes and 
+the volume of a model. 
+A balance point is used to measure the difference in distribution between the electrode and the centre of
+the model.
+To calculate this, all nodes contained between the surface of a selected electrode and the centre of the model 
+were identified and the mean position of nodes along the container axis was computed. 
+%A balance point was defined as the mean distance of all nodes along the axis 
+%of a container encompassing all points between the centre of the model and the surface of a selected electrode.
+We compare refinement strategies across commonly used meshing software in EIT and compare the 
+model sensitivity error to an ultra-fine reference mesh. 
+In a tank model, for a fixed number of nodes, error in the sensitivity calculation is minimized 
+when the balance point of the nodes is n  85\% of the tank radius and the node density dissipates evenly 
+from the electrode surface to the centre of the model. Using this method sensitivity error was decreased 
+in all regions with high sensitivity. This node distribution technique  enables the generation  of accurate 
+meshes with fewer nodes that can reduce measurement error and computing time. 
+%\end{abstract}
