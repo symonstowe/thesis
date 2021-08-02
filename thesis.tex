@@ -42,6 +42,7 @@ doi=false,
 isbn=false,
 url=false,
 citestyle=authoryear,
+labeldate=year,
 maxbibnames=19,
 apamaxprtauth=99,
 maxcitenames=2,
@@ -294,7 +295,8 @@ uniquelist=false
 
 % MAIN FILES
 \include{chapter1-intro/intro}
-\include{chapter2-background/background}
+\include{chapter2-background/background_I}
+\include{chapter2-background/background_II}
 \include{chapter3-perfusion_analysis/perfusion_analysis}
 \include{chapter4-mesh_refinement/mesh_refinement}
 \include{chapter5-CT_to_mesh/CT_to_mesh}
@@ -305,10 +307,10 @@ uniquelist=false
 % BIBTEX
 \phantomsection
 \addcontentsline{toc}{chapter}{Bibliography}
-\begin{singlespace}
+%\begin{singlespace}
   \setlength\bibitemsep{5pt}
   \printbibliography
-\end{singlespace}
+%\end{singlespace}
 
 %\appendix 
 \include{chapter9-appendix/appendix}

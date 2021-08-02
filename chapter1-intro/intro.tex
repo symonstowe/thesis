@@ -27,13 +27,6 @@ We investigate the current limitations of perfusion monitoring in 2D, and
 analyze novel meshing techniques and electrode placements for their 
 ability to improve thoracic imaging and increase sensitivity to blood flow. 
 
-\section{Motivation}
-\TODO{Briefly \\
-Why should we care?\\
-Why to we measure perfusion? \\
-What are the benefits if this technology works well? (increased sensitivity?) \\
-What are the benefits of using EIT for this?}
-
 \section{Problem}
 
 EIT can be used to image blood movement in two ways. 
@@ -80,7 +73,7 @@ potential to increase current density and sensitivity in
 the center of the thorax. 
 The benefits of internal electrodes have been simulated 
 in 2D showing great improvemets in reconstruction accuracy 
-and sensitivity~\parencite{tehrani_modelling_2012}, but 
+and sensitivity~\parencite{nasehi_tehrani_modelling_2012}, but 
 in practice there are several challenges to overcome. 
 Due to differences in physiology it is challenging to model
 the correct location of the internal electrodes between subjects
@@ -107,7 +100,8 @@ hemodynamic activitiy more accurately.
 \section{Thesis objectives}
 The goal of this project is to improve sensitivity of EIT to perfusion using 
 improved mesh accuracy and custom electrode locations. This thesis approaches problem 
-from two angles (\fref{fig:goal}). We investigate both
+from three angles (\fref{fig:goal}). We investigate the limitations of current 
+perfusion monitoring techniques,
 advanced meshing techniques, and novel electrode configurations
 with internal electrodes and their applications to improve thoracic EIT.
 
@@ -160,34 +154,50 @@ configuration with internal electrodes.}
 \label{fig:goal}
 \end{figure}
 
-%\section{Contributions}
-%The following 
-%
-%This thesis presents several contributions to the field of perfusion imaging and 
-%meshing in EIT.
-%
-%\COMMENT{OLD stuff}
-%The following questions will be answered by the thesis:
-%\begin{enumerate}
-%	\item How do current methods of EIT lung perfusion imaging compare? (\emph{Chapter 2})
-%	\item What advantages can internal electrode configurations provide? (\emph{Chapter 3})
-%	\item What advantage do alternative external electrode configurations provide
-%	when monitoring aortic blood flow? (\emph{Chapter 4})
-%	\item How can a configuration that is better able to isolate cardiac activity
-%	improve measures of lung perfusion and aortic flow in an animal model? (\emph{Chapter 5})
-%\end{enumerate}
-%
-%
-%\section{Publications}
-%Published works related to the thesis:
-%\begin{itemize}
-%	\item \fullcite{stowe_comparison_2019}
-%	\item \fullcite{stowe_effect_2020}
-%	\item \fullcite{stowe_generating_2021} 
-%\end{itemize}
-%
-%Other projects:
+\section{Contributions}
+The following 
+This thesis presents several contributions to the field of perfusion imaging and 
+meshing in EIT.
+\begin{itemize}
+	\item A method to determine the a node distribution in a finite element model mesh to
+        to reduce error in sensitivity calculations. \Fref{chap:chapter-4} presents an 
+        analysis between meshing software commonly used in EIT and reccomends a technique to 
+        place a fixed number of nodes that maximizes sensitivity accuracy. 
+        A finer node density has often been suggested near the electrode due to the higher 
+        sensitivity, but no analysis was availble to determine where a set number of
+        nodes should be located in a model to minimize sensitivity error. 
+        Using a balance point 
+        technique this chapter was able to determine the best distribution of nodes
+        to calculate the sensitivity of voltage meaasurements to conductivity changes.
+	\item A tool to generate accurate, custom meshes of arbitrary boundaryies for EIT reconstruction from 
+        from CT images. \Fref{chap:chapter-5} documents 
+        the design and validation of a tool to generate meshes for image reconstruction from CT images. 
+        diagnostic CT images were automatically segmented and a tool to manually check the segmentations
+        and generate meshes was created. 
+	\item An analysis of 3D electode placmenets with intenal electrodes on internal sensitivity. 
+        \Fref{chap:chapter-6} presents an analysis of the sensitivity patterns correspinding to 
+        internal electrodes when used with 2 planes of external electrodes. Internal electrodes are
+        expected to increase sensitivity in the center of the model, but it is not clear to what extent 
+        image reconstructions may be improved, or how many electrodes should be 
+        placed internally. This chapter provides an analysis of the sensitivity when using internal
+        electrode in 3D with different injection patterns.  
+	\item A method to reconstruct images using internal electrode measurements in the presence of noise.
+        \Fref{chap:chapter-7} demonstrates the effect of internal electrode probe motion on image 
+        reconstruction and presented a techniqe using the interferance in reconstructed images 
+        due to the movement artefact to create a model with a corrected probe location. This technique
+        improves reconstruction performance and noise levels in the presence of electrode motion.
+\end{itemize}
+
+\subsection{Publications}
+\subsubsection{Published works related to the thesis:}
+\begin{itemize}
+	\item \fullcite{stowe_comparison_2019}
+	\item \fullcite{stowe_generating_2021} 
+	\item \fullcite{stowe_effect_2020}
+  \item \fullcite{stowe_using_2021}
+\end{itemize}
+
+%\subsubsection{Other projects}
 %\begin{itemize}
 %	\item \fullcite{stowe_monitoring_2019}.
 %\end{itemize}
-%
