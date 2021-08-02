@@ -219,6 +219,15 @@ The collection of nodes, and elements making up a larger model is commonly calle
 Each line connecting two nodes of a mesh can be visualized as a resistor,
 used to model the conductivity of an object.
 
+To accurateatly solve numerical problems using the FEM, it is vital to accurately represent 
+spatial information. \citeauthorandyear{boyle_impact_2011} show that incorrectly modelling 
+the boundary and electrodes can result in distorted images. 
+Especially in brain EIT great care is taken to minimize errors in the forward model 
+\parencite{aristovich_method_2014,malone_multifrequency_2014}, 
+as small errors
+in modelling have been shown to give large erros in the reconstructed 
+images \parencite{kolehmainen_assessment_1997}. 
+
 \subsection{Inverse Problem}
 To reconstruct images we must solve for impedance distribution from known voltage measurements. 
 This is known as the inverse problem. 
@@ -351,12 +360,54 @@ This reconstruciton method is widely used in EIT for both 2D and 3D electrode co
 and is shown to give even resolution throughout the image \parencite{adler_greit_2009}.
 
 \subsection{Internal Electrodes}
-\TODO{ADD overview from whereever I put it!}
-\subsubsection{Motion Correction} \label{sec:motion_correction}
-\TODO{Just background}
+
+While there have been some studies researching electrode placement for cardiac
+imaging in 2D~\parencite{vonk_noordegraaf_improvement_1996} and 
+3D electrode configurations~\parencite{graham_electrode_2007}, there has 
+been little research into the applicaiton of internal electrodes. 
+It has been shown that externally placed 3D electrode configurations
+consisting of two electrode planes
+can improve the sensitivity distribution and image quality~\parencite{Grychtol2016},
+but there is still limited sensitivity in the central-most regions 
+of the chest.
+The concept of using internal esophageal reference electrodes has been presented
+previously
+\parencite{Pilkington1989,Schuessler1995}
+as a method to improve internal sensitivity and have 
+shown a reconstructio accuracy improved by up to 30\% for small 
+targets \parencite{pilkington_utilization_1989}.
+Recent simulations in 2D have shown in increase in reconstruction 
+accuracy, amplitude response, position error, and resolution
+\parencite{nasehi_tehrani_modelling_2012,nasehi_tehrani_evaluation_2012},
+but internal electrodes have not been widely used clinically. 
+
+An clinical evaluaiton of EIT found that the amplitude of cardiosynchronous signals 
+in EIT measurements was 6 times larger when placing 2 of 16 total electrodes in 
+either the esophagus or trachea, but found that reconstructions 
+in an animal model were not obvoisly improved in all cases \parencite{czaplik_application_2014}.
+A recent review highlighted the use of internal electrodes to monitor cardiac radiofrequency
+ablation, investigate the possible noise sources and 
+state the need for analysis of the effect of motion on the 
+internal electrodes
+\parencite{nguyen_electrical_2020}.
+
+Despite several promising simulation results using internal electrodes, the clinical advantage
+has not been realized. While studies show an increased sensitivity to cardiosynchronous
+EIT signals, the source of these signals is not clear, and the impact of movement 
+on the internal electrodes is not known. 
 
 \section{Summary}
-\TODO{bring it back to the general motivation briefly}
+EIT has potential to be used as a tool for continuous perfusion monitoring at the bedside,
+but is limited by low sensitivity to cardiosynchronous signal. 
+Accurate modelling and 
+the use of internal electrodes have been proposed as techniques to 
+increase the sensitivity of EIT in specific regions, 
+but it is not clear how much these might improve perfusion imaging. 
+We also examine the effect of internal electrode movement and potential
+methods to correct these errors. 
+Improving sensitivity to cardiosynchronous signals with EIT could enable 
+better isolation of the perfusion related signal from other factors, and 
+improve the use of EIT for cardiovascular monitoring. 
 
 
 %\subsubsection{3D Reconstruction}
@@ -370,16 +421,6 @@ and is shown to give even resolution throughout the image \parencite{adler_greit
 %It is thought this is due to the increased complexity of 3D images
 %and the subsequent analysis~\parencite{Grychtol2019}.
 %
-%It has been shown that externally placed 3D electrode configurations
-%consisting of two electrode planes
-%can improve the sensitivity distribution and image quality~\parencite{Grychtol2016},
-%but there is still limited sensitivity in the central-most regions 
-%of the chest.
-%The concept of using internal esophageal electrodes has been presented
-%previously~\parencite{Pilkington1989,Schuessler1995}
-%as a method to improve internal sensitivity 
-%and reconstruction quality,
-%but has not been widely used or simulated.
 %Several studies have shown that there may be several advantages to using an internal
 %electrode in \acrshort{eit} recordings; 
 %Measurements with an internal electrode have been 
