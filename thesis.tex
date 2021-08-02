@@ -6,8 +6,8 @@
 % !BIB program = biber
 
 % Define style of document
-%\documentclass[12pt,twoside]{report}
-\documentclass[12pt]{report}
+\documentclass[12pt,twoside]{report}
+%\documentclass[12pt]{report}
 \usepackage{amsmath} 
 \usepackage{wasysym}
 \usepackage{amssymb}
@@ -170,27 +170,24 @@ uniquelist=false
 
 %List of abbreviations
 \usepackage[acronym,nomain,nonumberlist]{glossaries}
-
-\newacronym{ards}{ARDS}{acute respiratory distress syndrome}
-\newacronym{bpm}{bpm}{beats per minute}
-\newacronym{ct}{CT}{computed tomography}
-\newacronym{ecg}{ECG}{electrocardiogram}
-\newacronym{eit}{EIT}{electrical impedance tomography}
-\newacronym{co}{CO}{cardiac output}
-\newacronym{fem}{FEM}{finite element model}
-\newacronym{gi}{GI}{global inhomogeneity}
-\newacronym{gui}{GUI}{graphical user interface}
-\newacronym{fft}{FFT}{fast fourrier transform}
-\newacronym{fwhm}{FWHM}{full width half max}
-\newacronym{lv}{LV}{left ventricular}
-\newacronym{mri}{MRI}{magnetic resonance imaging}
-\newacronym{mse}{MSE}{mean squared error}
-\newacronym{peep}{PEEP}{positive end-expiratory pressure}
-\newacronym{pet}{PET}{positron emission tomography}
-\newacronym{spect}{SPECT}{single photon emission computed tomography}
-\newacronym{sv}{SV}{stroke volume}
-\newacronym{svv}{SVV}{stroke volume variation}
 \makeglossaries
+
+\newacronym{ards}{ARDS}{Acute Respiratory Distress Syndrome}
+\newacronym{bpm}{bpm}{Beats per Minute}
+\newacronym{ct}{CT}{Computed Tomography}
+\newacronym{ecg}{ECG}{Electrocardiogram}
+\newacronym{eit}{EIT}{Electrical Impedance Tomography}
+\newacronym{fem}{FEM}{Finite Element Model}
+\newacronym{gi}{GI}{Global Inhomogeneity}
+\newacronym{gui}{GUI}{Graphical User Interface}
+\newacronym{fft}{FFT}{Fast Fourrier Transform}
+\newacronym{fwhm}{FWHM}{Full Width Half Max}
+\newacronym{mri}{MRI}{Magnetic Resonance Imaging}
+\newacronym{mse}{MSE}{Mean Squared Error}
+\newacronym{peep}{PEEP}{Positive End-Expiratory Pressure}
+\newacronym{pet}{PET}{Positron Emission Tomography}
+\newacronym{snr}{SNR}{Signal-to-noise Ratio}
+\newacronym{spect}{SPECT}{Single Photon Emission Computed Tomography}
 
 % Include packages for manipulating figures/tables
 \usepackage{epsfig} 
@@ -213,6 +210,9 @@ uniquelist=false
 
 % For the papers in appendix
 \usepackage{pdfpages}
+
+\usepackage{fancyvrb}
+
 
 % Start of document
 \begin{document}
@@ -268,25 +268,27 @@ uniquelist=false
 % CONTENTS, FIGURES, TABLES
 \tableofcontents
 \addcontentsline{toc}{chapter}{Contents}
-\pagebreak
+%\pagebreak
 
 \markboth{List of Figures}{List of Figures}
 \phantomsection
 \addcontentsline{toc}{chapter}{List of Figures}
 \listoffigures
-\pagebreak
+%\pagebreak
 
 \markboth{List of Tables}{List of Tables}
 \phantomsection
 \addcontentsline{toc}{chapter}{List of Tables}
 \listoftables
-\pagebreak
+%\pagebreak
 
 \markboth{List of Acronyms}{List of Acronyms}
 \phantomsection
 \addcontentsline{toc}{chapter}{list of Acronyms}
+\glsaddall
 \printglossary[type=\acronymtype,title=List of Acronyms]
-\pagebreak
+\cleardoublepage
+%\pagebreak
 
 % Page Headings
 % Chapter headings are in chapter files

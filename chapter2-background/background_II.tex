@@ -2,9 +2,9 @@
 
 Most EIT systems consist of: 
 a current source to inject a current between two electrodes;
-a system to measure differential voltage between pairs of electrodes; and
+a system to measure differential voltages between pairs of electrodes; and
 electrodes, applied to the body surface.
-This section further discsses each of these aspects of EIT 
+This section further discusses each of these aspects of EIT 
 and introduces concepts of image acquisition and reconstruction.
 
 
@@ -41,21 +41,21 @@ conductive gel \parencite{waldmann_performance_2017}, but it can decrease
 over long measurements as the gel dries \parencite{lozano_errors_1995}. 
 
 \subsubsection{Current injection and voltage measurement}
-To calculate impedance three main conisderations must be made with regard to the 
+To calculate impedance three main considerations must be made with regard to the 
 injected current: the frequency, amplitude and pattern. 
 
 Low frequency currents will 
-prefferentially pass around cells through the extracellular
-fluid due to the high capacitive componenet of the cell 
-membrane~\parencite{foster_whole-body_1996}, wheras high frequency currents will be 
+preferentially pass around cells through the extracellular
+fluid due to the high capacitive component of the cell 
+membrane~\parencite{foster_whole-body_1996}, whereas high frequency currents will be 
 more affected by the capacitive 
-componenet~\parencite{holder_electrical_2004}. 
+component~\parencite{holder_electrical_2004}. 
 Since EIT requires a linear relationship between the measured voltages and 
 tissue impedance to produce valid reconstructions,
 it is important to select frequencies of less than 1 MHz to ensure that cell 
 and neural membrane is not the dominant factor in the impedance 
 measurements~\parencite{barber_applied_1984}.
-Impedance measurements below 100 KHz have shown to be primarily rsitive on lung
+Impedance measurements below 100 kHz have shown to be primarily resistive (real) on lung
 tissue~\parencite{witsoe_electrical_1967}, and most EIT systems use
 frequencies between 10 kHz and 1 Mhz~\parencite{holder_electrical_2004}.
 
@@ -65,38 +65,40 @@ The guideline defined by IEC 60601-1
 \parencite{international_electrotechnical_commission_iec_2021}, set a limit 
 of 10 mA on current across all electrodes at 100 kHz, and lower limits 
 at lower frequencies. 
-For EIT frequencies between 20--100 kHz are often used with an injected current 
+For EIT frequencies between 20--100 kHz are often used with 
+an injected current
 between 1--5 mA.
 In order to meet the 
 guidelines at low frequencies,
 when injecting sinusoidal currents it is also important to use complete current cycles 
 so that DC currents are not applied to the body \parencite{adler_electrical_2017}.
-When using internal electrodes there are additional safety considerations that limit
-current amplitudes
+When using internal electrodes, there are additional safety considerations that limit
+current amplitudes. Depending on the proximity to the heart, for clinical use 
+it may be required to not inject current on internal electrodes. They can still be used
+to make measurements. 
 
-The pattern of current injection and voltage measurement is commonly refered to in EIT 
-as the stimulation and measuremnt pattern. Typically a current is injected between two electrodes
-while the resulting voltages are measured between asjacent pairs. The two most common injection 
+The pattern of current injection and voltage measurement is commonly referred to in EIT 
+as the stimulation and measurement pattern. Typically a current is injected between two electrodes
+while the resulting voltages are measured between adjacent pairs. The two most common injection 
 patterns are adjacent, and ``skip 4''. Examples of these measurement patterns are shown in 
-\fref{fig:stim_meas_bkgnd} on a 16 electrode system. The terms adjacent and skip 4 describe 
+\fref{fig:stim_meas_bkgnd} on a 16-electrode system. The terms adjacent and skip 4 describe 
 the space between pairs of injecting or measurement electrodes. 
 Regardless of the pattern, a frame of EIT data is generated in the same way. 
 Current is injected between a pair of electrodes as voltage is measured between all 
 remaining pairs, then current is injected between the next pair of electrodes and
 voltages are measured again. This results in voltage measurements on each electrode 
-pair for every current injection. For a 16 electrode system this results in 
-256 measurements in each frame. For a 32 electrode system there are 1024. As mentioned in 
+pair for every current injection. For a 16-electrode system, this results in 
+256 measurements in each frame. For a 32-electrode system, there are 1024. As mentioned in 
 \fref{sec:electrodes}, voltage measurements made on the stimulating electrodes
-are often removed resulting in 208 measurements per frame on a 16
-electrode system, and 928 measurements per frame on a 32 electrode system.  
+are often removed resulting in 208 measurements per frame on a 16-electrode system, and 928 measurements per frame on a 32-electrode system.  
 
 \begin{figure}
     \includegraphics[width=\textwidth]{chapter2-background/imgs/common_stim_meas_patterns.pdf}
     \caption[Adjacent and "skip 4" stimulation patterns]{\label{fig:stim_meas_bkgnd} 
-    Two common stimulation patterns are simulated on a simple human model showin in 
+    Two common stimulation patterns are simulated on a simple human model shown in 
     \fref{fig:cur_equip_line}. Injected current is shown in blue and the resulting equipotential 
     lines are shown in red.
-    (A) An exmaple of an adjacent stimulation pattern. Current is injected between 
+    (A) An example of an adjacent stimulation pattern. Current is injected between 
     pairs of adjacent electrodes. For each current injection voltage is 
     measured between all sequential pairs. 
     (B) An example of the ``skip 4'' injection pattern. Current is injected between every
@@ -104,18 +106,18 @@ electrode system, and 928 measurements per frame on a 32 electrode system.
     during each current injection, voltage measurements are made using the same skip 4 
     pattern between each of the 16 electrodes and their corresponding pair. 
     A single frame of data is generated by all measurements made for each possible injection
-    pattern. For 16 electrodes this results in 256 meaasurements.}
+    pattern. For 16 electrodes this results in 256 measurements.}
  \end{figure}
 
 
 \subsection{Imaging Techniques}
 There are several challenges that make absolute EIT imaging difficult. 
-The differences in tissue impedance are subtle relative to artefact introduced 
+The differences in tissue impedances are subtle relative to artefacts introduced 
 by unknown boundary locations and electrode 
 positions~\parencite{adler_why_2015,adler_electrical_2017,nissinen_compensation_2009}. 
 EIT is instead typically used to reconstruct impedance changes between two points in time.
 
-Time difference EIT is sensitive to the movement of fluis within the body 
+Time difference EIT is sensitive to the movement of fluid within the body 
 and is well suited to image functional activity such as 
 the inflation of the lungs 
 and the flow of blood.
@@ -129,17 +131,17 @@ Most frequencies used to differentiate between different tissue types are at hig
 where current starts to flow across the cell membranes. 
 These high frequencies are out of the range of most current EIT systems and 
 frequency changes due to different lower frequencies are limited~\parencite{adler_electrical_2017}.
-This thesis uses time-difference EIT to images changes in movemnt and fluid volumes in teh thorax.
+This thesis uses time-difference EIT to images changes in movement and fluid volumes in the thorax.
 
 \subsection{Forward Problem} \label{sec:fwd}
-In simulation, we have a model with known geometry and impedance and we wish to solve for the 
+In simulations, we have a model with known geometry and impedance and we wish to solve for the 
 voltage at the electrodes due to a stimulation current. 
 This process is called the forward problem. 
 A model used to calculate a solution for the forward problem is called a forward 
 model. 
 
 This problem is well-posed, and can be solved analytically on simple, regular geometries. 
-For the inverse solution we require Maxwell's forumlation of Faraday's Law:
+For the inverse solution, we require Maxwell's formulation of Faraday's Law:
 \begin{equation} \label{eq:farad}
 \Delta \times \vec{E} = -\frac{\partial}{\partial t} \vec{B}
 \end{equation}
@@ -151,7 +153,7 @@ and Ampere's Law:
 To set up the solution we first assume that the current used for EIT is sufficiently low 
 frequency relative to the scale of interest that we can use a 
 quasistatic approximation of Maxwell's equations \parencite{larsson_electromagnetics_2007}. 
-Under this assumption the derivitave components of \fref{eq:farad} and \fref{eq:amp}
+Under this assumption the derivative components of \fref{eq:farad} and \fref{eq:amp}
 can be set to zero giving:
 \begin{equation}
 \Delta \times \vec{E} = 0
@@ -165,7 +167,7 @@ In this static case the electric field due to a potential can be described by
 	\vec{E} = -\Delta\vec{u}.
 \end{equation}
 
-Finally we require Ohm's Law, describing the relationship between the current density,
+Finally, we require Ohm's Law, describing the relationship between the current density,
 conductivity and electric field:
 \begin{equation} \label{eq:ohm}
 	\vec{J} = \sigma \vec{E}.
@@ -196,7 +198,7 @@ The current density on the boundary is given by:
 Where $\vec{n}$ is a unit vector normal to the boundary. \Fref{eq:cur_den} cannot be 
 used in EIT where the current density on the boundary is not 
 uniform \parencite{somersalo_existence_1992}. Instead
-we require a formulation that give current density on injecting electrodes 
+we require a formulation that gives current density on injecting electrodes 
 and no current density on the rest of the boundary \parencite{somersalo_existence_1992}.
 \citeauthorandyear{somersalo_existence_1992} give 
 a formulation of a complete electrode model for the voltage on $L$ electrodes ($E$)
@@ -204,17 +206,17 @@ where the voltage measured on each electrode ($U$) is constant.
 \begin{equation} \label{eq:comp_elec}
 	u + z_l (\sigma \Delta u \cdot \vec{n}) = U_l ~~~~~ \text{on} ~~ E_l, ~~~~ l= 1,2,\cdot\cdot\cdot,L.
 \end{equation}
-The impedance of each electrode contact ($z$) is also typically trated as a constant over the surface of 
+The impedance of each electrode contact ($z$) is also typically treated as a constant over the surface of 
 an electrode \parencite{somersalo_existence_1992}.
 This complete electrode model has been shown to predict voltage accurately \parencite{somersalo_existence_1992}.
 
 \subsection{Discretization and the Finite Element Method}
-For EIT an analytic soltutions are possible for simple geometires, but in a majority or cases
+For EIT an analytic solutions are possible for simple geometries, but in a majority or cases
 numerical methods are required. 
-One of the primary discritization techniques is the finite element method \acrshort{fem}
+One of the primary discretization techniques is the finite element method \acrshort{fem}
 where the domain is divided into a number of smaller elements. 
 An element is
-triangular in 2D and tetrehedral in 3D. 
+triangular in 2D and tetrahedral in 3D. 
 The collection of nodes, and elements making up a larger model is commonly called a mesh. 
 Each line connecting two nodes of a mesh can be visualized as a resistor,
 used to model the conductivity of an object.
@@ -225,28 +227,28 @@ the boundary and electrodes can result in distorted images.
 Especially in brain EIT great care is taken to minimize errors in the forward model 
 \parencite{aristovich_method_2014,malone_multifrequency_2014}, 
 as small errors
-in modelling have been shown to give large erros in the reconstructed 
+in modelling have been shown to give large errors in the reconstructed 
 images \parencite{kolehmainen_assessment_1997}. 
 
-\subsection{Inverse Problem}
+\subsection{Inverse Problem} \label{sec:inv_prob}
 To reconstruct images we must solve for impedance distribution from known voltage measurements. 
 This is known as the inverse problem. 
 The ability to reconstruct impedance distributions from a known voltage distribution is challenging 
 and relies on the assumption that the relationship between voltage and conductivity is 
 linear \parencite{barber_applied_1984}.
 Unlike the forward problem, due to the small number of electrodes 
-relative to the large number of internal elements the inverse probelm is
+relative to the large number of internal elements the inverse problem is
 ill-posed \parencite{holder_electrical_2004}.
 
 The sensitivity of EIT is often represented by a jacobian matrix, $\mathbf{J}$,
 which gives the change in measurement relative to another factor. To reconstruct 
-a conductivitiy distribution a conductivity jacobian, $\mathbf{J}_c$, is used
+a conductivity distribution a conductivity jacobian, $\mathbf{J}_c$, is used
 which links the change 
 in boundary voltage measurements to the change in impedance. It can be represented by 
 \begin{equation} \label{eq:jacobian_c}
 	\mathbf{J}_C = \frac{\Delta U}{\Delta \sigma}. 
 \end{equation}
-The jacobian gives the relationship between the conductivity of each voxel, and the resulting
+The jacobian gives the relationship between the conductivity of each voxel and the resulting
 measurements \parencite{holder_electrical_2004}.
 In practice the jacobian can be calculated using the adjoint 
 field \parencite{vauhkonen_three-dimensional_1999}. 
@@ -256,7 +258,7 @@ The sensitivity of measurements to changes is vastly different throughout the mo
 Near electrodes where the current density is high, there is high sensitivity to conductivity 
 changes but there is limited sensitivity away from the electrodes. This contributes 
 to the ill-posed nature of the inverse problem \parencite{holder_electrical_2004}.
-To overcome this regularzation must be used to stabalize reconstruction. 
+To overcome this regularization must be used to stabilize reconstruction. 
 Regularization imposes restrictions on a minimization problem to ensure a unique solution.
 In EIT some typical regularization techniques include the maximum \emph{a priori} approach
 \parencite{adler_electrical_1996}, Tikhonov regularization \parencite{vauhkonen_tikhonov_1998},
@@ -270,12 +272,12 @@ voxel ($\Delta \mathbf{\hat{\sigma}}$) for a given set of difference measurement
 	\Delta \mathbf{\hat{\sigma}} = \mathbf{J}^T \mathbf{W} 
 	(\mathbf{J} \mathbf{W} \mathbf{J}^T + \mathbf{W})^{-1} \mathbf{b}. 
 \end{equation}
-Where $\mathbf{W}$ is a convariance matrix that incorporates \emph{a priori} information such 
+Where $\mathbf{W}$ is a covariance matrix that incorporates \emph{a priori} information such 
 as the error weighting, and regularization \parencite{adler_electrical_1996}.
 The term $ \mathbf{J}^T \mathbf{W} 
 (\mathbf{J} \mathbf{W} \mathbf{J}^T + \mathbf{W})^{-1} $ is also called the 
 reconstruction matrix and can be represented by the term
-$\mathbf{R}$, since after initial calculation it typiclaly remains constant for a given model. 
+$\mathbf{R}$, since after initial calculation it typically remains constant for a given model. 
 Conductivity distributions can be solved using the reconstruction matrix using the equation:
 
 \begin{equation} \label{eq:rm_solve}
@@ -286,10 +288,10 @@ There are several techniques used to calculate error weighting and prior informa
 $\mathbf{W}$,
 such as the NOSER algorithm \parencite{cheney_noser_1990}. There are also 
 techniques that have been specifically designed 
-to compentaste for the limitations and characteristics of EIT systems 
+to compensate for the limitations and characteristics of EIT systems 
 such as GREIT \parencite{adler_greit_2009}.
 
-\subsubsection{Image Reconstruction with GREIT}
+\subsubsection{Image Reconstruction With GREIT}
 
 GREIT (Graz consensus Reconstruction algorithm for EIT) is 
 a consensus algorithm that is used to reconstruct EIT images 
@@ -300,30 +302,30 @@ forward model, noise model and the desired performance metrics.
 GREIT uses a forward model that models electrodes using 
 the complete electrode model discussed in \fref{sec:fwd}.
 The forward model has information regarding the stimulation measurement pattern,
-body geomerty, and electrodes.
+body geometry, and electrodes.
 
 GREIT constructs a set of training images using a small (less than 5\% of the model diameter) 
 conductive target in the 
 forward model. A training set consists of images of a conductive object
 placed at many (100--500) locations within the model. 
-A noise model consisting of of a gaussian estimate of measurement noise, 
+A noise model consisting of a Gaussian estimate of measurement noise, 
 and measurements with electrode motion noise is generated. 
 
 Training targets are blurred so that their diameter increases to 20\% of 
 the model diameter, but the position remains constant. 
 This is used as the desired image for a training target. 
-The weighting relative to noise and other perfomance metrics 
-is set to minimize recoonstruction errors between the training target and idea image. 
+The weighting relative to noise and other performance metrics 
+is set to minimize reconstruction errors between the training target and idea image. 
 The weights are set based on the radius of the training image to penalize
 changes outside the desired image radius to minimize shape deformation
-and ringing artefact. The weighting can also be adjusted to meet specific perfomance 
+and ringing artefact. The weighting can also be adjusted to meet specific performance 
 characteristics of interest. A description of all performance characteristics that 
 can be specified is found in \parencite{adler_greit_2009}.
 When applying the training, weighting is also set to increase uniformity 
 of the resolution in the reconstructed image. Some resolution near the electrode is 
-lost, but weighting help to ensure that targets reconstruct to the same size throught the model.
+lost, but weighting help to ensure that targets reconstruct to the same size throughout the model.
 
-To calculate a reconstruction martix ()$\mathbb{R}$), error ($\epsilon$)
+To calculate a reconstruction matrix ()$\mathbb{R}$), error ($\epsilon$)
 is minimized over all training targets ($k$) with respect to the 
 weighting parameters ($\mathbf{w}^{(k)}$),
 measurements ($\mathbf{b}$), and the desired images ($\mathbf{\tilde{x}}$).
@@ -352,11 +354,11 @@ as:
 Where $\mathbf{D}$ is the desired image matric from all training images,
 $\mathbf{\Sigma}_t$  is the effective covariance of all training targets after weighting with 
 $\mathbf{W}$ and 
-$\mathbf{\Sigma}_n$ is thr noise covarience. 
+$\mathbf{\Sigma}_n$ is the noise covariance. 
 %It is assumed that the noise on each measurement is independant and not correlated to other measurements 
 %which is not always true \parencite{adler_minimizing_2011}. 
 %The calculated noise covarience matrix is assumed be 
-This reconstruciton method is widely used in EIT for both 2D and 3D electrode configurations 
+This reconstruction method is widely used in EIT for both 2D and 3D electrode configurations 
 and is shown to give even resolution throughout the image \parencite{adler_greit_2009}.
 
 \subsection{Internal Electrodes}
@@ -364,7 +366,7 @@ and is shown to give even resolution throughout the image \parencite{adler_greit
 While there have been some studies researching electrode placement for cardiac
 imaging in 2D~\parencite{vonk_noordegraaf_improvement_1996} and 
 3D electrode configurations~\parencite{graham_electrode_2007}, there has 
-been little research into the applicaiton of internal electrodes. 
+been little research into the application of internal electrodes. 
 It has been shown that externally placed 3D electrode configurations
 consisting of two electrode planes
 can improve the sensitivity distribution and image quality~\parencite{Grychtol2016},
@@ -373,18 +375,18 @@ of the chest.
 The concept of using internal esophageal reference electrodes has been presented
 previously
 \parencite{Pilkington1989,Schuessler1995}
-as a method to improve internal sensitivity and have 
-shown a reconstructio accuracy improved by up to 30\% for small 
+as a method to improve internal sensitivity, and has shown
+accuracy improvements of up to 30\% for small 
 targets \parencite{pilkington_utilization_1989}.
 Recent simulations in 2D have shown in increase in reconstruction 
 accuracy, amplitude response, position error, and resolution
 \parencite{nasehi_tehrani_modelling_2012,nasehi_tehrani_evaluation_2012},
 but internal electrodes have not been widely used clinically. 
 
-An clinical evaluaiton of EIT found that the amplitude of cardiosynchronous signals 
+A clinical evaluation of EIT found that the amplitude of cardiosynchronous signals 
 in EIT measurements was 6 times larger when placing 2 of 16 total electrodes in 
 either the esophagus or trachea, but found that reconstructions 
-in an animal model were not obvoisly improved in all cases \parencite{czaplik_application_2014}.
+in an animal model were not obviously improved in all cases \parencite{czaplik_application_2014}.
 A recent review highlighted the use of internal electrodes to monitor cardiac radiofrequency
 ablation, investigate the possible noise sources and 
 state the need for analysis of the effect of motion on the 

@@ -20,7 +20,7 @@ electrodes are used.
 Internal electrodes placed on a probe are challenging to locate within a subject
 due to variation in individual geometries. Incorrectly modelling the electrode 
 locations can introduce an artefact in the image~\parencite{boyle_impact_2011}, 
-but in time difference EIT these effects are minimized~\parencite{adler_electrical_2017}. 
+but in time difference EIT these effects are reduced~\parencite{adler_electrical_2017}. 
 The larger problem appears 
 to be the 
 movement of the internal probe relative to the external electrodes between
@@ -44,7 +44,7 @@ A more detailed explanation of this jacobian calculation method is presented in
 As an internal probe moves towards one side of a model the distance between the 
 probe and the external electrodes changes. This results in less impedance where the distance 
 has decreased, and a higher impedance where the distance has increased. Without knowing 
-the new probe location we can minimize the effect of this error, but there still remains 
+the new probe location we can reduce the effect of this error, but there still remains 
 a mismatch between the modelled and actual probe locations. 
 The artefact that is reconstructed can give hints regarding the motion of electrodes,
 although it can be difficult to separate the effect of electrode movement 
@@ -57,31 +57,42 @@ The known shape of the artefact due to movement of the probe is used to
 derive the probe location, and create a corrected model to improve 
 reconstruction accuracy in the presence of probe motion.
 
-The goal of this chapter is to establish a technique to reduce the impact of probe movement on 
-image reconstructions, and then to use this technique in an animal model. 
+The goal of this chapter is to develop and validate a technique to reduce the impact of probe movement on 
+image reconstructions, and then to test this technique in an animal model. 
 Although simulations in 2D and now in 3D show that internal electrodes can provide 
 a desirable increase in sensitivity, the benefit has not been realized in real-world
 recordings. 
-This chapter presents a novel method to correct for electrode displacement artefacts, 
-and compares established techniques for 3D EIT image reconstruction 
-to reconstructions with the novel internal electrode approach in a limited number of 
-subjects.
+The relatively large amount of promosing simulation work compared to limited real-world 
+results suggest that this is a challening problem. 
+It has been suggested that error due to electrode motion may be a major contributing 
+factor to the the EIT signal on internal electrodes \parencite{nguyen_electrical_2020},
+and we believe this may be one of most significant sources of error in real-world 
+EIT measurements. 
+In this chapter we investigate the impact of motion on internal electrode EIT and explore 
+techniques to solve this problem and reconstruct images in the presence of electrode motion.
+This chapter presents a novel method to correct for electrode displacement artefacts, and evaluates 
+how it is able to minimize electrode motion errors.
+This new technique is compared to 
+established techniques for 3D EIT image reconstruction 
+to reconstructions on a limited number of 
+subjects in an animal model.
 
 \section{Methods}
-This chapter consists of two experiments: a simulation study correcting for probe motion 
-in a tank model, and preliminary \emph{in-vivo} recordings that were conducted as an 
-addition to another experimental protocol. 
+This chapter describes the analysis for both: a simulation study correcting for probe motion 
+in a tank model, and preliminary \emph{in-vivo} recordings that were conducted 
+in conjunction with a larger experimental protocol. 
 
 \subsection{Simulations}
+To model electrode motion measure the effect on reconstruction accuracy simulations 
+in a tank model were used.
 Simulations were done using EIDORS (v3.10)~\parencite{adler_eidors_2017}
 using Matlab 2019b (Matworks, Natick, MA, USA).
 Within EIDORS, meshes were generated using 
 Netgen (version 5.3.1)~\parencite{schoberl_netgen_1997}.
 
 \subsubsection{Tank models}
-A model of a tank with 28 external electrodes placed in two planes of 14
-evenly around the exterior
-and 4 internal electrodes was created. 
+On the tank model 28 external electrodes were placed in two planes of 14. 
+4 internal electrodes were placed evenly between the top and bottom external electrode planes. 
 The tank radius and height were 1 m, and the external electrode radius was 5 cm. 
 The external electrode planes were placed at a height of 0.3 m and 0.7 m on the tank. 
 The internal electrodes were spaced evenly between the external electrode planes 
@@ -104,21 +115,28 @@ Both models are shown in \fref{fig:probe_types}.
 	contained in the target to be twice the background conductivity.}
 \end{figure}
 
-These models were compared to confirm that both 
+These models were compared to verify that both 
 performed adequately with motion correction, as internal electrodes 
 are challenging to model and many different techniques are used. 
 When using internal electrodes on a complex model, it is currently easiest 
-to add electrodes along a hollow tube cut through the centre. 
+to add electrodes along a hollow tube cut through the centre, since 
+a small circle can be specified in EIDORS functions that are designed to make extruded 
+models. This circle when extruded up with the boundary will form a small hole representing 
+the probe where electrodes can be placed.
 
-To specify a conductive region elements within a radius were assigned a conductivity 
+To specify a conductive region, elements within a radius were assigned a conductivity 
 of twice the background conductivity of the tank model.
-The conductive target was placed midway between the centre of the tank and the boundary. The radius of the target was 20 cm. 
+The conductive target was placed midway between the centre of the tank and the boundary. 
+The radius of the target was 20 cm. 
 \Fref{fig:probe_types} shows the conductive target for both internal probe types.
 
 \subsubsection{Measurements}
-Despite sensitivity advantages ascribed to custom injection and 
-measurement patterns, the skip 4 pattern was used as it 
-is straight forward to implement with currently available EIT systems. 
+The skip 4 currnet injection and measuremnt pattern was used as it can be 
+easily implemented on most EIT systems, and was shown to have a very even 
+sensitivity distribution in 3D EIT \parencite{grychtol_3d_2016}.
+%Despite sensitivity advantages ascribed to custom injection and 
+%measurement patterns, the skip 4 pattern was used as it 
+%is straight forward to implement with currently available EIT systems. 
 
 Reference measurements were made with no conductive object and 
 electrodes in the centre of the model. Measurements with a conductive object were made 
@@ -130,8 +148,24 @@ each of the 1, 5 and 10 percent probe error models that were compared.
 \subsection{Movement correction}
 \label{sec:3_methods}
 
+As shown in \fref{sec:inv_prob}, the jacobian in typical EIT reconstruction 
+represents the sensitivity of the voltage measurements to a change in conductivity. 
+In this chapter we will refer to this as the conductivity jacobian ($J_C$). 
+A similar formulation can be used for the movment, but instead of the sensitivity 
+to change in conductivity, we want the jacobian to represent the 
+change in measured voltage 
+sensitivity due to movement of the probe. to calculate the movement jacobian we can use:
+\begin{equation}
+	[J_M]_l = \frac{\Delta\mathbf{V}_l}{\Delta\mathbf{r}_l},
+\end{equation}
+where $\mathbf{r}$ is the change in position of an electrode $l$.
+The movement jacobian is a derivative of the measurements with respect to the movement.
+To aproximate the movement derivative we can use a perturbation to 
+shift each electrode by a small amount (0.001 m), and calculating the 
+change in voltage measurements \parencite{gomez-laberge_direct_2008}.
+
 The movement correction jacobian was calculated using the methods presented by
-~\citeauthorandyear{gomez-laberge_direct_2008}. In a model with a centred electrode
+\citeauthorandyear{gomez-laberge_direct_2008}. In a model with a centred electrode
 probe and uniform conductivity, each of the four electrodes on the probe was
 perturbed by 0.001 m in each of the $\mathbf x$, $\mathbf y$, 
 and $\mathbf z$ directions. A measurement was made for 
@@ -159,30 +193,29 @@ formulation for a reconstruction matrix presented
 by \citeauthorandyear{adler_impedance_1994}. The regular impedance based 
 reconstruction matrix is denoted by $R_C$ and the jacobian for impedance based 
 reconstruction is denoted by $J_C$.
-
 \begin{equation}\label{eq:regular_rm}
-	R_C = \frac{[J_C]^T [W]}{[J_C] [W] [J_C]^T + [W]}
+	R_C = [J_C]^T [W]\left([J_C] [W] [J_C]^T + [W]\right)^{-1}
 \end{equation}
-
 $W$ in the above equation represents the Laplace prior~\parencite{soleimani_imaging_2006}.
 Combining this formulation with the movement jacobian yields the following equation 
 for the reconstruction matrix ($R_M$)~\parencite{soleimani_imaging_2006} where $R_M$
 denotes the reconstruction matrix for motion correction.
-
 \begin{equation}\label{eq:motion_rm}
-	R_M = \frac{[J_C]^T [W]}{[J_C] [W] [J_C]^T + \mu [J_M][J_M]^T + [W]}
+	R_M = [J_C]^T [W]([J_C] [W] [J_C]^T + \mu [J_M][J_M]^T + [W])^{-1}
 \end{equation}
-
 In the above equation $\mu$ represents the weighting of the motion correction. 
 In this experiment the motion correction weighting was set to 100. 
 
 Combining \fref{eq:regular_rm} and \fref{eq:motion_rm} a reconstruction
 matrix to reconstruct exclusively the noise due to movement ($R_N$) 
 in an image can be generated.
-
-\begin{equation}
+\begin{equation} \label{eq:noise_rm}
 	R_N = R_M - R_C
 \end{equation}
+
+%$R_N$ can also be calculated directly by combining \fref{eq:regular_rm}
+%and \fref{eq:motion_rm}. 
+%
 
 An image ($X$) is reconstructed using 
 the measurements ($b$) and reconstruction matrix ($R$) as follows:
@@ -196,8 +229,15 @@ respective reconstruction matrix.
 
 A new movement correction strategy had been built 
 around the reconstructed image $X_N$.
-The noise due to exclusively motion is reconstructed into a 
-3D image, and the centre of mass of the positive change is located. 
+As a probe is moved towards electrodes on the the edge of the model 
+conductivity is decreased and this is shown as a conductive object in the reconstructed 
+image. Using $R_N$ we are able to reconstruct the 
+size and shape of the artefact due to only electrode motion,
+and determine the approximate direction and amplitude of
+the probe movement.
+In the reconstructed image 
+showing only the motion artefact,
+the centre of mass of the positive change is located. 
 This is assumed to be the direction of the motion. The amplitude of the electrode 
 motion is estimated as half of the distance between the 
 conductive artefact and the probe. This method is illustrated in
@@ -209,10 +249,13 @@ electrode position in the reconstructed image.
     \centering
    \includegraphics[width=\textwidth]{chapter7-internal_elec_motion/imgs/recon_methods.pdf} 
    \caption[Motion correction methods]{\label{fig:motion_correction_methods} 
-	Three image reconstruction matrices were generated: one to calculate an image based 
-	only on the measurements (A), one that is able to reduce the impact of noise using a 
-	movement jacobian (B) and finally a reconstruction that reconstructs only the noise 
-	due to motion of the probe (C). The centre of mass of the conductive object is used to
+   This figure shows the 3 scenarios of the initial image reconstruciton. 
+   Image (A) shows the image reconstructed using the typical conductivity jacobian 
+   from \fref{eq:regular_rm}. Image (B) shows the image reconstruced using the movment 
+   jacobian ans equation \fref{eq:motion_rm}. Finally image (C) shows the 
+   isolated image artefact reconstructed using the reconstruction matrix in 
+   \fref{eq:noise_rm}
+	The centre of mass of the conductive object in (C) is used to
 	estimate the probe location and direction of movement. The green arrow indicates the 
 	calculated direction of movement (multiplied by 5 for visibility).
 	The black line indicates the outline of the region of conductivity at the imaged plane.
@@ -233,7 +276,8 @@ external electrode planes were averaged together to generate a 2D
 representation of the 3D data. This did not allow for analysis of movement in the vertical 
 direction, but we did not expect this to be a major contribution in real-world data.
 The reconstructed images were compared in two ways. First the accuracy of the reconstruction
-was evaluated by computing the Jaccard index between the actual and imaged boundaries of the 
+was evaluated by computing the Jaccard index \parencite{jaccard_distribution_1912} 
+between the actual and imaged boundaries of the 
 conductive target. The imaged boundary was drawn at half the maximum value of the brightest 
 object in the image. The second metric computed was a noise estimate. This was calculated as
 the amplitude of the imaged object relative to the amplitude of the entire image through the
@@ -439,7 +483,7 @@ on internal electrodes reconstructed an image of a conductive target
 more accurately and with less noise in the surrounding image. \emph{In-vivo}
 reconstructions showed a slight improvement in lung distinguishability when correcting
 for motion artefacts on internal electrodes compared to methods without this correction 
-including GREIT. Results in 3D also confirmed results from a 2D study in a porcine 
+including GREIT. Results in 3D also aligned with results from a 2D study in a porcine 
 model showing an increased cardiosynchronous component on the internal electrode 
 measurements~\parencite{czaplik_application_2014}.
 

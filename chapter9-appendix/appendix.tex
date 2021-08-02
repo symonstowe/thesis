@@ -1,17 +1,127 @@
 \begin{appendices} 
 
 \chapter{GMSH models} \label{app:geo_stuff}
+In order to create models with mesh refinement in GMSH matlab was used
+to generate geometry (or .geo) files. Examples of the geometry files for 
+a basic tank with 4 square external electrodes and the internal probe 
+with muptiple densitities are presented. To use these models in EIDORS 
+they must be meshed using GMSH and loaded into eidors 
+with \verb!gmsh_read_mesh!. Also see \verb!mat_idx_2_electrode! to specify
+electrodes in GMSH meshes. To run these meshes with gmsh from the command line 
+copy the text into a file and type: \verb!gmsh <filename.geo>! while in the same
+directory.
+
 \section{Tank model}
+\begin{Verbatim}[fontsize=\footnotesize]
+SetFactory("OpenCASCADE"); 
+tank_boundary = newv; 
+Cylinder(tank_boundary) = {0, 0, 0,  0, 0, 0.125, 0.25, 2*Pi}; 
+Box(2) = {-0.025, 0.225,0.10, 0.05, 0.05,0.025}; 
+Box(3) = { 0.025,-0.225,0.10,-0.05,-0.05,0.025}; 
+Box(4) = { 0.225, 0.025,0.10, 0.05,-0.05,0.025}; 
+Box(5) = {-0.225,-0.025,0.10,-0.05, 0.05,0.025}; 
+elecs() = BooleanDifference{ Volume{2:5}; Delete;}{Volume{1};}; 
+vol() = BooleanFragments{ Volume{tank_boundary};}{Volume{elecs()};}; 
+Coherence; 
+Mesh.CharacteristicLengthFromPoints = 0; 
+Mesh.CharacteristicLengthFromCurvature = 0; 
+Mesh.CharacteristicLengthExtendFromBoundary = 0; 
+Field[1] = Attractor; 
+Field[1].NNodesByEdge = 1000; 
+Field[1].FacesList = {4,5,6,7,9}; 
+Field[2] = Threshold; 
+Field[2].IField = 1; 
+Field[2].LcMin = 0.006670; 
+Field[2].LcMax = 0.030830; 
+Field[2].DistMin = 0.000000; 
+Field[2].DistMax = 0.250000; 
+Background Field = 2; 
+Mesh 1; 
+Mesh 2; 
+Mesh 3; 
+OptimizeMesh "Gmsh"; 
+\end{Verbatim}
+
 \section{Internal probe model}
+\begin{Verbatim}[fontsize=\footnotesize]
+SetFactory("OpenCASCADE"); 
+Box(1) = {0, 0, 0,  16.18, 5, 10};
+Sphere(2) = {0, 0, 0, 10};
+Dilate {{0, 0, 0}, {0.7, 1, 1.5}} { Volume{2}; }
+Sphere(3) = {0, 0, 0, 10.5};
+Dilate {{0, 0, 0}, {0.7, 1, 1.5}} { Volume{3}; }
+Sphere(4) = {0, 0, 0, 16};
+Dilate {{0, 0, 0}, {0.51, 1, 1.5}} { Volume{4}; }
+Box(5) = {11  , 0, 0, 5.18, 5, 10}; 
+Box(6) = {12  , 0, 0, 4.18, 5, 10}; 
+Box(7) = {12.4, 0, 0, 3.78, 5, 10}; 
+Cylinder(8) = {0, 0, 5,  8, 0, 0, 0.15, 2*Pi};
+Sphere(9) = {8, 0, 5, 0.15};
+Cylinder(10) = {4.75, 0, 5,  0.25, 0, 0, 0.15, 2*Pi};
+Cylinder(11) = {5.75, 0, 5,  0.25, 0, 0, 0.15, 2*Pi};
+Cylinder(12) = {6.75, 0, 5,  0.25, 0, 0, 0.15, 2*Pi};
+Cylinder(13) = {7.75, 0, 5,  0.25, 0, 0, 0.15, 2*Pi};
+probe_temp()=BooleanUnion{Volume{8};Delete;}{Volume{9};}; 
+ext() = BooleanDifference{Volume{1};Delete;}{Volume{probe_temp()};};
+tip() = BooleanUnion{ Volume{9};Delete;}{ Volume{13}; Delete;};
+probe() = BooleanDifference{Volume{probe_temp()};Delete;}{Volume{10:12};};
+probe() = BooleanDifference{Volume{probe()};Delete;}{Volume{tip()}; };
+tissue() = BooleanIntersection{Volume{ext()};}{Volume{2};Delete;};
+bone_ext_a() = BooleanIntersection{Volume{ext()};}{Volume{3};Delete;};
+bone_mid_a() = BooleanIntersection{Volume{ext()};}{Volume{4};Delete;};
+bone_cent_a()= BooleanDifference{Volume{ext()};Delete;}{Volume{bone_mid_a};};
+bone_cent() = BooleanDifference{Volume{bone_cent_a()};Delete;}{Volume{5};};
+bone_mid_a() = BooleanDifference{Volume{bone_mid_a()};Delete;}{ Volume{bone_ext_a};};
+bone_ext_a() = BooleanDifference{Volume{bone_ext_a()};Delete;}{ Volume{tissue};};
+bone_mid_b() = BooleanDifference{Volume{5};Delete;}{Volume{6};};
+bone_ext_b() = BooleanDifference{Volume{6};Delete;}{Volume{7};};
+elecs() = BooleanFragments{Volume{probe()};Delete;}{Volume{10:12};Delete;};
+elecs() = BooleanFragments{Volume{elecs()};Delete;}{Volume{tip()};Delete;};
+Coherence; 
+Field[1] = Attractor; 
+Field[1].NNodesByEdge = 100; 
+Field[1].FacesList = {112,113,124,126,130,136,138,143,146,149,152}; 
+Field[2] = Threshold; 
+Field[2].IField = 1; 
+Field[2].LcMin = 0.03; 
+Field[2].LcMax = 0.500; 
+Field[2].DistMin = 0.050; 
+Field[2].DistMax = 2.00; 
+Field[3] = Attractor; 
+Field[3].NNodesByEdge = 500; 
+Field[3].FacesList = {70, 77, 84, 123}; 
+Field[4] = Threshold; 
+Field[4].IField = 3; 
+Field[4].LcMin = 0.4; 
+Field[4].LcMax = 1; 
+Field[4].DistMin = 0.100; 
+Field[4].DistMax = 0.500; 
+Field[5] = Attractor; 
+Field[5].NNodesByEdge = 100; 
+Field[5].FacesList = {123}; 
+Field[6] = Threshold; 
+Field[6].IField = 3; 
+Field[6].LcMin = 0.1; 
+Field[6].LcMax = 1; 
+Field[6].DistMin = 0.100; 
+Field[6].DistMax = 0.500; 
+Field[7] = Min;
+Field[7].FieldsList = {2, 4, 6};
+Background Field = 7;
+Mesh 1;
+Mesh 2;
+Mesh 3;
+Save 'advanced_mesh.msh';
+\end{Verbatim}
 
 \chapter{Algorithms} \label{app:appendix-algos}
-
+The following sections show the segmentation methods from \fref{chap:chapter-5}
+presented as algorithms for a clear presentation of the segmentation steps. 
 \section{External boundary}
 The following steps were used to segment the external boundary 
 from a single slice 
 of a CT image using Matlab 2021b  
 with the image processing toolbox:
-
 \begin{algorithm}[H]
 	\SetAlgoLined
 	\KwIn{image}
@@ -30,7 +140,49 @@ with the image processing toolbox:
 	\caption{Segment the external body boundary.}
 \end{algorithm}
 
+%\section{Ribcage}
+%The below algorithm is a presnetation of the segmentation methods to extract the 
+%ribcage from a selected CT slice.
+%\begin{algorithm}[H]
+%	\SetAlgoLined
+%	\KwIn{image}
+%	\KwOut{external boundary}
+%		weiner filter\;
+%		Set the lung intensity to 0\;
+%		erode image using disk size 20\;
+%		reconstruct on image from line 4\;
+%		dilate with disk of size 20\;
+%		reconstruct on image from line 6\;
+%		binarize, thresh = 0.5\;
+%		fill holes\;
+%		close using disk size = 2\;
+%		open using disk size = 5\;
+%		external boundary = largest object\;
+%	\caption{Segment the external body boundary.}
+%\end{algorithm}
+%
+%\section{Lungs}
+%This algorithm shoes the final steps taken to segment the lungs using the chest cavity 
+%segmentation.
+%\begin{algorithm}[H]
+%	\SetAlgoLined
+%	\KwIn{image}
+%	\KwOut{chest cavity}
+%	\For{CT slice}{
+%		Do something
+%	}
+%		weiner filter\;
+%		Set the lung intensity to 0\;
+%		erode image using disk size 20\;
+%		reconstruct on image from line 4\;
+%		dilate with disk of size 20\;
+%		reconstruct on image from line 6\;
+%		binarize, thresh = 0.5\;
+%		fill holes\;
+%		close using disk size = 2\;
+%		open using disk size = 5\;
+%		external boundary = largest object\;
+%	\caption{Segment the external body boundary.}
+%\end{algorithm}
 
-\section{Ribcage}
-\section{Lungs}
 \end{appendices}

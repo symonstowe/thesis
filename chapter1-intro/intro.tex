@@ -70,12 +70,12 @@ and along the path of the injected current.
 
 The placement of electrodes internally has the 
 potential to increase current density and sensitivity in 
-the center of the thorax. 
+the centre of the thorax. 
 The benefits of internal electrodes have been simulated 
-in 2D showing great improvemets in reconstruction accuracy 
+in 2D showing great improvements in reconstruction accuracy 
 and sensitivity~\parencite{nasehi_tehrani_modelling_2012}, but 
 in practice there are several challenges to overcome. 
-Due to differences in physiology it is challenging to model
+Due to differences in physiology, it is challenging to model
 the correct location of the internal electrodes between subjects
 and electrodes placed internally may move with relation 
 to the external electrodes during different physiological
@@ -95,7 +95,7 @@ in the thorax are extensive. Methods to monitor blood pressure non-invasively ar
 currently under development and could be greatly improved with increased sensitivity 
 near the region of interest. Increased sensitivity near the heart 
 could enable EIT to be realized as a low-cost solution to monitor and image
-hemodynamic activitiy more accurately.  
+hemodynamic activity more accurately.  
 
 \section{Thesis objectives}
 The goal of this project is to improve sensitivity of EIT to perfusion using 
@@ -147,7 +147,7 @@ frequency-based measures of perfusion \emph{(\Fref{chap:chapter-3})}};
 
 \end{tikzpicture}
 \caption[Overfiew of thesis objectives]{We aim to improve EIT measures of perfusion through 3 avenues.
-1) Comparing and investigating the limitaitons of existing perfusion imaging methods;
+1) Comparing and investigating the limitations of existing perfusion imaging methods;
 2) Advancing meshing techniques; and 
 3) Using novel electrode locations consisting of a 3D external
 configuration with internal electrodes.}
@@ -155,35 +155,34 @@ configuration with internal electrodes.}
 \end{figure}
 
 \section{Contributions}
-The following 
 This thesis presents several contributions to the field of perfusion imaging and 
 meshing in EIT.
 \begin{itemize}
-	\item A method to determine the a node distribution in a finite element model mesh to
+	\item A method to determine a node distribution in a finite element model mesh
         to reduce error in sensitivity calculations. \Fref{chap:chapter-4} presents an 
-        analysis between meshing software commonly used in EIT and reccomends a technique to 
+        analysis between meshing software commonly used in EIT and recommends a technique to 
         place a fixed number of nodes that maximizes sensitivity accuracy. 
         A finer node density has often been suggested near the electrode due to the higher 
-        sensitivity, but no analysis was availble to determine where a set number of
+        sensitivity, but no analysis was available to determine where a set number of
         nodes should be located in a model to minimize sensitivity error. 
         Using a balance point 
         technique this chapter was able to determine the best distribution of nodes
-        to calculate the sensitivity of voltage meaasurements to conductivity changes.
-	\item A tool to generate accurate, custom meshes of arbitrary boundaryies for EIT reconstruction from 
-        from CT images. \Fref{chap:chapter-5} documents 
+        to calculate the sensitivity of voltage measurements to conductivity changes.
+	\item A tool to generate accurate, custom meshes of arbitrary boundaries for EIT reconstruction from 
+        CT images. \Fref{chap:chapter-5} documents 
         the design and validation of a tool to generate meshes for image reconstruction from CT images. 
         diagnostic CT images were automatically segmented and a tool to manually check the segmentations
         and generate meshes was created. 
-	\item An analysis of 3D electode placmenets with intenal electrodes on internal sensitivity. 
-        \Fref{chap:chapter-6} presents an analysis of the sensitivity patterns correspinding to 
+	\item An analysis of 3D electrode placements with internal electrodes on internal sensitivity. 
+        \Fref{chap:chapter-6} presents an analysis of the sensitivity patterns corresponding to 
         internal electrodes when used with 2 planes of external electrodes. Internal electrodes are
-        expected to increase sensitivity in the center of the model, but it is not clear to what extent 
+        expected to increase sensitivity in the centre of the model, but it is not clear to what extent 
         image reconstructions may be improved, or how many electrodes should be 
         placed internally. This chapter provides an analysis of the sensitivity when using internal
         electrode in 3D with different injection patterns.  
 	\item A method to reconstruct images using internal electrode measurements in the presence of noise.
         \Fref{chap:chapter-7} demonstrates the effect of internal electrode probe motion on image 
-        reconstruction and presented a techniqe using the interferance in reconstructed images 
+        reconstruction and presented a technique using the interference in reconstructed images 
         due to the movement artefact to create a model with a corrected probe location. This technique
         improves reconstruction performance and noise levels in the presence of electrode motion.
 \end{itemize}

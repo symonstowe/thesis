@@ -1,6 +1,63 @@
 \chapter{Conclusion}
 
+This thesis investigated the role of mesh refinement and internal electrodes in 
+perfusion imaging. 
+EIT has very low sensitivity in the center of the thorax where 
+may of the perfusion changes of interest occur. 
+The source of the cardiosynchronous EIT signal is also 
+controversial, and there are many factors that may contribute to 
+the measured perfusion signal. 
+This thesis presents several contribution to the field of 
+perfusion imaging in EIT.
+We investigated the limitations of current EIT perfusion imaging
+and compared the difference between measures of perfusion using 
+a contrast agent and those relying on the cardiosynchronous signal.
+A technique to control mesh refinement is developped to enable meshes
+with adequate sensitivity accuracy throughout an entire model. This 
+technique can also be used to refine around intenal electrodes 
+where the sensitivity is much higher in the center of the model than 
+with typical external electrode configurations. 
+A 3D EIT configuration is presented with 4 internal electrodes that gives high
+sensitivity in the center of the model, and accuratey reconstructs a conductive
+target in the presence of Gaussian measurement noise.
+Finally, we develop a method to calculate movement of 
+an internal probe and correct for positioning error in a model. Electrode 
+motion artefacts can add artefact to images that overpower the 
+component of interest, and add noise outside of the actual 
+conductivity changes. This technique uses information in the reconstructed 
+image characteristic of probe movement to estimate the actual probe locaiton 
+and create a corrected model that reduced the effect of movement on reconstructed 
+images. 
+
 \section{Summary of Findings}
+
+\Fref{chap:chapter-3} compared two established methods of perfusion 
+imaging and found that perfusion estimation techniques using 
+cardiosynchronous signal were comprable to bolus injection methods. 
+Despite the different signal origins, both techniques 
+resulted in simular perfusion estimates. 
+One of the challenges with perfusion imaging with both bolus injection and
+frequency filtering is the contribution of blood flow in the heart. 
+In 2D with low sensitivity in the center of a subject 
+it is challenging to identify and correctly remove the contribution 
+of the heart to the perfusion signal. 
+
+In \fref{chap:chapter-4} we explore techniques to
+imrove sensitivity accuracy in meshes and ensure mesh density is adequate 
+around electrodes. This chapter recomends that 
+when mesh density is dissapated constantly from electrodes 
+the balance point 
+of the nodes in a mesh should be towards the electrodes.
+The nodes should be distributed so that the balance point is 
+at 80\% of the distance between the electrode and the 
+low sensitivity area in the center of a model.
+This recomendation can be used to generate 
+meshes that are highly accurate when calculating the sensitivity, with less elements
+than meshes that are uniformly refined.  
+
+
+
+
 
 Note - it is possible that measurements on the internal electrode probe 
 should be used only for identification of the pulsatile componenet and not
@@ -10,3 +67,7 @@ Limitations of the lamb model
 hear tlocation and whatnoT
 
 \section{Future Work}
+
+safety of internal electrodes with regards to the IEC stuff
+
+Test and validate the 
