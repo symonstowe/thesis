@@ -352,7 +352,7 @@ The tube radius was 0.5 cm. The constructed probe is shown in \fref{fig:probe_de
 	of the tube to connect to the EIT system.}
  \end{figure}
 
-\subsubsection{Electrode placment}
+\subsubsection{Electrode Placment}
 The ewes were shaved and 28 silver-silver chloride electrodes were placed in 2 rows immedeately behind the front
 legs with 10 cm seperation and equal spacing around the thorax. 
 The esophageal probe was alligned with the electrodes externally and the required
@@ -385,15 +385,15 @@ The resulting model is shown in \fref{fig:internal_lamb_model}.
     \centering
 	\includegraphics[width=\textwidth]{chapter7-internal_elec_motion/imgs/lamb_model.pdf} 
 	\caption[Ovine model with internal probe]{\label{fig:internal_lamb_model} 
-	An internal electrode was added to an ovine model by creating a hole at desired probe
-	location and added cylindrical electrodes at the desired heights. External electrodes
+	An internal electrode was added to an ovine model by creating a hole at the desired probe
+	location and adding cylindrical electrodes at the desired heights. External electrodes
 	were placed in a ``square'' electrode configuration on the boundary. Electrodes 1 to 28 were 
 	external and 29 to 32 were internal.}
 \end{figure}
 
 \subsubsection{Reconstruction}
 To reconstruct images 4 techniques were used. First we compared the 3
-techniques in \fref{sec:3_methods}, but GREIT was also used on reconstructions 
+techniques in \fref{sec:3_methods}, and GREIT was also used on reconstructions 
 of real data.
 GREIT for 3D reconstruction has been used with internal electrodes 
 \parencite{nasehi_tehrani_evaluation_2012,nasehi_tehrani_modelling_2012}, 
@@ -432,7 +432,7 @@ relative to the
 cylindrical electrodes. The results are presented
 using the cylindrical model to be consistent with the 
 lamb models.
-The probe was moved in in the $-\mathbf{y}$ direction for figures and calculations
+The probe was moved in the $-\mathbf{y}$ direction for figures and calculations
 in the results.
 
 \Fref{fig:probe_location_correction} shows the result of the three reconstruction methods. The boundaries 
@@ -463,7 +463,7 @@ are presented below in \fref{tab:recon_accuracy_jaccard} and \fref{tab:recon_acc
 The Jaccard index was calculated for each of the reconstructions in 
 \fref{fig:probe_location_correction}. Method A does not use any motion correction.
 Method B incorporates the movement jacobian, and method C uses the new probe location correction
-technique. For Jaccard index, a score closer to one is better.}
+technique. For Jaccard index, a score closer to 1 is better.}
 \begin{tabular}{SSSS} \toprule
     {Movement (\% of radius)} & {Method A} & {Method B} & {Method C} \\ \midrule
     1  & 0.732 & 0.809 & 0.802 \\
@@ -492,8 +492,8 @@ reconstructed image, so no noise score over 1 were recorded.
 	Noise estimate values calculated for each of the reconstructions in 
 	\fref{fig:probe_location_correction}. Method A does not use any motion correction.
 	Method B incorporates the movement jacobian, and method C uses the new probe location correction
-	technique. For the noise estimates a lower score is better, a score of zero indicates all image changes
-	occur within the target boundary, and a score less than one indicates most of the changes in the 
+	technique. For the noise estimates a lower score is better, a score of 0 indicates all image changes
+	occur within the target boundary, and a score less than 1 indicates most of the changes in the 
 	image are due to the identified target.}
 	\begin{tabular}{SSSS} \toprule
 		{Movement (\% of radius)} & {Method A} & {Method B} & {Method C} \\ \midrule
@@ -520,7 +520,7 @@ reconstructed image, so no noise score over 1 were recorded.
 When looking at the reconstructions using the three methods, the new probe correction technique
 reconstructed the target as the brightest object in all scenarios. With no motion correction, the 
 target was identified correctly only in the first scenario. Using the movement jacobaian 
-reconstruction method, the target was correctly identified when the probe was moved one or five percent
+reconstruction method, the target was correctly identified when the probe was moved 1 or 5\%
 of the tank radius. 
 
 \subsection{\emph{In-vivo}}
@@ -562,10 +562,11 @@ signal relative to ventilation when internal electrodes are used.
 \section{Discussion}
 
 This chapter aimed to provide a technique to reduce noise due to motion on internal
-electrodes when reconstructing images in 3D and demonstrate the noise reduction technique
+electrodes when reconstructing images in 3D, to demonstrate the noise reduction technique
 \emph{in-vivo}. The new technique to reconstruct images in the presence of motion 
 on internal electrodes reconstructed an image of a conductive target 
-more accurately and with less noise in the surrounding image. \emph{In-vivo}
+more accurately and with less noise in the surrounding image than currently
+available reconstruction techniques. \emph{In-vivo}
 reconstructions showed a slight improvement in lung distinguishability when correcting
 for motion artefacts on internal electrodes compared to methods without this correction 
 including GREIT. Results in 3D also aligned with results from a 2D study in a porcine 
@@ -581,18 +582,19 @@ continuation of this project.
 
 Two types of internal electrodes were modelled in this chapter. One with
 spherical internal electrodes and one with a hollow probe and cylindrical electrodes. 
-Meshing and creating internal electrodes can be challenging due to limited meshing tools 
-for using internal electrodes with EIT and the method of adding internal probes to
+Both meshing and creating internal electrodes can be challenging, due to limited meshing tools 
+for using internal electrodes with EIT. The method of adding internal probes to
 anatomical models using a hollow region in the centre of the model was created for this 
 project. Code to generate this model with internal electrodes is planned to be included in a
 future release of EIDORS.
 
 The noise estimate score calculations were not perfect representations of the noise
 in the images due to the way the reconstructed object was identified.  Since the
-brightest object was always identified as the object, the noise estimate was
+brightest object was always identified as reconstructed the object, the noise estimate was
 artificially low in some cases. 
 Comparing the amplitude of changes contained within the true
-object boundaries could be a better metric of the noise present in the image, but this
+object boundaries could be a better metric of the noise present in the image. 
+However, this
 would also be dependent on the accuracy of reconstruction and would have favoured
 the method that reconstructed the object most accurately.
 The boundary of the true target
@@ -604,7 +606,7 @@ The new
 method performed better than existing techniques across all situations according to the computed
 noise metrics.
 
-In simulated cases of less than one percent error in probe location, very little 
+In simulated cases of less than 1\% error in probe location, very little 
 difference in reconstruction accuracy between 
 the two motion correction algorithms was detected. 
 Despite this, a slight reduction 
@@ -617,15 +619,15 @@ the increased modelling time required. This method required an extra model, and 
 solution compared to the single step solutions. For simple models such as 
 a tank the added time difference
 is small, but for complex models this could increase reconstruction time drastically. 
-When several frames are reconstructed each requires a unique model 
-with a modified probe location increasing the time required. 
+When several frames are reconstructed, each requires a unique model 
+with a modified probe location, increasing the image reconstruction time. 
 To reduce the reconstruction 
-time, correcting the model only when the  probe location error is greater than one 
-percent of the model radius may be helpful. At this 
+time, correcting the model only when the  probe location error is greater than 1\%
+of the model radius may be helpful. At this 
 level of movement, the benefits of 
 the probe localization technique are 
 not substantial. 
-Additionally in the images presented probe movment did not 
+Additionally, in the images presented probe movment did not 
 appear to be large. It is not yet clear what the typical movement of the electrode probe 
 is expected to be in the esophagus. 
 
@@ -634,7 +636,7 @@ reconstructed for motion direction directly using the movement
 jacobian~\parencite{boyle_geophysical_2016,gomez-laberge_direct_2008,soleimani_imaging_2006}.
 This technique for electrode estimation has not been implemented using internal electrodes 
 for this research, but a comparison between the two electrode position estimation techniques 
-it required for complete validation of the demonstrated method.
+is required for complete validation of the demonstrated method.
 
 Previous studies with internal electrodes showed cases where contact impedance of the probe
 was inadequate for electrodes
