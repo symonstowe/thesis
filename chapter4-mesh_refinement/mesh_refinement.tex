@@ -5,45 +5,59 @@
 This thesis proposes the use of novel 3D electrode configurations 
 and internal electrodes to improve sensitivity to 
 cardiosynchronous activity. Unlike surface electrode configurations, these 
-modles will have a very high 
+modles have a very high 
 sensitivity in the center of a model where mesh refinement can be challenging. 
 In this chapter we explore the need for mesh refinement with regard
 to sensitivity accuracy, and develop tools to help control mesh density. 
 
 \section{Introduction}
-Electrical Impedance Tomography (EIT) reconstructs images of 
-electrical tissue properties within a body from electrical
-transfer impedance measurements at surface electrodes. For
-biomedical imaging applications, it is being actively studied
-for monitoring
-the movement of air and blood in the thorax, and for imaging
-the head and breast. Reconstruction of EIT images requires
-the solution of an inverse problem in soft field tomography.
-EIT image reconstruction requires 
-calculation of a sensitivity matrix, $\bf J$, representing the relationship between internal 
-changes and measurements. A pseudo-inverse of $\bf J$ is used
-to update the image estimate over several iterations. 
-EIT image reconstruction is ill-posed, since the physics of
-current propagation implies that sensitivity is largest near
-the electrodes and smallest in the body centre.
+Electrical Impedance Tomography (EIT) reconstructs
+conductivity distributions in a body from electrical impedance measurements 
+at the body surface. 
 
-It is therefore clear that a precise  calculation of $\bf J$ is
-required for solution accuracy. Since it is generally not
-possible to use analytic solutions, because of the non-regular
-shapes of biological bodies and the boundary conditions on a
-conductive electrode, the finite element method (FEM) is typically
-used. 
-One key advantage of the FEM is that element size can be
-selectively refined in regions to meet solution accuracy. 
-The accuracy of the FEM solution will increase as more elements are
-added, so a high mesh density is often desired to achieve an 
-accurate solution. 
-In this paper we will use the term mesh to refer to a specific 
+EIT is being actively developed to image the movement of air and 
+blood in the thorax \parencite{nguyen_review_2012}, and 
+neurological activity \parencite{holder_electrical_1992}. 
+For most applications of EIT the finite element method (FEM) is 
+used to reconstruct images, since geometry is irregular and 
+an analytic solution cannot be used. When using the Finite element method,
+a mesh is required to reconstruct images. 
+To reconstruct images the solution to an inverse problem. 
+As described in \fref{sec:inv_prob}, a jacobian matrix
+is required that represents relationship between the internal conductivity
+and measurements.
+In this thesis we will use the term mesh to refer to a specific 
 combination of nodes and elements in a finite element model. 
-In EIT the sensitivity is nonuniform 
-across the entire model.
-Thus
-it has generally been recommended in the EIT literature 
+As more elements are added to a mesh, the accuracy is improved,
+but the time required to reconstruct and display results is increased. 
+In order to generate accurate results, a mesh that gives the highest accuracy 
+with the fewest nodes is desirable. This way accuracy can be increased, and
+computing time can be decreased.
+
+Due to the propagation of current in EIT, sensitivity is much higher near the
+electrodes relative to in the centre of the model. This results in an inverse problem
+that is severely ill-posed,
+and an uneven sensitivity distribution in the model. 
+An accurate calculation of the jacobian is required to solve the inverse
+problem accurately, but changes in errors in regions with high sensitivity 
+will disproportionately affect the sensitivity error. 
+
+%the solution of an inverse problem.
+%EIT image reconstruction requires 
+%calculation of a sensitivity matrix, $\bf J$, representing the relationship between internal 
+%changes and measurements. A pseudo-inverse of $\bf J$ is used
+%to update the image estimate over several iterations. 
+%EIT image reconstruction is ill-posed, since the physics of
+%current propagation implies that sensitivity is largest near
+%the electrodes and smallest in the body centre.
+
+%One key advantage of the FEM is that element size can be
+%selectively refined in regions to meet solution accuracy. 
+%The accuracy of the FEM solution will increase as more elements are
+%added, so a high mesh density is often desired to achieve an 
+%accurate solution. 
+
+It has generally been recommended in the EIT literature 
 that meshes be refined near electrodes, where the electric 
 field and sensitivity are largest~\parencite{adler_electrical_2017}. 
 This recommendation gives rise to two questions: 
@@ -79,7 +93,7 @@ do not conveniently provide such capability either.
 %The quality of a mesh dictates the accuracy of the subsequent analysis 
 %and solution, and can be characterized by the properties of the tetrahedra
 %comprising the model~\parencite{Parthasarathy1993}.
-In this paper we investigate approaches to manage the tradeoff
+In this chapter we investigate approaches to manage the tradeoff
 between refinement of the electrode regions versus the bulk volume. 
 We present a comparison between Gmsh and 
 Netgen based mesh refinement around electrodes, and evaluate the 
@@ -95,7 +109,7 @@ These results were compared to a very high density meshes which was considered t
 The format of the geometry files used to generate these meshes can be seen in \fref{app:geo_stuff}.
 
 \subsection{Mesh Generation}
-A cylinder ($\diameter=0.5$~m, height $h=0.25$~m) with four square electrodes 
+A cylinder (with a diameter of 0.5~m, and a height of 0.25~m $h=0.25$~m) with four square electrodes 
 (5~cm edge length) placed equidistantly around the perimeter at mid-height was
 meshed with Netgen (version 5.3.1)~\parencite{schoberl_netgen_1997} and Gmsh 
 (version 4.7.0)~\parencite{geuzaine_gmsh_2009}
@@ -115,11 +129,11 @@ in Matlab 2019b
 Meshes of different sizes were generated with Netgen and Gmsh by manipulating the desired
 maximum edge length (maxh parameter) for the entire domain and the electrodes.
 Two  mesh analyses were performed. For the first
-mesh, maximum element lengths were
+mesh, maximum element edge lengths were
 chosen such as to divide the electrode side of 5~cm into an integer number of
 segments of equal size. 
-The maximum mesh element length ranged from 1 to 7 subdivisions of the electrode 
-edge, while the maximum mesh element length in the ultra-fine reference mesh  
+The maximum mesh edge length ranged from 1 to 7 subdivisions of the electrode 
+edge, while the maximum mesh edge length in the ultra-fine reference mesh  
 was 15 subdivisions per 
 electrode edge. Independent reference meshes were generated for each software.
 Two types of models were generated this way. Constant models C1--C7, where the mesh size 
@@ -130,7 +144,7 @@ R1-R7 is referred to as refinement A where the internal element max size was 5 c
 B had an internal mesh size of 4 cm, C was 3 cm and D was 2 cm.
 The numeric value in the mesh 
 ID indicated the number of subdivisions per electrode edge. 
-In Netgen the mesh decay was not easily controlledbeyone selecting a refinement 
+In Netgen the mesh decay was not easily controlled by selecting a refinement 
 level from 1 to 5, but in Gmsh the size was set 
 to increase evenly from the surface of the electrode to the centre of the model.
 It should be possible to replicate this mesh density distributionin Netgen by using a 
@@ -163,7 +177,7 @@ for both Netgen and Gmsh.
 
 For the second analysis, the distribution of nodes within the 
 model was changed without altering 
-the total number of nodes to give M1 -- M17. 
+the total number of nodes to give M1--M17. 
 Starting with the constant mesh C3 as M1, the maximum mesh element 
 length on the electrode was decreased by 10\% and the maximum mesh size in the centre was
 increased so that the total number of elements in the mesh was  within 10\% of the 
@@ -191,7 +205,7 @@ This process is illustrated in \fref{fig:balanceMethods}.
 
 When generating meshes to compare across several mesh density profiles as the balance of the nodes was shifted 
 towards the electrodes, 19 meshes were generated for each software including 2 reference meshes. 
-\fref{tab:mesh-table} shows the parameters of the resulting odd numbered meshes. 
+\Fref{tab:mesh-table} shows the parameters of the resulting odd numbered meshes. 
 
 % Table 
 \begin{table}[]
@@ -199,7 +213,9 @@ towards the electrodes, 19 meshes were generated for each software including 2 r
 to determine the optimal 
 node balance. Parameters global maxh and electrode maxh refer to the specified input parameters; the remaining 
 columns give parameters from the resulting meshes.}
-\input{chapter4-mesh_refinement/mesh_table.tex}
+\vspace{3mm}
+\resizebox{\textwidth}{!}{
+\input{chapter4-mesh_refinement/mesh_table.tex}}
 \end{table}
 
 %The difference in meshing algorithms meant that the meshes did not have the same number
@@ -216,22 +232,22 @@ columns give parameters from the resulting meshes.}
 %for the volumetric mesh, and the minimum angle of the triangles in the surface mesh.
 
 \subsection{Simulation}
-The potential at each node \VB\ of the mesh was calculated using the finite
-element method (FEM) using the linearization 
-\begin{equation}
-\VB = \YB^{-1}\CB
-\end{equation}
-where \YB\ is the admittance matrix of the FEM (and a function of conductivity
-distribution) and \CB\ is a matrix representing the current injection pattern,
-such that \CB$_{ij}$ represents the current injected in electrode $i$ during
-the $j$-th stimulation. Here, we drive current of 1~A between two adjacent
-electrodes in a single stimulation, so $C = [0\,|\,0\,|\,1\,|\,-1]^T$. 
-We pick a node in the centre of the FEM as ground, since it is necessary to
-assume the potential on
-one node for \YB\ to be invertible.
-We use the complete electrode model and assume contact impedance of
-0.01~$\Omega$ in the calculation of the admittance
-matrix~\parencite{polydorides_electrode_2002}. 
+%The potential at each node \VB\ of the mesh was calculated using the finite
+%element method (FEM) using the linearization 
+%\begin{equation}
+%\VB = \YB^{-1}\CB
+%\end{equation}
+%where \YB\ is the admittance matrix of the FEM (and a function of conductivity
+%distribution) and \CB\ is a matrix representing the current injection pattern,
+%such that \CB$_{ij}$ represents the current injected in electrode $i$ during
+%the $j$-th stimulation. Here, we drive current of 1~A between two adjacent
+%electrodes in a single stimulation, so $C = [0\,|\,0\,|\,1\,|\,-1]^T$. 
+%We pick a node in the centre of the FEM as ground, since it is necessary to
+%assume the potential on
+%one node for \YB\ to be invertible.
+%We use the complete electrode model and assume contact impedance of
+%0.01~$\Omega$ in the calculation of the admittance
+%matrix~\parencite{polydorides_electrode_2002}. 
 
 %The resultant potential distribution in the
 %electrode plane, calculated for the finest mesh and subsequently projected onto
@@ -239,23 +255,33 @@ matrix~\parencite{polydorides_electrode_2002}.
 %The potential distribution \VB\ is used to visualize the current flow
 %around the measuring electrodes.
 % NOT CURRENTLY LOOKING AT THE CURRENT FLOW! seems to be a repeat of the same stuff
-
-We calculate the sensitivity (or Jacobian) matrix \JB\ of measurements \vB\ to
-changes in the conductivity $\sigma$ of individual elements as
-$\JB_{ij}=\frac{\partial v_j}{\partial \sigma_i}$ using the adjoint
-method~\parencite{polydorides_electrode_2002}. Again, since we only have one measurement, \JB\
-is in fact a vector.
-We construct a sensitivity image by assigning each element
-$i$ of the FEM the value of \JB$_i$ divided by the element's volume.
-Mean sensitivity in the plane of electrodes is then calculated by averaging
-the sensitivity in fifteen planes parallel to the plane of electrodes and
-spanning the height of 5~cm. 
-The sensitivity was projected onto a $512\times512$ array and divided into regions
-of interest for the centre (C), at the electrode (E) and between the centre and electrode
+To calculate the sensitivity of each measurement to a change in conductivity of each element
+we use the adjoint method \parencite{polydorides_electrode_2002}. 
+\begin{equation}
+  \JB_{ij}=\frac{\partial v_j}{\partial \sigma_i}
+\end{equation}
+A sensitivity was normalized by dividing the sensitivity value for each element 
+by the element's volume. 
+The average sensitivity of 15 planes evenly spaced between the top and bottom edges of the electrodes
+was used to generate a sensitivity image.
+%We calculate the sensitivity (or Jacobian) matrix \JB\ of measurements \vB\ to
+%changes in the conductivity $\sigma$ of individual elements as
+%$\JB_{ij}=\frac{\partial v_j}{\partial \sigma_i}$ using the adjoint
+%method~\parencite{polydorides_electrode_2002}. Again, since we only have one measurement, \JB\
+%is in fact a vector.
+%We construct a sensitivity image by assigning each element
+%$i$ of the FEM the value of \JB$_i$ divided by the element's volume.
+%Mean sensitivity in the plane of electrodes is then calculated by averaging
+%the sensitivity in fifteen planes parallel to the plane of electrodes and
+%spanning the height of 5~cm. 
+The EIT image structure was rasterized onto a $512\times512$ array, and divided into 3 regions of interest:
+%The sensitivity was projected onto a $512\times512$ array and divided into regions
+%of interest for 
+the centre of the model (C), adjacent to the electrode (E) and between the centre and electrode
 (I). The resulting sensitivity for the reference mesh calculated with Gmsh and the 
-selected regions of interest is presented in \fref{fig:roiMethods}.
+selected regions of interest are presented in \fref{fig:roiMethods}.
 
-To calculate the sensitivity error first the difference in sensitivity wasa computed between the 
+To calculate the sensitivity error, the difference in sensitivity wasa computed between the 
 reference model and the refoned models to give the total error in sensitivity.
 The normalized sensitivity error is calculated as the absolute sensitivity error 
 divided by the total sensitivity error
@@ -272,13 +298,13 @@ for the selected region.
 %We use the results obtained
 %with the C0 mesh as reference to compare the others against.
 
-\subsection{Electrode refinement for arbitrary FEMs}
+\subsection{Electrode Refinement for Arbitrary FEMs}
 Our approach for refinement around electrodes in Gmsh with external electrodes 
 also allows for the refinement of arbitrary models with complex structures
 such as internal electrodes and tissue boundaries.
 A scenario depicting an approximation of 
 a probe entering a bone with different 
-layers of conductivity. The resulting mesh pictured in 
+layers of conductivity was modelled. The resulting mesh pictured in 
 \fref{fig:adv_mesh}
 highlights the ability of this technique
 to be used for refinement around electrodes and the control of mesh density  
@@ -287,11 +313,12 @@ very challenging in EIT software.
 
 \section{Results}
 
-Two analyses of mesh refinement were completed. The first comparing normalized sensitivity error between
-meshes with constant refinement and refinement only at the electrodes, and the second 
+Two analyses of mesh refinement were completed. First, comparing normalized sensitivity error between
+meshes with constant refinement and refinement only at the electrodes; Second,
 comparing meshes with different levels of electrode refinement and the same number of nodes.
 
-When comparing constant meshes to meshes with refinement at the electrodes, normalized sensitivity error
+When comparing constant meshes to meshes with refinement at the electrodes only, 
+normalized sensitivity error
 was decreased as more nodes were added to the mesh and to the electrodes. The sensitivity
 error was lowest in the constant meshes across both Netgen and Gmsh software. Meshes 
 generated using Netgen
@@ -326,8 +353,8 @@ when refinement at the electrodes was higher.
 The total sensitivity error across all meshes is plotted vs. the balance point in
 \fref{fig:balance_sens}. For meshes generated with Gmsh the minimum error was 
 achieved when the node balance point was approximately 85\% of the model radius corresponding
-to model M15-B, 
-and for Netgen generated meshes the minimum sensitivity was achieved in model M13-A at a balance point
+to model M15-B. 
+For Netgen generated meshes the minimum sensitivity was achieved in model M13-A at a balance point
 of approximately 70\%. Gmsh achieved a lower sensitivity error measured against
 the respective reference mesh. For meshes using Netgen refinement, the balance point did not
 increase evenly as the electrode density was increased and the internal density decreased. 
@@ -362,7 +389,7 @@ at less than 0.2\%.
   
 \section{Discussion}
 
-We consider several questions on the requirement of FEM refinement in the neighbourhood of
+We consider several questions on the requirement of FEM refinement near
 electrodes and the available tools for mesh refinement in EIT. 
 1) Given a ``FEM element budget'', what should
 balance of nodes be between the centre of the model and the electrodes?
@@ -380,7 +407,7 @@ and the same input parameters result in meshes with different numbers of nodes.
 \fref{fig:electrode_mesh_size}, depicts the difference in
 mesh dissipation rates between Netgen and Gmsh. The mesh size in Gmsh increased
 gradually from the surface of the electrode  towards the centre of the model,
-where the mesh size in Netgen increased much more quickly from the edges of the
+whereas the mesh size in Netgen increased much more quickly from the edges of the
 electrode. While we attempted to control the dissipation rate in 
 Netgen by manipulating the mesh density in the centre of the model, we were unable 
 to achieve a smooth transition between the electrode and internal regions of the mesh. 
@@ -388,8 +415,9 @@ to achieve a smooth transition between the electrode and internal regions of the
 To analyze the benefit of electrode refinement and the difference between 
 Netgen and Gmsh refinement techniques we consider
 a sequence of refined meshes compared to a ``gold standard'', uniformly fine
-FEM solution. The models were refined either globally or in the electrode
-neighbourhood, and the error in the sensitivity matrix $\bf J$ %voltage measurement,  and mesh quality %current distribution and sensitivity
+FEM solution. The models were refined either globally or from the electrode surface, 
+and the error in the sensitivity matrix $\bf J$ 
+%voltage measurement,  and mesh quality %current distribution and sensitivity
 was compared. \fref{fig:results_sens_original} displays the difference 
 in sensitivity between constant meshes and meshes with refinement at the electrodes. 
 The sensitivity error was lower in Netgen across all constant refinement meshes, in
@@ -431,7 +459,7 @@ of regions surrounding internal structures and electrodes, and
 
 Despite the increased ability to control refinement, the results still show that there are
 discrepancies between the specified parameters and the resulting meshes. The data in 
-\fref{tab:mesh-table} show that the maximum element lengths specified for each mesh 
+\fref{tab:mesh-table} show that the maximum edge lengths specified for each mesh 
 were different from the actual maximum edge lengths. As the node density was increased
 near the electrodes, in Netgen the balance point did not always shift towards the electrode
 as the maximum node density was not always higher despite specifying a smaller mesh size.
@@ -446,7 +474,7 @@ As more electrodes are added and the model complexity is increased, we expect th
 refinement around the electrodes will continue to reduce total sensitivity error. However 
 the node balance analysis will not be possible for irregularly shaped models.
 The node balance analysis provides a straightforward method to determine the 
-ideal placement of a given number of nodes to reduce model errors.
+ideal placement for a given number of nodes to reduce model errors.
 
 % Based on these results, we produced an additional model combining the electrode
 % refinement of R8 and the maximum element size of C5 (18947 nodes and 98595
@@ -466,7 +494,7 @@ ideal placement of a given number of nodes to reduce model errors.
 %model when the dissipation of mesh refinement is constant. 
 
 \section{Summary}
-In this paper we examine the requirement for mesh refinement around 
+In this chapter we examine the requirement for mesh refinement around 
 electrodes in Electrical Impedance Tomography (EIT). 
 While it has been recommended that  models be refined around the electrodes, where current
 density and sensitivity are highest,  the level of refinement required is poorly understood. 

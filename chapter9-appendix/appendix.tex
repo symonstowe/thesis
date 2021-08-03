@@ -117,72 +117,78 @@ Save 'advanced_mesh.msh';
 \chapter{Algorithms} \label{app:appendix-algos}
 The following sections show the segmentation methods from \fref{chap:chapter-5}
 presented as algorithms for a clear presentation of the segmentation steps. 
+
 \section{External boundary}
 The following steps were used to segment the external boundary 
 from a single slice 
 of a CT image using Matlab 2021b  
 with the image processing toolbox:
+
 \begin{algorithm}[H]
 	\SetAlgoLined
 	\KwIn{image}
 	\KwOut{external boundary}
-		weiner filter\;
-		Set the lung intensity to 0\;
-		erode image using disk size 20\;
-		reconstruct on image from line 4\;
-		dilate with disk of size 20\;
-		reconstruct on image from line 6\;
-		binarize, thresh = 0.5\;
-		fill holes\;
-		close using disk size = 2\;
-		open using disk size = 5\;
+		adjusted image = weiner filter\;
+		adjusted image = set the lung intensity to 0\;
+		body = erode image using disk size 20\;
+		body = reconstruct on image from line 4\;
+		body = dilate with disk of size 20\;
+		body = reconstruct on image from line 6\;
+		body = binarize, thresh = 0.5\;
+		body = fill holes\;
+		body = close using disk size = 2\;
+		body = open using disk size = 5\;
 		external boundary = largest object\;
 	\caption{Segment the external body boundary.}
 \end{algorithm}
 
-%\section{Ribcage}
-%The below algorithm is a presnetation of the segmentation methods to extract the 
-%ribcage from a selected CT slice.
-%\begin{algorithm}[H]
-%	\SetAlgoLined
-%	\KwIn{image}
-%	\KwOut{external boundary}
-%		weiner filter\;
-%		Set the lung intensity to 0\;
-%		erode image using disk size 20\;
-%		reconstruct on image from line 4\;
-%		dilate with disk of size 20\;
-%		reconstruct on image from line 6\;
-%		binarize, thresh = 0.5\;
-%		fill holes\;
-%		close using disk size = 2\;
-%		open using disk size = 5\;
-%		external boundary = largest object\;
-%	\caption{Segment the external body boundary.}
-%\end{algorithm}
-%
-%\section{Lungs}
-%This algorithm shoes the final steps taken to segment the lungs using the chest cavity 
-%segmentation.
-%\begin{algorithm}[H]
-%	\SetAlgoLined
-%	\KwIn{image}
-%	\KwOut{chest cavity}
-%	\For{CT slice}{
-%		Do something
-%	}
-%		weiner filter\;
-%		Set the lung intensity to 0\;
-%		erode image using disk size 20\;
-%		reconstruct on image from line 4\;
-%		dilate with disk of size 20\;
-%		reconstruct on image from line 6\;
-%		binarize, thresh = 0.5\;
-%		fill holes\;
-%		close using disk size = 2\;
-%		open using disk size = 5\;
-%		external boundary = largest object\;
-%	\caption{Segment the external body boundary.}
-%\end{algorithm}
+\section{Ribcage}
+The below algorithm is a presnetation of the segmentation methods to extract the 
+ribcage from a selected CT slice.
+
+\begin{algorithm}[H]
+	\SetAlgoLined
+	\KwIn{image, external boundary}
+	\KwOut{chest cavity}
+		\For{CT slice \pm 9}{
+			small boundary = erode the boundary with disck size 5\;
+			bones = binarize adjusted image (thresh = 0.6)\;
+			ribs = bones \& small boundary\;
+			ribs = fill holes in ribs \;
+			ribs = close ribs (disk size 5) \;
+			ribs = open ribs (disk size 2) \;
+		}
+		ribcage = sum(ribs)\;
+		ribcage = ribcage > 2 \;
+		\While{ribage != enclosed}{
+			enclosed ribcage = close anterior ribcage (rectangle size 15 50+i) \;
+		}
+		enclosed ribcage = thicken enclosed ribcage \;
+		enclosed ribcage = clear border enclosed ribcage \;
+		chest cavity = enclosed ribcage - ribs \;
+		chest cavity = blur chest cavity (mask size 15) \;
+		chest cavity = binarize chest cavity (threshold 0.5) \;
+	\caption{Segment the chest cavity.}
+\end{algorithm}
+
+\section{Lungs}
+This algorithm shoes the final steps taken to segment the lungs using the chest cavity 
+segmentation.
+
+\begin{algorithm}[H]
+	\SetAlgoLined
+	\KwIn{image, chest cavity}
+	\KwOut{lung}
+		ventilted lung = binarize adjusted image (thresh 0.5) \;
+		ventilated lung = objects > 200 pixels \;
+		ventilated lung = close ventilated lung (disk size 2) \;
+		heart = add elipse \;
+		lung estimate = chest cavity - heart \;
+		collapsed regions = lung estimate - ventilated lung \;
+		lung = collapsed regions \& ventilated lung \;
+		lung = close lung (disk size 5) \;
+		lung = fill holes in lung \;
+	\caption{Segment the lung boundary.}
+\end{algorithm}
 
 \end{appendices}

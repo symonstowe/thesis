@@ -5,7 +5,7 @@
  in Medicine \& Biology Society (EMBC 2020) \parencite{stowe_effect_2020}.} 
 
 \section{Introduction}
-Currently the most common implementations of EIT in biomedical applications
+Currently, the most common implementations of EIT in biomedical applications
 measure voltages and inject currents from the body surface using 
 one or two planes of electrodes. Internal electrodes are not used clinically
 despite promising simulation studies that have shown large improvements 
@@ -32,17 +32,20 @@ Other methods such as averaging a large number of signals together
 have been used \parencite{eyuboglu_vivo_1989,vonk-noordegraaf_pulmonary_1998}, 
 but as discussed by \citeauthorandyear{deibele_dynamic_2008} 
 these do not allow real-time monitoring and 
-may miss sudden changes in perfusion that are of interest.
+may miss sudden changes in perfusion.
 Filtering techniques have been implemented to help isolate the 
-cardiac component of the signal, but there is also occasionally overlap between 
+cardiac component of the signal, but there is occasionally overlap between 
 the carsiosynchronous component and harmonics of the ventilation
-signal which makes signal separation more 
+signal. This makes signal separation more 
 challenging \parencite{zadehkoochak_pulmonary_1992,leathard_comparison_1994}.
+%Low sensitivity in central regions relative to the boundary
+%limits the clinical applications of EIT. 
 
-Low sensitivity in central regions relative to the boundary
-limits the clinical applications of EIT, reducing the ability to
-accurately reconstruct and identify impedance changes due to
-the heart.
+%Low sensitivity in the centre of 
+
+%the model reduces the ability to
+%accurately reconstruct and identify impedance changes  to
+%the heart.
 
 Internal electrodes have been proposed several times as a method to 
 sustainably increase sensitivity in central regions of the 
@@ -52,7 +55,8 @@ czaplik_application_2014,nguyen_electrical_2020}.
 Past research in 2D identified a sixfold increase in the cardiac frequency 
 component of the EIT signal 
 when 2 of 16 total electrodes were placed in the 
-esophagus or trachea \parencite{czaplik_application_2014}. It is not clear whether 
+esophagus or trachea compared to a typical external configuration
+\parencite{czaplik_application_2014}. However, tt is not clear whether 
 the identified increase in cardiac-frequency amplitude stems from pulsatile 
 (motion-based), changes or whether these changes represent 
 perfusion.
@@ -71,11 +75,11 @@ For all of these uses of EIT, internal sensitivity in the centre of
 a model could provide increased accuracy. 
 In an 
 intensive-care environment where feeding and breathing tubes 
-are used internal electrodes could provide 
+are used, internal electrodes could provide 
 several advantages without additional invasiveness. 
 It has even been suggested that internal electrodes may replace 
-electrodes on the back, which are challenging to place in critically 
-ill patients that cannot be safely or easily 
+electrodes on the back, which are challenging to place for critically 
+ill patients who cannot be safely or easily 
 moved \parencite{czaplik_application_2014}.
 Internal electrodes placed in both the esophagus and the trachea
 have been used, and both have shown increased sensitivity to cardiosynchronous
@@ -116,7 +120,7 @@ improve EIT sensitivity.
 
 \section{Methods}
 
-\subsection{Tank model}
+\subsection{Tank Model}
 This section exmpalins the techniques used to 
 generate 3D meshes with different external and internal 
 electrode configurations on a tank model. 
@@ -148,15 +152,15 @@ The background conductivity of the tank was 1 S/m and the conductivity of the ta
 10 S/m.
 
 When reconstructing images a conductive target was added to the tank
-centred at a height of 1 m at the midpoint of the tank radius. The target
+at a height of 1 m at the midpoint of the tank radius. The target
 object radius is 0.4 m.
 
-\subsection{Image reconstruction}
+\subsection{Image Reconstruction}
 
 To generate EIT images from voltage measurements, the 3D GREIT
 reconstruction algorithm
 was used \parencite{grychtol_3d_2016}. A spherical
-conductive target with a radius of 20 percent of the tank radius
+conductive target with a radius of 20\% of the tank radius
 was placed midway between the centre and boundary
 of the tank, in a region with typically low sensitivity.
 The inverse problem hyperparameter
@@ -165,7 +169,7 @@ noise that propagated from the measurements into the final images
 was equal. 500 training targets with a size of 5 cm were placed within the model to train the GREIT 
 algorithm. 
 
-\subsection{Sensitivitiy calculation}
+\subsection{Sensitivitiy Calculation}
 
 The sensitivity is then calculated from the jacobian ($J$) of the reconstruction matrix as:
 \begin{equation}
@@ -173,7 +177,7 @@ The sensitivity is then calculated from the jacobian ($J$) of the reconstruction
 \end{equation}
 where $V_i$ is the volume of each respective voxel. 
 
-\subsection{Current injection and measurement}
+\subsection{Current Injection and Measurement}
 For this analysis external electrodes are placed in 
 a ``square'' pattern \parencite{grychtol_3d_2016} 
 and the internal electrodes are placed from top to 
@@ -184,11 +188,10 @@ typical ``skip 4'' injection pattern that has been shown to yield
 a good sensitivity distribution in 3D EIT \parencite{grychtol_3d_2016}.
 A new stimulation and measurement pattern is also used in a model with 
 two internal electrodes that increases
-the number of measurements on the internal probe. The stimulation 
+the number of measurements on the internal probe. This stimulation 
 pattern is consistent with the skip 4 pattern, but 
-for the measurements alternating stimulations and measurements
-are replaced with measurements to the internal probe. 
-
+for the measurements, every second measurement
+is replaced with a measurement between the boundary and the internal probe. 
 This results in the same total number of measurements, but many more measurements
 use the internal probe. This new stimulation pattern is described in \fref{fig:modified_measurement}. 
 All measurements are made between the top and bottom plane of electrodes.
@@ -226,7 +229,7 @@ reconstructed area. For this reason it is unusual to display reconstructions
 with a 2D ring of electrode in 3D, but the resulting image helps to visualize the
 improvement of 3D electrode arrangements.
 
-\Fref{fig:internal_sensitivity} show internal sensitivity distribution changes when 
+\Fref{fig:internal_sensitivity} shows internal sensitivity distribution changes when 
 using two and four internal electrodes compared to the
 typical 2D and 3D configurations with only external electrodes. 
 The highest central sensitivity can be seen when using four internal 
@@ -264,7 +267,7 @@ the modified injection and measurement pattern on the right (3D(b*)).}
 \label{fig:modified_measurement_sens}
 \end{figure}
 
-\subsection{Sensitivity in an ovine model}
+\subsection{Sensitivity in an Ovine Model}
 
 A sensitivity comparison was also computed for an ovine model with different 
 electrode configurations 
