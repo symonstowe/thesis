@@ -1,73 +1,195 @@
 \chapter{Conclusion}
 
-This thesis investigated the role of mesh refinement and internal electrodes in 
-perfusion imaging. 
-EIT has very low sensitivity in the center of the thorax where 
-may of the perfusion changes of interest occur. 
+This thesis investigated mesh refinement and internal electrodes 
+as tools to advance perfusion imaging. 
+EIT has very low sensitivity in the centre of the thorax where 
+majority of the perfusion changes of interest occur. 
 The source of the cardiosynchronous EIT signal is also 
-controversial, and there are many factors that may contribute to 
+poorly understood, and many factors may contribute to 
 the measured perfusion signal. 
-This thesis presents several contribution to the field of 
+This thesis presents several contributions to the field of 
 perfusion imaging in EIT.
 We investigated the limitations of current EIT perfusion imaging
 and compared the difference between measures of perfusion using 
 a contrast agent and those relying on the cardiosynchronous signal.
-A technique to control mesh refinement is developped to enable meshes
+A technique to control mesh refinement was developed to create meshes
 with adequate sensitivity accuracy throughout an entire model. This 
-technique can also be used to refine around intenal electrodes 
-where the sensitivity is much higher in the center of the model than 
-with typical external electrode configurations. 
-A 3D EIT configuration is presented with 4 internal electrodes that gives high
-sensitivity in the center of the model, and accuratey reconstructs a conductive
+technique can also guide refinement strategies in high sensitivity regions  
+surrounding internal electrodes. 
+A 3D EIT configuration is presented with four internal electrodes that gives high
+sensitivity in the centre of the model, and accurately reconstructs a conductive
 target in the presence of Gaussian measurement noise.
-Finally, we develop a method to calculate movement of 
+Finally, we developped a method to calculate movement of 
 an internal probe and correct for positioning error in a model. Electrode 
-motion artefacts can add artefact to images that overpower the 
-component of interest, and add noise outside of the actual 
-conductivity changes. This technique uses information in the reconstructed 
-image characteristic of probe movement to estimate the actual probe locaiton 
-and create a corrected model that reduced the effect of movement on reconstructed 
-images. 
+motion can add artefacts
+to images that overpower the 
+component of interest, and background noise to the reconstructed images. 
+This technique uses charactersitic information in the reconstructed 
+image related to probe movement to estimate the actual probe location 
+and create a corrected model. The corrected model 
+reduced the effect of movement on reconstructed images. 
 
 \section{Summary of Findings}
 
-\Fref{chap:chapter-3} compared two established methods of perfusion 
-imaging and found that perfusion estimation techniques using 
-cardiosynchronous signal were comprable to bolus injection methods. 
-Despite the different signal origins, both techniques 
-resulted in simular perfusion estimates. 
-One of the challenges with perfusion imaging with both bolus injection and
-frequency filtering is the contribution of blood flow in the heart. 
-In 2D with low sensitivity in the center of a subject 
-it is challenging to identify and correctly remove the contribution 
-of the heart to the perfusion signal. 
+\Fref{chap:chapter-3} compared several EIT measures of perfusion 
+to investigae the potential of EIT as a device to monitor 
+perfusion. 
+Despite the different signal origins, both filtering-, and bolus-based 
+techniques 
+resulted in similar perfusion estimates. We found that perfusion 
+estimation with EIT is variable, and hypothesize that 
+improved sensitivity and reconstruction accuracy could improve perfusion 
+measures and clinical viability. 
+
+%One of the challenges with  both bolus- and filtering-based perfusion 
+%imaging is the unwanted contribution of blood flow in the heart. 
+%In 2D images that have low sensitivity in the centre of a subject,
+%it is challenging to identify and correctly remove the contribution 
+%of the heart from the perfusion signal. 
 
 In \fref{chap:chapter-4} we explore techniques to
-imrove sensitivity accuracy in meshes and ensure mesh density is adequate 
-around electrodes. This chapter recomends that 
-when mesh density is dissapated constantly from electrodes 
+improve sensitivity accuracy in meshes, and ensure mesh density is adequate 
+around electrodes. 
+When mesh density dissipates evenly away from electrodes, we recommend 
 the balance point 
-of the nodes in a mesh should be towards the electrodes.
-The nodes should be distributed so that the balance point is 
-at 80\% of the distance between the electrode and the 
-low sensitivity area in the center of a model.
-This recomendation can be used to generate 
-meshes that are highly accurate when calculating the sensitivity, with less elements
+of the nodes in a mesh should be towards the electrodes. 
+A balance point is 
+at 80\% of the distance between the lowest sensitivity region of a 
+model and the electrodes minimized error when calculating sensitivity. 
+This recommendation can be used to generate 
+meshes that are highly accurate when calculating the sensitivity, with fewer elements
 than meshes that are uniformly refined.  
 
+In \fref{chap:chapter-5} a tool to generate accurate, custom meshes from 
+CT images was presented. This tool automatically segmented the lung and external 
+boundaries from CT images, and allowed manual verification of the segmented boundaries. 
+The segmented boundaries were used to generate custom EIT meshes. 
+Ventilation images on a small number of subjects 
+showed a small improvement over generic models when 
+measuring the centre of mass of the ventilated region. The presented tool 
+created meshes with individualized, accurate boundaries 
+for patients with CT data.
 
+\Fref{chap:chapter-6} presented a sensitivity analysis and simulated 
+reconstruction accuracy of novel electrode configurations with internal electrodes. 
+These simulations show an increased sensitivity in internal regions. Reconstructions 
+of a conductive object also show that internal electrodes can reconstruct 
+the location of a conductive target in the presence of noise. From this work 
+we determined that internal electrodes could be used in 3D to image conductivity changes 
+within the body and could improve sensitivity to internal conductivity changes. 
 
-
-
-Note - it is possible that measurements on the internal electrode probe 
-should be used only for identification of the pulsatile componenet and not
-as part of the reconstructed images
-
-Limitations of the lamb model
-hear tlocation and whatnoT
+In \fref{chap:chapter-7} we analyze the effect of motion on reconstructed images with 
+internal electrodes. Moving the probe only 1\% of the model radius added artefacts
+to images reconstructed without motion correction strategies. 
+Available motion correction techniques reduced the impact of 
+electrode movement up to 5\% of the tank boundary, but still showed an increase in 
+image noise. 
+We present a technique to reconstruct motion artefacts and use these images to 
+estimate the true probe location. A new model with the new probe location 
+was used to reconstruct images. Images reconstructed with the new technique
+accurately located a conductive object when the probe moved up to 
+10\% of the model radius between measurements, 
+and reduced noise in all probe movement scenarios. 
 
 \section{Future Work}
 
-safety of internal electrodes with regards to the IEC stuff
+There are several avenues that we recommend be explored further from the work and projects
+presented in this thesis. 
 
-Test and validate the 
+\begin{itemize}
+	\item Work is currently underway to test the automatic segmentation tool on a wider
+	number of subjects. We are currently working with the Peking Union Medical College in 
+	Beijing, China to obtain more CT and EIT data from ARDS patients.
+
+	\item The effect of electrode placement errors on reconstruction accuracy
+	when creating custom meshes from CT images is unclear. 
+	Incorrectly modelled electrodes degrade reconstruction accuracy \parencite{boyle_impact_2011},
+	and incorporating the correct electrode location into the custom meshes could yield 
+	more accurate EIT images. We discuss some possibilities in \fref{chap:chapter-5} to identify 
+	the correct electrode locations, including using photographs to identify electrode locations
+	and estimating electrode placement from the movement 
+	jacobian. Chest expansion can have a large effect on EIT images 
+	\parencite{adler_impedance_1994}, and may impact the 
+	accuracy of a custom model as the patient moves. 
+	Correctly modelling the impact of electrode and boundary movement 
+	during breathing could help to further improve reconstruction accuracy.
+
+	\item When creating meshes from CT images, errors often occur when electrode placement does not 
+	work well on the irregular boundary. 
+	Some existing techniques allow electrode 
+	placement on arbitrary mesh surfaces \parencite{grychtol_fem_2013}, 
+	but these techniques do not 
+	natively offer features for advanced mesh refinement control 
+	or use with internal structures. Therefore,  
+	future work could focus on developing a method to facilitate meshing and electrode
+	placement on arbitrary boundary shapes.
+
+	\item Further work is required to determine the safety requirements for internal electrodes in human use.
+	The IEC guidelines \parencite{international_electrotechnical_commission_iec_2021} have strict
+	requirements for the injection of electrical current near the heart, and the current density on 
+	internal electrodes should be examined to ensure that it does not exceed current safety standards. 
+	It is also possible to use internal electrodes without injecting currents internally, 
+	but this could reduce the sensitivity benefits found when using internal electrodes.
+	Further investigation could determine if there are benefits 
+	to using internal electrodes only for recording voltage measurements. 
+
+	\item When reconstructing images using internal electrodes with GREIT, 
+	internal electrode motion 
+	caused artefacts in the image. 
+	It is not clear which aspect of the electrode motion introduces extra artefacts in GREIT.
+	Work is planned to create an addition to 
+	GREIT that will improve reconstruction 
+	with internal electrodes and correct for internal probe movement. 
+
+	\item It has been suggested that the contact impedance of internal 
+	electrodes should be matched to the
+	external electrodes \parencite{nasehi_tehrani_evaluation_2012}, 
+	but it is not clear to what degree
+	differences in contact impedance and size impact the reconstruction. 
+	An investigation into the ideal size, shape and 
+	electrical properties of internal electrode 
+	could help to inform their use in a clinical setting. 
+
+	\item The novel technique introduced to correct for probe location uses reconstructed images 
+	to determine the position of the internal probe. Further investigation is required to determine 
+	if the electrode position can be calculated directly from the reconstruction matrix. Previous
+	work has shown that 
+	the movement direction of individual electrodes can be 
+	calculated directly from the reconstruction matrix 
+	\parencite{soleimani_imaging_2006}, but this technique does not reconstruct for position. 
+	A comparison between techniques to compare the accuracy of each could help to 
+	estimate the probe locaiton more accurately.
+\end{itemize}
+
+\section{Conclusion}
+\TODO{do this at the end}
+This thesis contributes to perfusion imaging in two main ways. 
+Tools to analyize and control
+mesh refinement are presented that enable 
+
+Adressed ---- This theis add contributsion were made something about what it might help with!!
+
+%Several techniques have been introduced to improve sensitivity to perfusion, but further research is
+%required to combine these techniques and validate their ability to image perfusion. 
+%In this thesis we have introduced several building blocks for 
+%increasing sensitivity, and independantly analyzed their impact
+%accuracy in EIT reconstruction. 
+%The results presented this thesis can be used to improve internal sensitivity 
+%using EIT, and combining methods presented in this chapter we hope
+
+
+%Having introduced several techniques to improve sensitivity to 
+%perfusion in EIT images, future work
+%future work could also be done to validate these techniques. 
+%also
+%entails validation. 
+%Exmeriments using saline injections in an animal model with internal electrodes 
+%could be conducted to determine if there is a significant difference between 
+%cardiosynchronous impedance changes and bolus injection measures. Additionally validation is
+%
+%
+%
+%conducted and are being analyzed for their abaility to increase sensitivity to
+%bolus related measure
+%
+%

@@ -8,7 +8,7 @@ cardiosynchronous activity. Unlike surface electrode configurations, these
 modles will have a very high 
 sensitivity in the center of a model where mesh refinement can be challenging. 
 In this chapter we explore the need for mesh refinement with regard
-to sensitivity accuracy. 
+to sensitivity accuracy, and develop tools to help control mesh density. 
 
 \section{Introduction}
 Electrical Impedance Tomography (EIT) reconstructs images of 
@@ -86,7 +86,7 @@ Netgen based mesh refinement around electrodes, and evaluate the
 effect of mesh refinement techniques on error in  the sensitivity matrix, 
 $\bf J$. 
 
-\section{METHODS}
+\section{Methods}
 \subsection{Overview}
 
 We built a cylindrical model in Gmsh and Netgen which was parameterized so that multiple
@@ -255,8 +255,11 @@ of interest for the centre (C), at the electrode (E) and between the centre and 
 (I). The resulting sensitivity for the reference mesh calculated with Gmsh and the 
 selected regions of interest is presented in \fref{fig:roiMethods}.
 
-The sensitivity error is the absolute difference in total sensetivity 
-for the selected region with reference to the ultra-fine model.
+To calculate the sensitivity error first the difference in sensitivity wasa computed between the 
+reference model and the refoned models to give the total error in sensitivity.
+The normalized sensitivity error is calculated as the absolute sensitivity error 
+divided by the total sensitivity error
+for the selected region.
 
 %\subsection{Meshing errors}
 %We compare the meshes in terms of the value of the voltage measurement between
@@ -284,11 +287,11 @@ very challenging in EIT software.
 
 \section{Results}
 
-Two analyses of mesh refinement were completed. The first comparing sensitivity error between
+Two analyses of mesh refinement were completed. The first comparing normalized sensitivity error between
 meshes with constant refinement and refinement only at the electrodes, and the second 
 comparing meshes with different levels of electrode refinement and the same number of nodes.
 
-When comparing constant meshes to meshes with refinement at the electrodes, sensitivity error
+When comparing constant meshes to meshes with refinement at the electrodes, normalized sensitivity error
 was decreased as more nodes were added to the mesh and to the electrodes. The sensitivity
 error was lowest in the constant meshes across both Netgen and Gmsh software. Meshes 
 generated using Netgen
@@ -299,7 +302,8 @@ constant and refined meshes with respect to the number of nodes per electrode.
 
 \begin{figure}
   \includegraphics[width=\columnwidth]{chapter4-mesh_refinement/imgs/sens_error_total.pdf}
-  \caption[Mesh sensitivity error vs. elements per electrode]{\label{fig:results_sens_original} Sensitivity error of each mesh as a function 
+  \caption[Mesh sensitivity error vs. elements per electrode]{\label{fig:results_sens_original} 
+  Normalized sensitivity error of each mesh as a function 
   of the number of elements per electrode for both Netgen and Gmsh. The darkest lines indicate the
   constant mesh refinement, lighter lines indicate a larger maximum internal mesh size. The maximum
   internal mesh sizes are as follows: refinement A - 5 cm; refinement B - 4 cm; refinement C - 3 cm;
