@@ -137,11 +137,64 @@
 \end{frame}
 
 \begin{frame}
-	\frametitle{Contributions}
+	\frametitle{Contributions}    
+	\begin{columns}[c]
+		\begin{column}{0.5\textwidth}
+			\begin{enumerate}
+				\item A mesh analysis technique to reduce error in sensitivity calculations on 
+				cylindrical meshes (\alert{Chapter 4}). \\ \vspace{4mm}
+				\item A tool to generate custom meshes of exterior and lung boundaries from CT iamges
+				(\alert{Chapter 5}).
+			\end{enumerate}
+		\end{column}
+		\begin{column}{0.5\textwidth}
+			\begin{enumerate}
+				\setcounter{enumi}{2}
+				\item An analysis of 3D electrode placements with internal electrodes on internal 
+				sensitivity (\alert{Chapter 6}). \\ \vspace{4mm}
+				\item A method to reconstruct images using internal electrode measurements in the
+				presence of movement (\alert{Chapter 7}).
+			\end{enumerate}
+		\end{column}
+	\end{columns}
 \end{frame}
 
 \begin{frame}
-	\frametitle{Background}
+	\frametitle{Background: EIT}
+	\begin{figure}
+		\centering
+	\includegraphics[width=\textwidth,trim={0 2cm 0 0},clip]{imgs/current_and_equipotential_lines.pdf}
+	\end{figure}
+	\vspace{2mm}
+	Electrodes on the body surface are used to inject current and measure the resulting voltages. \\
+	\vspace{0.5cm}
+	Thoracic EIT typically images impedance changes due to the movement of fluid in the chest. \\
+\end{frame}
+
+\begin{frame}
+	\frametitle{Background: Perfusion}
+	What is perfusion?
+\end{frame}
+
+\begin{frame}
+	\frametitle{Background: EIT Measures of Perfusion}
+	How is perfusion measured? 
+	Why EIT? 
+	Why does it need to be improved?
+\end{frame}
+
+\begin{frame}
+	\frametitle{Chapter 3: Introduction}
+	There are \alert{three common techniques} to measure perfusion with EIT. 
+	\begin{enumerate}
+		\item Ensemble averaging
+		\item Frequency filtering
+		\item Bolus injection 
+	\end{enumerate}
+	\begin{itemize}
+		\item Explore different measures of perfusion
+		\item 
+	\end{itemize}
 
 \end{frame}
 
@@ -156,24 +209,6 @@
 \end{itemize}
 \end{frame}
 
-\begin{frame}
-	\frametitle{ARDS Treatment}    
-	\begin{columns}[c]
-		\begin{column}{0.5\textwidth}
-			\begin{figure}
-				\includegraphics[width=\textwidth]{VentilatorCourseImageII.jpg}
-				%\caption{Image from: harvard online courses}
-			\end{figure}
-		\end{column}
-		\begin{column}{0.5\textwidth}
-			\begin{itemize}
-					\item Mechanical ventilation 
-					\item Challenging to monitor and adapt in real-time
-					\item Can be continuously monitored with EIT...
-			\end{itemize}
-		\end{column}
-	\end{columns}
-\end{frame}
 
 \begin{frame}
 	\frametitle{EIT - Electrical Impedance Tomography}    
