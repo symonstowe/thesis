@@ -81,13 +81,211 @@
 \begin{frame}
 	\frametitle{Overview}
 	\begin{enumerate}
+		\item Background
 		\item Thesis Goals
 		\item Contributions
-		\item Background
 		\item Methods and Results
 		\item Conclusions
 		\item Future Work 
 	\end{enumerate}
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Background}
+	\framesubtitle{EIT}
+	\begin{figure}
+		\centering
+	\includegraphics[width=\textwidth,trim={0 2cm 0 0},clip]{imgs/current_and_equipotential_lines.pdf}
+	\end{figure}
+	\vspace{2mm}
+	Electrodes on the body surface are used to inject current and measure the resulting voltages. \\
+	\vspace{0.5cm}
+	Thoracic EIT typically images impedance changes due to the movement of fluid in the chest. \\
+\end{frame}
+
+\begin{frame}
+	\frametitle{Background}
+	\framesubtitle{Perfusion}
+	{\Large What is \alert{perfusion}?} \\ \vspace{2mm}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=\textwidth]{perfusion_sketch.pdf}
+	\end{figure}
+
+\end{frame}
+
+\begin{frame}
+	\frametitle{Background}
+	\framesubtitle{EIT Measures of Perfusion}
+	\begin{columns}[c]
+		\begin{column}{0.5\textwidth}
+			Blood perfuses into the tissue. \\ \vspace{2mm}
+			\begin{figure}[H]
+				\centering
+				\includegraphics[width=\textwidth]{perfusion_sketch.pdf}
+			\end{figure}
+		\end{column}
+		\begin{column}{0.5\textwidth}
+			The perfusion signal can come from: \\ \vspace{2mm}
+			\begin{itemize}
+				\item Change in blood volume in the tissue
+				\item Change in blood volume in vessels
+				\item Pysical deformation of structures due to movement
+				\item Ballistic forces in the body 
+				\item The orientation of red blood cells (very small change)
+			\end{itemize}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Background}
+	\framesubtitle{EIT Perfusion Imaging}
+\begin{columns}[c]
+\begin{column}{0.5\textwidth}
+	Compared to other techniques used to image perfusion EIT is: \\ \vspace{2mm}
+	\begin{itemize}
+		\item Fast 
+		\item Does not use ionizing radiation 
+		\item Can be used continuously 
+		\item Cost efficient 
+	\end{itemize}
+\end{column}
+\begin{column}{0.5\textwidth}
+	Challenges of perfusion imaging with EIT: \\ \vspace{5mm}
+	\begin{itemize}
+		\item Unclear source of cardiac-frequency or cardiosynchronous signal
+		\item Low amplitude of cardiac-frequency signal
+		\item Low sensitivitiy in the center of a subject
+	\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Background}
+	\framesubtitle{Challenges of EIT Perfusion Imaging}
+\begin{columns}[c]
+\begin{column}{0.5\textwidth}
+\textbf{\large Not all perfusion results in a cardiac-frequency change}
+\begin{itemize}
+	\item e.g. Continuous flow
+\end{itemize} %
+\vspace{10mm}
+\textbf{\large Non-perfusion effects can result in heart-frequency EIT signals}
+\begin{itemize}
+	\item e.g. Movement
+\end{itemize}
+
+\end{column}
+\begin{column}{0.5\textwidth}
+	Challenges of perfusion imaging with EIT: \\ \vspace{5mm}
+	\begin{itemize}
+		\item \textbf{Unclear source of cardiac-frequency or cardiosynchronous signal}
+		\item Low amplitude of cardiac-frequency signal
+		\item Low sensitivitiy in the center of a subject
+	\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Background}
+	\framesubtitle{EIT Perfusion Imaging}
+\begin{columns}[c]
+\begin{column}{0.5\textwidth}
+	\begin{figure}
+		\centering
+	\includegraphics[width=\textwidth,trim={0.5cm 24cm 0.5cm 1cm},clip]{imgs/FFT_img.png}
+	\end{figure}
+	Example FFT of an EIT signal with only external electrodes (\alert{frequency in Hz}).
+\end{column}
+\begin{column}{0.5\textwidth}
+	Challenges of perfusion imaging with EIT: \\ \vspace{5mm}
+	\begin{itemize}
+		\item Unclear source of cardiac-frequency or cardiosynchronous signal
+		\item \textbf{Low amplitude of cardiac-frequency signal}
+		\item Low sensitivitiy in the center of a subject
+	\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Background}
+	\framesubtitle{EIT Perfusion Imaging}
+\begin{columns}[c]
+\begin{column}{0.5\textwidth}
+	\begin{figure}
+		\centering
+	\includegraphics[width=\textwidth,trim={16cm 3cm 16cm 0},clip]{imgs/current_and_equipotential_lines.pdf}
+	\end{figure}
+	\alert{Sensitivity} is proportional to \alert{current density}.
+\end{column}
+\begin{column}{0.5\textwidth}
+	Challenges of perfusion imaging with EIT: \\ \vspace{5mm}
+	\begin{itemize}
+		\item Unclear source of cardiac-frequency or cardiosynchronous signal
+		\item Low amplitude of cardiac-frequency signal
+		\item \textbf{Low sensitivitiy in the center of a subject}
+	\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Background}
+	\framesubtitle{Current State of EIT Perfusion Imaging}
+	\begin{columns}[c]
+		\begin{column}{0.33\textwidth}
+			\alert{\large Bolus Injection} \\ \vspace{2mm}
+			\begin{itemize}
+				\item A conductive contrast agent is injected
+				\item The transit of the conductive contrast agent is imaged
+				\vspace{3mm}
+				\item Occurs during apnoea
+				\item Saline solution is typically used 
+			\end{itemize}
+		\end{column}
+		\begin{column}{0.33\textwidth}
+			\alert{\large Frequency Filtering} \\ \vspace{2mm}
+			\begin{itemize}
+				\item The signal at the cardiac frequency is isolated
+				\item An image of activity at the cardiac frequency is generated
+				\item Can be done during either ventilation or apnoea
+			\end{itemize}
+		\end{column}
+		\begin{column}{0.33\textwidth}
+			\alert{\large Ensemble Averaging} \\ \vspace{2mm}
+			\begin{itemize}
+				\item Many heartbeats are averaged together 
+				\item An image of the impedance change over the averaged heartbeat is generated
+				\item Can be done during either ventilation or apnoea
+			\end{itemize}
+		\end{column}
+		\end{columns}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Background}
+	\framesubtitle{Shortcomings of EIT Perfusion Measures}
+	\begin{columns}[c]
+		\begin{column}{0.5\textwidth}
+			\begin{enumerate}
+				\item Bolus-based measures cannot be used continuously and are invasive
+				\item Filtering-based methods have low sensitivity to cardiosynchronous activity
+				\item Low internal sensitivity 
+			\end{enumerate}
+		\end{column}
+		\begin{column}{0.5\textwidth}
+			How can measures of \alert{perfusion} be improved? 
+			\begin{itemize}
+				\item Investigate the source of perfusion and cardiosynchronous EIT signals
+				\item Increase sensitivity near where perfusion is measured
+			\end{itemize}
+		\end{column}
+		\end{columns}	
 \end{frame}
 
 \begin{frame}
@@ -117,7 +315,7 @@
 	\node [below of = c2, xshift=12pt, yshift=-17pt] (c21) 
 	{Controlling mesh refinement\\ \emph{(Chapter 4)}};
 	\node [below of = c21, yshift=-25pt] (c22) 
-	{Creating Custom meshes from CT images \emph{(Chapter 5)}};
+	{Creating custom meshes from CT images \emph{(Chapter 5)}};
 	\node [below of = c3, xshift=12pt, yshift=-20pt] (c31) 
 	{Internal electrodes in 3D \emph{(Chapter 6 \& Chapter 7)}};
 	\end{scope}
@@ -143,7 +341,7 @@
 			\begin{enumerate}
 				\item A mesh analysis technique to reduce error in sensitivity calculations on 
 				cylindrical meshes (\alert{Chapter 4}). \\ \vspace{4mm}
-				\item A tool to generate custom meshes of exterior and lung boundaries from CT iamges
+				\item A tool to generate custom meshes of exterior and lung boundaries from CT images
 				(\alert{Chapter 5}).
 			\end{enumerate}
 		\end{column}
@@ -160,47 +358,175 @@
 \end{frame}
 
 \begin{frame}
-	\frametitle{Background: EIT}
+	\frametitle{Chapter 3: Bolus- and Frequency-Based Perfusion}
+	\begin{tikzpicture}[
+		level 1/.style={sibling distance=50mm},
+		edge from parent/.style={->,draw},
+		>=latex]
+	  
+	  % root of the the initial tree, level 1
+	  \node[root] {Improve EIT measures of perfusion}
+	  % The first level, as children of the initial tree
+		child {node[level 2] (c1) {1) Evaluation of current perfusion monitoring}}
+		child {node[level 2] (c2) {2) Advanced meshing techniques}}
+		child {node[level 2] (c3) {3) Novel electrode positioning}};
+	  
+	  % The second level, relatively positioned nodes
+	  \begin{scope}[every node/.style={level 3}]
+	  \node [below of = c1, xshift=12pt, yshift=-32pt, fill=red!40 ,line width=0.3mm] (c11) {\textbf{Bolus- vs 
+	  frequency-based measures of perfusion \emph{(Chapter 3)}}}; 
+	  
+	  \node [below of = c2, xshift=12pt, yshift=-17pt] (c21) 
+	  {Controlling mesh refinement\\ \emph{(Chapter 4)}};
+	  \node [below of = c21, yshift=-25pt] (c22) 
+	  {Creating custom meshes from CT images \emph{(Chapter 5)}};
+	  \node [below of = c3, xshift=12pt, yshift=-20pt] (c31) 
+	  {Internal electrodes in 3D \emph{(Chapter 6 \& Chapter 7)}};
+	  \end{scope}
+	  
+	  % lines from each level 1 node to every one of its "children"
+	  \foreach \value in {1}
+		\draw[->] (c1.195) |- (c1\value.west);
+	  
+	  \foreach \value in {1,2}
+		\draw[->] (c2.195) |- (c2\value.west);
+	  
+	  \foreach \value in {1}
+		\draw[->] (c3.195) |- (c3\value.west);
+	  
+	  \end{tikzpicture}
+\end{frame}
+
+\begin{frame}
+	\vspace{5mm}
+	\frametitle{Chapter 3: Bolus- and Frequency-Based Perfusion}
+	\framesubtitle{Introduction}
+	\begin{columns}[c]
+	\begin{column}{0.5\textwidth}
+		There are \alert{three common techniques} to measure perfusion with EIT. \\ \vspace{2mm}
+		\begin{enumerate}
+			\item Bolus injection 
+			\item Frequency filtering
+			\item Ensemble averaging
+		\end{enumerate}
+	\end{column}
+	\begin{column}{0.5\textwidth}
+		\textbf{Goals}
+		\begin{itemize}
+			\item Compare different measures of perfusion.
+			\item Investigate the source of cardiosynchronous EIT signals. 
+		\end{itemize}
+	\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Chapter 3: Bolus- and Frequency-Based Perfusion}
+	\framesubtitle{Methods}
+	\begin{columns}[c]
+		\begin{column}{0.5\textwidth}
 	\begin{figure}
 		\centering
-	\includegraphics[width=\textwidth,trim={0 2cm 0 0},clip]{imgs/current_and_equipotential_lines.pdf}
+	\includegraphics[width=0.9\textwidth,trim={0 0 0 3.35cm},clip]{imgs/fig-methodsOverview.pdf}
 	\end{figure}
-	\vspace{2mm}
-	Electrodes on the body surface are used to inject current and measure the resulting voltages. \\
-	\vspace{0.5cm}
-	Thoracic EIT typically images impedance changes due to the movement of fluid in the chest. \\
-\end{frame}
-
-\begin{frame}
-	\frametitle{Background: Perfusion}
-	What is perfusion?
-\end{frame}
-
-\begin{frame}
-	\frametitle{Background: EIT Measures of Perfusion}
-	How is perfusion measured? 
-	Why EIT? 
-	Why does it need to be improved?
-\end{frame}
-
-\begin{frame}
-	\frametitle{Chapter 3: Introduction}
-	There are \alert{three common techniques} to measure perfusion with EIT. 
-	\begin{enumerate}
-		\item Ensemble averaging
-		\item Frequency filtering
-		\item Bolus injection 
-	\end{enumerate}
+\end{column}
+\begin{column}{0.5\textwidth}
 	\begin{itemize}
-		\item Explore different measures of perfusion
-		\item 
+		\item 7 animals, 4 postures (suppine, left side, right side, prone)
+		\item Frequency filtering ($P_V$) and ensemble averaging ($P_A$) methods used during both
+		ventilation and apnoea
+		\item Compated to a bolus injection during apnoea
 	\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
 
+\begin{frame}
+	\frametitle{Chapter 4: FEM Mesh Refinement for 3D EIT}
+	\begin{tikzpicture}[
+		level 1/.style={sibling distance=50mm},
+		edge from parent/.style={->,draw},
+		>=latex]
+	  
+	  % root of the the initial tree, level 1
+	  \node[root] {Improve EIT measures of perfusion}
+	  % The first level, as children of the initial tree
+		child {node[level 2] (c1) {1) Evaluation of current perfusion monitoring}}
+		child {node[level 2] (c2) {2) Advanced meshing techniques}}
+		child {node[level 2] (c3) {3) Novel electrode positioning}};
+	  
+	  % The second level, relatively positioned nodes
+	  \begin{scope}[every node/.style={level 3}]
+	  \node [below of = c1, xshift=12pt, yshift=-32pt] (c11) {Bolus- vs 
+	  frequency-based measures of perfusion \emph{(Chapter 3)}}; 
+	  
+	  \node [below of = c2, xshift=12pt, yshift=-17pt, fill=red!40 ,line width=0.3mm] (c21) 
+	  {\textbf{Controlling mesh refinement\\ \emph{(Chapter 4)}}};
+	  \node [below of = c21, yshift=-25pt] (c22) 
+	  {Creating custom meshes from CT images \emph{(Chapter 5)}};
+	  \node [below of = c3, xshift=12pt, yshift=-20pt] (c31) 
+	  {Internal electrodes in 3D \emph{(Chapter 6 \& Chapter 7)}};
+	  \end{scope}
+	  
+	  % lines from each level 1 node to every one of its "children"
+	  \foreach \value in {1}
+		\draw[->] (c1.195) |- (c1\value.west);
+	  
+	  \foreach \value in {1,2}
+		\draw[->] (c2.195) |- (c2\value.west);
+	  
+	  \foreach \value in {1}
+		\draw[->] (c3.195) |- (c3\value.west);
+	  
+	  \end{tikzpicture}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Chapter 5: Custom EIT Meshes}
+	\begin{tikzpicture}[
+		level 1/.style={sibling distance=50mm},
+		edge from parent/.style={->,draw},
+		>=latex]
+	  
+	  % root of the the initial tree, level 1
+	  \node[root] {Improve EIT measures of perfusion}
+	  % The first level, as children of the initial tree
+		child {node[level 2] (c1) {1) Evaluation of current perfusion monitoring}}
+		child {node[level 2] (c2) {2) Advanced meshing techniques}}
+		child {node[level 2] (c3) {3) Novel electrode positioning}};
+	  
+	  % The second level, relatively positioned nodes
+	  \begin{scope}[every node/.style={level 3}]
+	  \node [below of = c1, xshift=12pt, yshift=-32pt] (c11) {Bolus- vs 
+	  frequency-based measures of perfusion \emph{(Chapter 3)}}; 
+	  
+	  \node [below of = c2, xshift=12pt, yshift=-17pt] (c21) 
+	  {Controlling mesh refinement\\ \emph{(Chapter 4)}};
+	  \node [below of = c21, yshift=-25pt, fill=red!40 ,line width=0.3mm] (c22) 
+	  {\textbf{Creating custom meshes from CT images \emph{(Chapter 5)}}};
+	  \node [below of = c3, xshift=12pt, yshift=-20pt] (c31) 
+	  {Internal electrodes in 3D \emph{(Chapter 6 \& Chapter 7)}};
+	  \end{scope}
+	  
+	  % lines from each level 1 node to every one of its "children"
+	  \foreach \value in {1}
+		\draw[->] (c1.195) |- (c1\value.west);
+	  
+	  \foreach \value in {1,2}
+		\draw[->] (c2.195) |- (c2\value.west);
+	  
+	  \foreach \value in {1}
+		\draw[->] (c3.195) |- (c3\value.west);
+	  
+	  \end{tikzpicture}
 \end{frame}
 
 
+
+
 \begin{frame}
-\frametitle{ARDS - Acute Respiratory Distress Syndrome}    
+\frametitle{Chapter 5: Custom EIT Meshes}
+\framesubtitle{ARDS - Acute Respiratory Distress Syndrome}    
 \begin{itemize}
 	\item Widespread inflammation in the lungs 
 	\item Reduces the lungs’ ability to exchange oxygen and carbon dioxide
@@ -211,85 +537,8 @@
 
 
 \begin{frame}
-	\frametitle{EIT - Electrical Impedance Tomography}    
-	\begin{columns}[c]
-		\begin{column}{0.5\textwidth}
-			\begin{figure}
-				\includegraphics[width=\textwidth]{draeger_system.png}
-				%\caption{Image from: drager.com}
-			\end{figure}
-		\end{column}
-		\begin{column}{0.5\textwidth}
-			\begin{itemize}
-				\item used as a tool to monitor and guide mechanical ventilation  
-				\item non-invasive 
-				\item continuous 
-				\item low-cost
-				\item safe 
-			\end{itemize}
-		\end{column}
-	\end{columns}
-\end{frame}
-
-\begin{frame}
-	\frametitle{EIT - A brief overview}    
-\begin{columns}[c]
-	\begin{column}{0.5\textwidth}
-		\begin{figure}[H]
-			\centering
-			\includegraphics[width=0.9\textwidth]{current_density_injection.pdf}
-		\end{figure}
-	\end{column}
-	\begin{column}{0.5\textwidth}
-		\begin{itemize}
-			\item \alert{current (blue) is injected between electrodes}
-			\item voltage is measured at the body surface
-			\item voltages are reconstructed into images
-		\end{itemize}
-	\end{column}
-\end{columns}
-\end{frame}
-
-\begin{frame}
-\frametitle{EIT - A brief overview}    
-\begin{columns}[c]
-	\begin{column}{0.5\textwidth}
-		\begin{figure}[H]
-			\centering
-			\includegraphics[width=0.9\textwidth]{current_density_voltage.pdf}
-		\end{figure}
-	\end{column}
-	\begin{column}{0.5\textwidth}
-		\begin{itemize}
-			\item current (blue) is injected between electrodes
-			\item \alert{voltage is measured at the body surface}
-			\item voltages are reconstructed into images
-		\end{itemize}
-	\end{column}
-\end{columns}
-\end{frame}
-
-\begin{frame}
-\frametitle{EIT - A brief overview}    
-\begin{columns}[c]
-	\begin{column}{0.5\textwidth}
-		\begin{figure}[H]
-			\centering
-			\includegraphics[width=0.9\textwidth]{current_density_image.pdf}
-		\end{figure}
-	\end{column}
-	\begin{column}{0.5\textwidth}
-		\begin{itemize}
-			\item current (blue) is injected between electrodes
-			\item voltage is measured at the body surface
-			\item \alert{voltages are reconstructed into images}
-		\end{itemize}
-	\end{column}
-\end{columns}
-\end{frame}
-
-\begin{frame}
-	\frametitle{Finitie Element Models (FEMs) in EIT}    
+	\frametitle{Chapter 5: Custom EIT Meshes}
+	\framesubtitle{Finitie Element Models (FEMs) in EIT}    
 	\begin{columns}[c]
 		\begin{column}{0.5\textwidth}
 			\begin{figure}[H]
@@ -308,7 +557,8 @@
 \end{frame}
 
 \begin{frame}
-	\frametitle{Finitie Element Models (FEMs) in EIT}    
+	\frametitle{Chapter 5: Custom EIT Meshes}
+	\framesubtitle{Finitie Element Models (FEMs) in EIT}    
 	\begin{columns}[c]
 		\begin{column}{0.5\textwidth}
 			\begin{figure}[H]
@@ -327,7 +577,8 @@
 \end{frame}
 
 \begin{frame}
-	\frametitle{Finitie Element Models (FEMs) in EIT}    
+	\frametitle{Chapter 5: Custom EIT Meshes}
+	\framesubtitle{Finitie Element Models (FEMs) in EIT}    
 	\begin{columns}[c]
 		\begin{column}{0.5\textwidth}
 			\begin{figure}[H]
@@ -430,6 +681,87 @@ An average breath imaged for two FEMs
 	
 \end{frame}
 
+
+\begin{frame}
+	\frametitle{Chapter 6: Internal Electrode Sensitivity}
+	\begin{tikzpicture}[
+		level 1/.style={sibling distance=50mm},
+		edge from parent/.style={->,draw},
+		>=latex]
+	  
+	  % root of the the initial tree, level 1
+	  \node[root] {Improve EIT measures of perfusion}
+	  % The first level, as children of the initial tree
+		child {node[level 2] (c1) {1) Evaluation of current perfusion monitoring}}
+		child {node[level 2] (c2) {2) Advanced meshing techniques}}
+		child {node[level 2] (c3) {3) Novel electrode positioning}};
+	  
+	  % The second level, relatively positioned nodes
+	  \begin{scope}[every node/.style={level 3}]
+	  \node [below of = c1, xshift=12pt, yshift=-32pt] (c11) {Bolus- vs 
+	  frequency-based measures of perfusion \emph{(Chapter 3)}}; 
+	  
+	  \node [below of = c2, xshift=12pt, yshift=-17pt] (c21) 
+	  {Controlling mesh refinement\\ \emph{(Chapter 4)}};
+	  \node [below of = c21, yshift=-25pt] (c22) 
+	  {Creating custom meshes from CT images \emph{(Chapter 5)}};
+	  \node [below of = c3, xshift=12pt, yshift=-20pt, fill=red!40 ,line width=0.3mm] (c31) 
+	  {\textbf{Internal electrodes in 3D \emph{(Chapter 6 \& Chapter 7)}}};
+	  \end{scope}
+	  
+	  % lines from each level 1 node to every one of its "children"
+	  \foreach \value in {1}
+		\draw[->] (c1.195) |- (c1\value.west);
+	  
+	  \foreach \value in {1,2}
+		\draw[->] (c2.195) |- (c2\value.west);
+	  
+	  \foreach \value in {1}
+		\draw[->] (c3.195) |- (c3\value.west);
+	  
+	  \end{tikzpicture}
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Chapter 7: Internal Electrode Motion}
+	\begin{tikzpicture}[
+		level 1/.style={sibling distance=50mm},
+		edge from parent/.style={->,draw},
+		>=latex]
+	  
+	  % root of the the initial tree, level 1
+	  \node[root] {Improve EIT measures of perfusion}
+	  % The first level, as children of the initial tree
+		child {node[level 2] (c1) {1) Evaluation of current perfusion monitoring}}
+		child {node[level 2] (c2) {2) Advanced meshing techniques}}
+		child {node[level 2] (c3) {3) Novel electrode positioning}};
+	  
+	  % The second level, relatively positioned nodes
+	  \begin{scope}[every node/.style={level 3}]
+	  \node [below of = c1, xshift=12pt, yshift=-32pt] (c11) {Bolus- vs 
+	  frequency-based measures of perfusion \emph{(Chapter 3)}}; 
+	  
+	  \node [below of = c2, xshift=12pt, yshift=-17pt] (c21) 
+	  {Controlling mesh refinement\\ \emph{(Chapter 4)}};
+	  \node [below of = c21, yshift=-25pt] (c22) 
+	  {Creating custom meshes from CT images \emph{(Chapter 5)}};
+	  \node [below of = c3, xshift=12pt, yshift=-20pt, fill=red!40 ,line width=0.3mm] (c31) 
+	  {\textbf{Internal electrodes in 3D \emph{(Chapter 6 \& Chapter 7)}}};
+	  \end{scope}
+	  
+	  % lines from each level 1 node to every one of its "children"
+	  \foreach \value in {1}
+		\draw[->] (c1.195) |- (c1\value.west);
+	  
+	  \foreach \value in {1,2}
+		\draw[->] (c2.195) |- (c2\value.west);
+	  
+	  \foreach \value in {1}
+		\draw[->] (c3.195) |- (c3\value.west);
+	  
+	  \end{tikzpicture}
+\end{frame}
 \begin{frame}
 \frametitle{Current Work}    
 \begin{columns}[c]

@@ -17,8 +17,12 @@
     {   \vspace{0.15cm}
 %\colorbox{blue}{%
         \begin{beamercolorbox}[wd=0.99\paperwidth,ht=1.2cm,leftskip=0.25cm,#1]{frametitle}
-            {\linespread{0.7}\usebeamerfont{frametitle}\insertframetitle\par}%
-            {\linespread{0.9}\usebeamerfont{framesubtitle}\insertframesubtitle\par}%
+            {\linespread{0.9}\usebeamerfont{framesubtitle}\insertframetitle\par}%
+            \vspace{2mm}
+            {\linespread{0.7}\usebeamerfont{frametitle}\insertframesubtitle\par}%
+            \begin{textblock*}{3cm}(12.4cm,0.4cm) % {block width} (coords)
+            \includegraphics[width=3cm]{carleton-university-logo.pdf}
+            \end{textblock*}
         \end{beamercolorbox}
 %}    
     }%
