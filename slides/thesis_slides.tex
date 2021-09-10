@@ -54,7 +54,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % date of the presentation (leave empty for no date, default is today)
 \date[] % leave empty for no date in footer
-    {\today}
+    %{\today}
+    {September 13, 2021}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % authors and their affiliations (the latter is optional)
 \author[] % leave empty for no author in footer
@@ -79,7 +80,8 @@
 \end{frame}
 
 \begin{frame}
-	\frametitle{Overview}
+	\frametitle{EIT for Perfusion Imaging and Monitoring}
+	\framesubtitle{Overview}
 	\begin{enumerate}
 		\item Background
 		\item Thesis Goals
@@ -432,10 +434,40 @@
 \end{column}
 \begin{column}{0.5\textwidth}
 	\begin{itemize}
+		\item Data segment with ventilation and apnea segments
 		\item 7 animals, 4 postures (suppine, left side, right side, prone)
 		\item Frequency filtering ($P_V$) and ensemble averaging ($P_A$) methods used during both
 		ventilation and apnoea
-		\item Compated to a bolus injection during apnoea
+		\item Compared to a bolus injection during apnoea
+	\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Chapter 3: Bolus- and Frequency-Based Perfusion}
+	\framesubtitle{Results}
+	\begin{figure}
+		\centering
+	\includegraphics[width=0.9\textwidth]{imgs/fig-resultsJaccard.pdf}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Chapter 3: Bolus- and Frequency-Based Perfusion}
+	\framesubtitle{Conclusion}
+	\begin{columns}[c]
+		\begin{column}{0.5\textwidth}
+	\begin{figure}
+		\centering
+	\includegraphics[width=0.7\textwidth,trim={0 0 0 0cm},clip]{imgs/fig-discussionSample.pdf}
+	\end{figure}
+\end{column}
+\begin{column}{0.5\textwidth}
+	\begin{itemize}
+		\item Frequency filtering corresponds better to the bolus injection compared to ensemble averaging
+		\item Challenging to isolate the lung regions
+		\item Large contribution from the heart in the perfusion estimate
 	\end{itemize}
 \end{column}
 \end{columns}
@@ -482,6 +514,40 @@
 \end{frame}
 
 \begin{frame}
+	\frametitle{Chapter 4: FEM Mesh Refinement for 3D EIT}
+	\framesubtitle{Introduction \& Methods}
+	What distribution of nodes minimizes error in the sensitivitiy calculation?
+	\begin{figure}
+		\centering
+	\includegraphics[width=0.9\textwidth,trim={0 0cm 0 10cm},clip]{balance_methods.pdf}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Chapter 4: FEM Mesh Refinement for 3D EIT}
+	\framesubtitle{Results \& Conclusions}
+	\begin{columns}[c]
+		\begin{column}{0.47\textwidth}
+	\begin{figure}
+		\centering
+	\includegraphics[width=\textwidth,trim={0 0 15cm 1.2cm},clip]{roi_methods_figure.pdf}
+	\end{figure}
+	\begin{itemize}
+		\item Lowest error at approximately 80\% of tank radius
+	\end{itemize}
+\end{column}
+\begin{column}{0.53\textwidth}
+	\begin{figure}
+		\centering
+		\vspace{-5mm}
+	\includegraphics[width=\textwidth,trim={0 0 0cm 0cm},clip]{m-mesh_sens_error_regions_split.pdf}
+	\end{figure}
+\end{column}
+\end{columns}
+
+\end{frame}
+
+\begin{frame}
 	\frametitle{Chapter 5: Custom EIT Meshes}
 	\begin{tikzpicture}[
 		level 1/.style={sibling distance=50mm},
@@ -524,61 +590,61 @@
 
 
 
-\begin{frame}
-\frametitle{Chapter 5: Custom EIT Meshes}
-\framesubtitle{ARDS - Acute Respiratory Distress Syndrome}    
-\begin{itemize}
-	\item Widespread inflammation in the lungs 
-	\item Reduces the lungs’ ability to exchange oxygen and carbon dioxide
-	\item Can be diagnosed with chest x-ray 
-	\item Treated with mechanical ventilation
-\end{itemize}
-\end{frame}
+%\begin{frame}
+%\frametitle{Chapter 5: Custom EIT Meshes}
+%\framesubtitle{ARDS - Acute Respiratory Distress Syndrome}    
+%\begin{itemize}
+%	\item Widespread inflammation in the lungs 
+%	\item Reduces the lungs’ ability to exchange oxygen and carbon dioxide
+%	\item Can be diagnosed with chest x-ray 
+%	\item Treated with mechanical ventilation
+%\end{itemize}
+%\end{frame}
 
+
+%\begin{frame}
+%	\frametitle{Chapter 5: Custom EIT Meshes}
+%	\framesubtitle{Finitie Element Models (FEMs) in EIT}    
+%	\begin{columns}[c]
+%		\begin{column}{0.5\textwidth}
+%			\begin{figure}[H]
+%				\centering
+%				\includegraphics[width=0.9\textwidth]{basic_mesh.png}
+%			\end{figure}
+%		\end{column}
+%		\begin{column}{0.5\textwidth}
+%			\begin{itemize}
+%				\item \alert{finite element model is required to reconstruct voltages into images}
+%				\item The more accurate the FEM the better the reconstruction  
+%				\item More prior information regarding the body conductivity is better
+%			\end{itemize}
+%		\end{column}
+%	\end{columns}
+%\end{frame}
+%
+%\begin{frame}
+%	\frametitle{Chapter 5: Custom EIT Meshes}
+%	\framesubtitle{Finitie Element Models (FEMs) in EIT}    
+%	\begin{columns}[c]
+%		\begin{column}{0.5\textwidth}
+%			\begin{figure}[H]
+%				\centering
+%				\includegraphics[width=0.9\textwidth]{human_mesh_empty.png}
+%			\end{figure}
+%		\end{column}
+%		\begin{column}{0.5\textwidth}
+%			\begin{itemize}
+%				\item finite element model is required to reconstruct voltages into images
+%				\item \alert{The more accurate the FEM the better the reconstruction} 
+%				\item More prior information regarding the body conductivity is better
+%			\end{itemize}
+%		\end{column}
+%	\end{columns}
+%\end{frame}
 
 \begin{frame}
 	\frametitle{Chapter 5: Custom EIT Meshes}
-	\framesubtitle{Finitie Element Models (FEMs) in EIT}    
-	\begin{columns}[c]
-		\begin{column}{0.5\textwidth}
-			\begin{figure}[H]
-				\centering
-				\includegraphics[width=0.9\textwidth]{basic_mesh.png}
-			\end{figure}
-		\end{column}
-		\begin{column}{0.5\textwidth}
-			\begin{itemize}
-				\item \alert{finite element model is required to reconstruct voltages into images}
-				\item The more accurate the FEM the better the reconstruction  
-				\item More prior information regarding the body conductivity is better
-			\end{itemize}
-		\end{column}
-	\end{columns}
-\end{frame}
-
-\begin{frame}
-	\frametitle{Chapter 5: Custom EIT Meshes}
-	\framesubtitle{Finitie Element Models (FEMs) in EIT}    
-	\begin{columns}[c]
-		\begin{column}{0.5\textwidth}
-			\begin{figure}[H]
-				\centering
-				\includegraphics[width=0.9\textwidth]{human_mesh_empty.png}
-			\end{figure}
-		\end{column}
-		\begin{column}{0.5\textwidth}
-			\begin{itemize}
-				\item finite element model is required to reconstruct voltages into images
-				\item \alert{The more accurate the FEM the better the reconstruction} 
-				\item More prior information regarding the body conductivity is better
-			\end{itemize}
-		\end{column}
-	\end{columns}
-\end{frame}
-
-\begin{frame}
-	\frametitle{Chapter 5: Custom EIT Meshes}
-	\framesubtitle{Finitie Element Models (FEMs) in EIT}    
+	\framesubtitle{Introduction}    
 	\begin{columns}[c]
 		\begin{column}{0.5\textwidth}
 			\begin{figure}[H]
@@ -588,64 +654,69 @@
 		\end{column}
 		\begin{column}{0.5\textwidth}
 			\begin{itemize}
-				\item finite element model is required to reconstruct voltages into images
-				\item The more accurate the FEM the better the reconstruction
-				\item \alert{More prior information regarding the body conductivity is better}
+				\item A finite element model is required to reconstruct voltages into images
+				\item The more accurate the FEM, the better the reconstruction
+				\item More prior information regarding the body conductivity
+				\item For some patients (ARDS) we have diagnostic CT images 
 			\end{itemize}
 		\end{column}
-	\end{columns}
-\end{frame}
-
-\begin{frame}
-	\frametitle{Motivation}    
-	\begin{itemize}
-		\item Often a generic model is used for reconstructions
-		\item True electrode locations and internal geometry is unknown  
-		\item With ARDS patients we have information from  diagnostic CT images
-		\item More prior information 
-	\end{itemize}
-\vspace{2em}
+	\end{columns}%
+	\vspace{8mm}
 \alert{Can we use this to improve EIT image reconstruction and monitoring of patients?}
 \end{frame}
 
-\begin{frame}
-	\frametitle{Overview}    
-	\begin{enumerate}
-		\item Obtain CT images
-		\item Automatically identify lung regions  
-		\item Present in a GUI for correction by doctors or technicians
-		\item Generate a FEM based on the corrected segmentation
-		\item Reconstruct EIT data
-	\end{enumerate}
-\end{frame}
+%\begin{frame}
+%	\frametitle{Motivation}    
+%	\begin{itemize}
+%		\item Often a generic model is used for reconstructions
+%		\item True electrode locations and internal geometry is unknown  
+%		\item With ARDS patients we have information from  diagnostic CT images
+%		\item More prior information 
+%	\end{itemize}
+%\vspace{2em}
+%\alert{Can we use this to improve EIT image reconstruction and monitoring of patients?}
+%\end{frame}
+
+%\begin{frame}
+%	\frametitle{Overview}    
+%	\begin{enumerate}
+%		\item Obtain CT images
+%		\item Automatically identify lung regions  
+%		\item Present in a GUI for correction by doctors or technicians
+%		\item Generate a FEM based on the corrected segmentation
+%		\item Reconstruct EIT data
+%	\end{enumerate}
+%\end{frame}
+% 
+% \begin{frame}
+% 	\frametitle{CT images}    
+%		\begin{figure}[H]
+%			\centering
+%			\includegraphics[width=\textwidth]{raw_ct_imgs.png}
+%		\end{figure}
+%	Example images taken from the 4th intercostal space for each subject
+% \end{frame}
  
- \begin{frame}
- 	\frametitle{CT images}    
-		\begin{figure}[H]
-			\centering
-			\includegraphics[width=\textwidth]{raw_ct_imgs.png}
-		\end{figure}
-	Example images taken from the 4th intercostal space for each subject
- \end{frame}
- 
 \begin{frame}
-	\frametitle{Methods}    
+	\frametitle{Chapter 5: Custom EIT Meshes}
+	\framesubtitle{Methods: Automatic Segmentation}    
 		\begin{figure}[H]
 			\centering
 			\includegraphics[width=\textwidth]{lung_segmentation_methods_a.pdf}
 		\end{figure}
 \end{frame}
 
-\begin{frame}
-	\frametitle{Segmentation Results}    
-	\begin{figure}[H]
-		\centering
-		\includegraphics[width=\textwidth]{segment_results.png}
-	\end{figure}
-\end{frame}
+%\begin{frame}
+%	\frametitle{Segmentation Results}    
+%	\begin{figure}[H]
+%		\centering
+%		\includegraphics[width=\textwidth]{segment_results.png}
+%	\end{figure}
+%\end{frame}
 
 \begin{frame}
-	\frametitle{Methods}    
+	\frametitle{Chapter 5: Custom EIT Meshes}
+	\framesubtitle{Methods: Manual Correction}    
 	\begin{figure}[H]
 		\centering
 		\includegraphics[width=\textwidth]{lung_segmentation_methods_b.pdf}
@@ -653,32 +724,29 @@
 \end{frame}
 
 \begin{frame}
-	\frametitle{Methods}    
+	\frametitle{Chapter 5: Custom EIT Meshes}
+	\framesubtitle{Methods: Meshing}    
 	\begin{figure}[H]
 		\centering
-		\includegraphics[width=\textwidth]{lung_segmentation_methods_c.pdf}
+		\includegraphics[width=\textwidth]{fem_models_PT04.pdf}
 	\end{figure}
 \end{frame}
 
 \begin{frame}
-	\frametitle{Preliminary Results}   
-	\begin{columns}[c]
-		\begin{column}{0.5\textwidth}
-		\begin{figure}[H]
-			\centering
-			\includegraphics[width=\textwidth]{generic_fem.png}
-		\end{figure}
-		\end{column}
-		\begin{column}{0.5\textwidth}
-			\begin{figure}[H]
-				\centering
-				\includegraphics[width=\textwidth]{new_fem.png}
-			\end{figure}
-		\end{column}
-	\end{columns} 
-\vspace{1em}
-An average breath imaged for two FEMs
-	
+	\frametitle{Chapter 5: Custom EIT Meshes}
+	\framesubtitle{Results \& Conclusion}   
+	Center of ventilation error relative to the CT center of ventilation.
+	\\ \vspace{2mm}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.9\textwidth,trim={0 1.5cm 0 1.5cm},clip]{error_boxplot.pdf}
+	\end{figure}%
+	%\\ 
+	\vspace{1mm}
+	Custom model is lower, but not consistently. 
+	\\ \vspace{5mm}
+	\centering
+	\alert{Electrode locations are still unknown...}
 \end{frame}
 
 
@@ -722,6 +790,37 @@ An average breath imaged for two FEMs
 	  \end{tikzpicture}
 \end{frame}
 
+\begin{frame}
+	\frametitle{Chapter 6: Internal Electrode Sensitivity}
+	\framesubtitle{Introduction}
+	To increase sensitivity in the center of a model internal electrodes are added.  \\ \vspace{3mm}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.9\textwidth,trim={0 0.5cm 0 0cm},clip]{FEM_Comparison.pdf}
+	\end{figure}%
+	Typical 2D and 3D configurations are compared to internal electrode configurations.
+\end{frame}
+
+\begin{frame}
+	\frametitle{Chapter 6: Internal Electrode Sensitivity}
+	\framesubtitle{Results}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.65\textwidth,trim={0 0.5cm 0 0cm},clip]{Image_Comparison.pdf}
+	\end{figure}%
+	Internal electrodes were used to reconstructed the target closer to actual size.
+\end{frame}
+
+\begin{frame}
+	\frametitle{Chapter 6: Internal Electrode Sensitivity}
+	\framesubtitle{Results \& Conclusion}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.65\textwidth,trim={0 0.5cm 0 0cm},clip]{Sensitivity_Comparison_new.pdf}
+	\end{figure}%
+	With high sensitivity near the internal electrodes, small internal errors can produce large artefacts.
+\end{frame}
+
 
 \begin{frame}
 	\frametitle{Chapter 7: Internal Electrode Motion}
@@ -762,30 +861,129 @@ An average breath imaged for two FEMs
 	  
 	  \end{tikzpicture}
 \end{frame}
+
 \begin{frame}
-\frametitle{Current Work}    
-\begin{columns}[c]
-\begin{column}{0.5\textwidth}
-\alert{Improvement}
-\begin{itemize}
-\item Apply the segmentation to larger numbers of patients
-\item Create a more user friendly editing pgoram to accelerate segmentation and meshing
-\item Create a database of meshes that can be applied to additional subjects
-\end{itemize}
-\end{column}
-\begin{column}{0.5\textwidth}
-\alert{Validate the use of custom meshes for ARDS monitoring} \\
-\vspace{1em}
-Do patient specific meshes:
-\begin{itemize}
-\item improve on generic meshes for ARDS monitoring?
-\item give increased accuracy in measures of lung collapse and fluid movement?
-\item Improve detection of collapse and overdistention 
-\end{itemize}
-\end{column}
-\end{columns}
+	\frametitle{Chapter 7: Internal Electrode Motion}
+	\framesubtitle{Introduction}
+	\begin{columns}[c]
+		\begin{column}{0.5\textwidth}
+			\begin{figure}[H]
+				\centering
+				\includegraphics[width=0.52\textwidth,trim={18cm 0cm 0 1.4cm},clip]{probe_types.pdf}
+			\end{figure}
+		\end{column}
+		\begin{column}{0.5\textwidth}
+			\begin{itemize}
+				\item High sensitivity near the internal probe
+				\item A small amount of movement produces a large artefact
+			\end{itemize}
+		\end{column}
+	\end{columns}%	
 \end{frame}
 
+\begin{frame}
+	\frametitle{Chapter 7: Internal Electrode Motion}
+	\framesubtitle{Methods}
+	For a probe is moved 5\% of the tank radius: \\ \vspace{2mm}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=\textwidth,trim={0cm 0.6cm 0 1.4cm},clip]{recon_methods.pdf}
+	\end{figure}
+	\begin{columns}[c]
+		\begin{column}{0.33\textwidth}
+			\centering
+			{\large Regular reconstruction} 
+		\end{column}
+		\begin{column}{0.33\textwidth}
+			\centering
+			{\large Reconstruction with original motion correction} 
+		\end{column}
+		\begin{column}{0.33\textwidth}
+			\centering
+			{\large Reconstructing the effect of motion only}
+		\end{column}
+		\end{columns}
+		\vspace{5mm}
+		\centering
+		\alert{This direction is used to generate a new model for reconstruction}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Chapter 7: Internal Electrode Motion}
+	\framesubtitle{Results}
+	\begin{columns}[c]
+		\begin{column}{0.65\textwidth}
+			\begin{figure}[H]
+				\centering
+				\includegraphics[width=0.95\textwidth,trim={0cm 0.6cm 0 0cm},clip]{recon_accuracy_hollow_loc_10.pdf}
+			\end{figure}
+		\end{column}
+		\begin{column}{0.35\textwidth}
+			\begin{itemize}
+				\item \alert{\textbf{A}} -- No motion correction
+				\vspace{4mm}
+				\item \alert{\textbf{B}} -- Regular motion correction
+				\vspace{4mm}
+				\item \alert{\textbf{C}} -- Probe position correction
+			\end{itemize}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Chapter 7: Internal Electrode Motion}
+	\framesubtitle{Conclusion}
+	\begin{columns}[c]
+		\begin{column}{0.25\textwidth}
+			\begin{figure}[H]
+				\centering
+				\includegraphics[width=\textwidth,trim={0cm 0.6cm 0 0cm},clip]{internal_probe_location.png}
+			\end{figure}
+		\end{column}
+		\begin{column}{0.75\textwidth}
+			\begin{figure}[H]
+				\centering
+				\includegraphics[width=0.95\textwidth,trim={0cm 0.6cm 0 0cm},clip]{amplitude_ratio.pdf}
+			\end{figure}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}
+\frametitle{Conclusion}
+\framesubtitle{Summary}
+This thesis presented 5 results chapters:
+\vspace{2mm}
+\begin{enumerate}
+	\setcounter{enumi}{2}
+	\item Comparison of currently used perfusion measuring techniques
+	\vspace{2mm}
+	\item Technique to measure and set mesh distribution to reduce error in sensitivity calculations
+	\vspace{2mm}
+	\item Tool to create custom meshes from CT images
+	\vspace{2mm}
+	\item Analysis of 3D electrode placements with internal electrodes on internal sensitivity 
+	\vspace{2mm}
+	\item Method to reconstruct images using internal electrodes in the presence of movement 
+\end{enumerate}
+\end{frame}
+
+\begin{frame}
+\frametitle{Conclusion}
+\framesubtitle{Future Work}
+\begin{enumerate}
+	\item Test the automatic segmentation tool on a number of subjects 
+	\vspace{2mm}
+	\item Determine the effect of incorrectly modelling the electrode locaiton on custom meshes
+	\vspace{2mm}
+	\item Explore the safety requirements for using internal electrodes for current injection and measurement 
+	\vspace{2mm}
+	\item Additional modifications to GREIT to improve reconstructions with internal electrodes
+	\vspace{2mm}
+	\item Directly calculate the location of the probe from the reconstructed image
+\end{enumerate}
+
+\end{frame}
 
 \begin{frame}
   \titlepage
