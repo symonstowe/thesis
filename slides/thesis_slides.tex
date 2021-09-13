@@ -157,7 +157,7 @@
 \begin{column}{0.5\textwidth}
 	Challenges of perfusion imaging with EIT: \\ \vspace{5mm}
 	\begin{itemize}
-		\item Unclear source of cardiac-frequency or cardiosynchronous signal
+		\item Unclear source of cardiac-frequency (cardiosynchronous) signal
 		\item Low amplitude of cardiac-frequency signal
 		\item Low sensitivity in the centre of a subject
 	\end{itemize}
@@ -184,7 +184,7 @@
 \begin{column}{0.5\textwidth}
 	Challenges of perfusion imaging with EIT: \\ \vspace{5mm}
 	\begin{itemize}
-		\item \textbf{Unclear source of cardiac-frequency or cardiosynchronous signal}
+		\item \textbf{Unclear source of cardiac-frequency (cardiosynchronous) signal}
 		\item Low amplitude of cardiac-frequency signal
 		\item Low sensitivity in the centre of a subject
 	\end{itemize}
@@ -206,7 +206,7 @@
 \begin{column}{0.5\textwidth}
 	Challenges of perfusion imaging with EIT: \\ \vspace{5mm}
 	\begin{itemize}
-		\item Unclear source of cardiac-frequency or cardiosynchronous signal
+		\item Unclear source of cardiac-frequency (cardiosynchronous) signal
 		\item \textbf{Low amplitude of cardiac-frequency signal}
 		\item Low sensitivity in the centre of a subject
 	\end{itemize}
@@ -228,7 +228,7 @@
 \begin{column}{0.5\textwidth}
 	Challenges of perfusion imaging with EIT: \\ \vspace{5mm}
 	\begin{itemize}
-		\item Unclear source of cardiac-frequency or cardiosynchronous signal
+		\item Unclear source of cardiac-frequency (cardiosynchronous) signal
 		\item Low amplitude of cardiac-frequency signal
 		\item \textbf{Low sensitivity in the centre of a subject}
 	\end{itemize}
@@ -274,18 +274,18 @@
 	\framesubtitle{Shortcomings of EIT Perfusion Measures}
 	\begin{columns}[c]
 		\begin{column}{0.5\textwidth}
-			\begin{enumerate}
+			\begin{itemize}
 				\item Bolus-based measures cannot be used continuously and are invasive
 				\item Filtering-based methods have low sensitivity to cardiosynchronous activity
 				\item Low internal sensitivity 
-			\end{enumerate}
+			\end{itemize}
 		\end{column}
 		\begin{column}{0.5\textwidth}
 			How can measures of \alert{perfusion} be improved? 
-			\begin{itemize}
+			\begin{enumerate}
 				\item Investigate the source of perfusion and cardiosynchronous EIT signals
 				\item Increase sensitivity near where perfusion is measured
-			\end{itemize}
+			\end{enumerate}
 		\end{column}
 		\end{columns}	
 \end{frame}
@@ -455,7 +455,7 @@
 
 \begin{frame}
 	\frametitle{Chapter 3: Bolus- and Frequency-Based Perfusion}
-	\framesubtitle{Conclusion}
+	\framesubtitle{Results}
 	\begin{columns}[c]
 		\begin{column}{0.5\textwidth}
 	\begin{figure}
@@ -525,7 +525,7 @@
 
 \begin{frame}
 	\frametitle{Chapter 4: FEM Mesh Refinement for 3D EIT}
-	\framesubtitle{Results \& Conclusions}
+	\framesubtitle{Results}
 	\begin{columns}[c]
 		\begin{column}{0.47\textwidth}
 	\begin{figure}
@@ -533,7 +533,7 @@
 	\includegraphics[width=\textwidth,trim={0 0 15cm 1.2cm},clip]{roi_methods_figure.pdf}
 	\end{figure}
 	\begin{itemize}
-		\item Lowest error at approximately 80\% of tank radius
+		\item Lowest error at approximately 85\% of tank radius
 	\end{itemize}
 \end{column}
 \begin{column}{0.53\textwidth}
@@ -734,7 +734,7 @@
 
 \begin{frame}
 	\frametitle{Chapter 5: Custom EIT Meshes}
-	\framesubtitle{Results \& Conclusion}   
+	\framesubtitle{Results}   
 	Center of ventilation error relative to the CT centre of ventilation.
 	\\ \vspace{2mm}
 	\begin{figure}[H]
@@ -813,53 +813,12 @@
 
 \begin{frame}
 	\frametitle{Chapter 6: Internal Electrode Sensitivity}
-	\framesubtitle{Results \& Conclusion}
+	\framesubtitle{Results}
 	\begin{figure}[H]
 		\centering
 		\includegraphics[width=0.65\textwidth,trim={0 0.5cm 0 0cm},clip]{Sensitivity_Comparison_new.pdf}
 	\end{figure}%
 	With high sensitivity near the internal electrodes, small internal errors can produce large artefacts.
-\end{frame}
-
-
-\begin{frame}
-	\frametitle{Chapter 7: Internal Electrode Motion}
-	\begin{tikzpicture}[
-		level 1/.style={sibling distance=50mm},
-		edge from parent/.style={->,draw},
-		>=latex]
-	  
-	  % root of the the initial tree, level 1
-	  \node[root] {Improve EIT measures of perfusion}
-	  % The first level, as children of the initial tree
-		child {node[level 2] (c1) {1) Evaluation of current perfusion monitoring}}
-		child {node[level 2] (c2) {2) Advanced meshing techniques}}
-		child {node[level 2] (c3) {3) Novel electrode positioning}};
-	  
-	  % The second level, relatively positioned nodes
-	  \begin{scope}[every node/.style={level 3}]
-	  \node [below of = c1, xshift=12pt, yshift=-32pt] (c11) {Bolus- vs 
-	  frequency-based measures of perfusion \emph{(Chapter 3)}}; 
-	  
-	  \node [below of = c2, xshift=12pt, yshift=-17pt] (c21) 
-	  {Controlling mesh refinement\\ \emph{(Chapter 4)}};
-	  \node [below of = c21, yshift=-25pt] (c22) 
-	  {Creating custom meshes from CT images \emph{(Chapter 5)}};
-	  \node [below of = c3, xshift=12pt, yshift=-20pt, fill=red!40 ,line width=0.3mm] (c31) 
-	  {\textbf{Internal electrodes in 3D \emph{(Chapter 6 \& Chapter 7)}}};
-	  \end{scope}
-	  
-	  % lines from each level 1 node to every one of its "children"
-	  \foreach \value in {1}
-		\draw[->] (c1.195) |- (c1\value.west);
-	  
-	  \foreach \value in {1,2}
-		\draw[->] (c2.195) |- (c2\value.west);
-	  
-	  \foreach \value in {1}
-		\draw[->] (c3.195) |- (c3\value.west);
-	  
-	  \end{tikzpicture}
 \end{frame}
 
 \begin{frame}
@@ -926,13 +885,26 @@
 				\vspace{4mm}
 				\item \alert{\textbf{C}} -- Probe position correction
 			\end{itemize}
+			\vspace{10mm}
+			Actual (black) vs. reconstructed ({\color{green} green}) target location.
 		\end{column}
 	\end{columns}
 \end{frame}
 
 \begin{frame}
 	\frametitle{Chapter 7: Internal Electrode Motion}
-	\framesubtitle{Conclusion}
+	\framesubtitle{Results}
+			\begin{figure}[H]
+				\centering
+				\includegraphics[width=\textwidth,trim={0cm 0cm 10cm 20cm},clip]{lamb_reconstruction_all.pdf}
+			\end{figure}
+			Increased separability of the lungs with regular motion correction (column 2) and 
+			probe position correction (column 3)
+\end{frame}
+
+\begin{frame}
+	\frametitle{Chapter 7: Internal Electrode Motion}
+	\framesubtitle{Results}
 	\begin{columns}[c]
 		\begin{column}{0.25\textwidth}
 			\begin{figure}[H]
@@ -952,35 +924,61 @@
 \begin{frame}
 \frametitle{Conclusion}
 \framesubtitle{Summary}
-This thesis presented 5 results chapters:
+\textbf{This thesis presents:}
 \vspace{2mm}
-\begin{enumerate}
-	\setcounter{enumi}{2}
-	\item Comparison of currently used perfusion measuring techniques
+\begin{itemize}
+	\item Potential for filtering based measures of perfusion imaging
+	\begin{itemize}
+		\item limited sensitivity to cardiac frequency
+		\item challenging to identify the lung regions
+	\end{itemize}
 	\vspace{2mm}
-	\item Technique to measure and set mesh distribution to reduce error in sensitivity calculations
+	\item Advanced modelling techniques to improve ventilation and lung localization
+
 	\vspace{2mm}
-	\item Tool to create custom meshes from CT images
-	\vspace{2mm}
-	\item Analysis of 3D electrode placements with internal electrodes on internal sensitivity 
-	\vspace{2mm}
-	\item Method to reconstruct images using internal electrodes in the presence of movement 
-\end{enumerate}
+	\item A reconstruction technique used \emph{in-vivo} that was able to correct for
+	probe motion 
+	\begin{itemize}
+		\item Motion up to 5\% of the tank radius in simulation
+	\end{itemize}
+\end{itemize}
+%\begin{columns}[c]
+%	\begin{column}{0.5\textwidth}
+%		\textbf{Challenges}
+%		\vspace{2mm}
+%		\begin{itemize}
+%			\item Challenging to isolate perfusion in the lung regions 
+%			\vspace{2mm}
+%			\item Low sensitivity to cardiac-frequency impedance changes
+%			\vspace{2mm}
+%			\item Reconstructions with internal electrodes are challenging...
+%		\end{itemize}
+%	\end{column}
+%	\begin{column}{0.5\textwidth}
+%		\textbf{Contributions}
+%			\vspace{2mm}
+%		\begin{itemize}
+%			\item Technique to improve identification of boundary and lung regions
+%			\vspace{2mm}
+%			\item Internal electrodes to increase internal sensitivity
+%			\vspace{2mm}
+%			\item Correct for movement of internal electrodes
+%		\end{itemize}
+%	\end{column}
+%\end{columns}
 \end{frame}
 
 \begin{frame}
 \frametitle{Conclusion}
 \framesubtitle{Future Work}
 \begin{enumerate}
-	\item Test the automatic segmentation tool on a number of subjects 
-	\vspace{2mm}
-	\item Determine the effect of incorrectly modelling the electrode location on custom meshes
-	\vspace{2mm}
-	\item Explore the safety requirements for using internal electrodes for current injection and measurement 
-	\vspace{2mm}
-	\item Additional modifications to GREIT to improve reconstructions with internal electrodes
-	\vspace{2mm}
-	\item Directly calculate the location of the probe from the reconstructed image
+	\item Collect data from a range of patients to test automatic segmentation software
+	\vspace{3mm}
+	\item Meshing tool to control mesh dissipation on complex geometry 
+	\vspace{3mm}
+	\item Validation of the safety of internal electrodes for clinical use
+	\vspace{3mm}
+	\item Incorporate internal electrode reconstruction into standard reconstruction algorithms (GREIT)
 \end{enumerate}
 
 \end{frame}
