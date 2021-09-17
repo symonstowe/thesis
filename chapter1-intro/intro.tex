@@ -39,7 +39,7 @@ and second, the signal can be filtered to isolate cardiac-frequency
 impedance changes. 
 Using a conductive bolus injection to image perfusion has been well established and 
 can give an easily detectable signal when using large volumes
-or high concentrations of the contrasting agent. However, but they do not 
+or high concentrations of the contrasting agent. However, they do not 
 allow continuous monitoring, and frequent injections may pose 
 risks to the patient.
 In thoracic EIT, bolus injections also typically occur during apnea to 
@@ -52,7 +52,7 @@ The primary challenge is the small amplitude of the signal.
 Impedance changes related to cardiac activity are often an order of
 magnitude smaller than signals related to respiration, 
 and can be challenging to identify without using additional signals like 
-an \acrfull{ecg}, to average many heartbeats together. When 
+an electrocardiogram \acrshort{ecg}, to average many heartbeats together. When 
 averaging over several heartbeats, the ability of the system to 
 monitor in real time is greatly diminished. Additionally,
 there is some uncertainty surrounding the source of
@@ -102,11 +102,11 @@ could enable EIT to be realized as a low-cost solution to monitor and image
 hemodynamic activity more accurately.  
 
 \section{Thesis Objectives}
-The goal of this project is to improve sensitivity of EIT to perfusion using 
+The goal of this project is to improve the sensitivity of EIT to perfusion using 
 improved mesh accuracy and custom electrode locations. This thesis approaches problem 
 from three angles (\fref{fig:goal}). We investigate the limitations of current 
-perfusion monitoring techniques,
-advanced meshing techniques, and novel electrode configurations
+perfusion monitoring techniques, explore
+advanced meshing techniques, and present novel electrode configurations
 with internal electrodes and their applications to improve thoracic EIT.
 
 \begin{figure}
@@ -148,7 +148,8 @@ frequency-based measures of perfusion \emph{(\Fref{chap:chapter-3})}};
   \draw[->] (c3.195) |- (c3\value.west);
 
 \end{tikzpicture}
-\caption[Overfiew of thesis objectives]{This thesis aims to improve EIT measures of perfusion through 3 avenues.
+\caption[Overview of thesis objectives]{This flowchart presents an overview of the thesis objectives. 
+This thesis aims to improve EIT measures of perfusion through 3 avenues.
 1) Comparing and investigating the limitations of existing perfusion imaging methods;
 2) Advancing meshing techniques; and 
 3) Using novel electrode locations consisting of a 3D external
@@ -163,10 +164,10 @@ meshing in EIT.
 	\item A method to determine a node distribution in a finite element model mesh,
         to reduce error in sensitivity calculations. \Fref{chap:chapter-4} presents an 
         analysis between meshing software commonly used in EIT and recommends a technique to 
-        place a fixed number of nodes that maximizes sensitivity accuracy. 
+        place a fixed number of nodes to reduce error when calculating sensitivity.
         A finer node density has often been suggested near the electrode due to the higher 
         sensitivity, but no analysis was available to determine where a set number of
-        nodes should be located in a model to minimize sensitivity error. 
+        nodes should be located in a model to minimize error in the sensitivity calculation. 
         Using a balance point 
         technique this chapter was able to determine the best distribution of nodes
         to calculate the sensitivity of voltage measurements to conductivity changes.
@@ -181,7 +182,7 @@ meshing in EIT.
         expected to increase sensitivity in the centre of the model, but it is not clear to what extent 
         image reconstructions may be improved, or how many electrodes should be 
         placed internally. This chapter provides an analysis of the sensitivity when using internal
-        electrode in 3D with different injection patterns.  
+        electrodes in 3D with different injection patterns.  
 	\item A method to reconstruct images using internal electrode measurements in the presence of noise.
         \Fref{chap:chapter-7} demonstrates the effect of internal electrode probe motion on image 
         reconstruction, and presents a technique using the interference in reconstructed images 
