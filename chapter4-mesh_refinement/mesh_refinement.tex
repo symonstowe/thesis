@@ -156,7 +156,7 @@ constant refinement meshes around the electrode
 for both Netgen and Gmsh. 
 
 
-\begin{figure}
+\begin{figure}[H]
    \includegraphics[width=\columnwidth]{chapter4-mesh_refinement/imgs/sample_meshes.pdf}
    \caption[Example meshes for various refinement strategies]{\label{fig:sample_meshes} 
    Sample meshes generated with Netgen (top row)
@@ -165,7 +165,7 @@ for both Netgen and Gmsh.
    electrode mesh density as C5 but lower internal mesh density.}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[H]
   \includegraphics[width=\textwidth]{chapter4-mesh_refinement/imgs/electrode_mesh_size_large.pdf}
   \caption[Mesh size surrounding the electrode]{\label{fig:electrode_mesh_size} A view of the electrode meshing for all constant-density meshes 
   in Netgen and Gmsh. The top two rows show all electrode faces and immediate surrounding
@@ -193,7 +193,7 @@ distance, or balance point, along the x-axis of the selected points was expresse
 as a percentage of the tank radius.
 This process is illustrated in \fref{fig:balanceMethods}.
  
-\begin{figure}
+\begin{figure}[H]
   \includegraphics[width=\columnwidth]{chapter4-mesh_refinement/imgs/balance_methods.pdf}
   \caption[Balance point calculation method]{\label{fig:balanceMethods} A sketch of the process to determine the 
   balance point of generated meshes. A) the starting mesh; B) nodes between the
@@ -327,7 +327,7 @@ compared to Gmsh, and resulted in meshes with fewer nodes per electrode given th
 parameters. \fref{fig:results_sens_original} shows the sensitivity error between
 constant and refined meshes with respect to the number of nodes per electrode.  
 
-\begin{figure}
+\begin{figure}[H]
   \includegraphics[width=\columnwidth]{chapter4-mesh_refinement/imgs/sens_error_total.pdf}
   \caption[Mesh sensitivity error vs. elements per electrode]{\label{fig:results_sens_original} 
   Normalized sensitivity error of each mesh as a function 
@@ -341,7 +341,7 @@ Example sensitivity profiles for the M-series meshes are shown in \fref{fig:roiM
 The resulting sensitivity profile near the electrodes more closely matched the reference case 
 when refinement at the electrodes was higher. 
 
-\begin{figure}
+\begin{figure}[H]
   \includegraphics[width=\columnwidth]{chapter4-mesh_refinement/imgs/roi_methods_figure.pdf}
   \caption[Sensitivity distribution and regions of interest]{\label{fig:roiMethods} (A) Sensitivity distribution for the reference mesh
   (C15) generated in Gmsh with regions of interest used to compare between models. 
@@ -365,7 +365,7 @@ resulting mesh parameters for odd numbered meshes can be seen in \fref{tab:mesh-
 Across all meshes the measurement error when computing the voltage measurements was insignificant
 at less than 0.2\%.
 
-\begin{figure}
+\begin{figure}[H]
   \includegraphics[width=\columnwidth]{chapter4-mesh_refinement/imgs/m-mesh_sens_error_regions_split.pdf}
   \caption[Sensitivity error with shifting node balance]{\label{fig:balance_sens}
   Resulting sensitivity error for Netgen (blue) and Gmsh (red) as the balance of the nodes
@@ -451,7 +451,7 @@ a probe entering a bone from the surrounding tissue.
 These additions fill an important need in EIT to allow for more accurate models 
 of regions surrounding internal structures and electrodes, and 
 
-\begin{figure}
+\begin{figure}[H]
   \includegraphics[width=\columnwidth]{chapter4-mesh_refinement/imgs/advanced_mesh_combined.pdf}
     \caption[Advanced mesh example of an internal probe]{\label{fig:adv_mesh} Example FEMs of a probe entering a bone from the surrounding 
     tissue. Refinement is specified around the electrodes and tissue interfaces near the probe.}
