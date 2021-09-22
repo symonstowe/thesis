@@ -4,29 +4,28 @@
 \section{Motivation}
 This thesis proposes the use of novel 3D electrode configurations 
 and internal electrodes to improve sensitivity to 
-cardiosynchronous activity. Unlike surface electrode configurations, these 
-modles have a very high 
-sensitivity in the center of a model where mesh refinement can be challenging. 
+cardiosynchronous activity. Unlike surface electrode configurations,
+models with internal electrodes have a very high 
+sensitivity in the centre of a model where mesh refinement can be challenging. 
 In this chapter we explore the need for mesh refinement with regard
 to sensitivity accuracy, and develop tools to help control mesh density. 
 
 \section{Introduction}
-Electrical Impedance Tomography (EIT) reconstructs
-conductivity distributions in a body from electrical impedance measurements 
-at the body surface. 
+%Electrical Impedance Tomography (EIT) reconstructs
+%conductivity distributions in a body from electrical impedance measurements 
+%at the body surface. 
 
 EIT is being actively developed to image the movement of air and 
 blood in the thorax \parencite{nguyen_review_2012}, and 
 neurological activity \parencite{holder_electrical_1992}. 
 For most applications of EIT the finite element method (FEM) is 
 used to reconstruct images, since geometry is irregular and 
-an analytic solution cannot be used. When using the Finite element method,
+an analytic solution cannot be used. When using the FEM,
 a mesh is required to reconstruct images. 
-To reconstruct images the solution to an inverse problem. 
+To reconstruct images we require the solution to an inverse problem and therefore we must calculate the sensitivity or jacobian. 
 As described in \fref{sec:inv_prob}, a jacobian matrix
-is required that represents relationship between the internal conductivity
-and measurements.
-In this thesis we will use the term mesh to refer to a specific 
+represents relationship between the voltage measurements and internal conductivity.
+In this thesis we use the term mesh to refer to a specific 
 combination of nodes and elements in a finite element model. 
 As more elements are added to a mesh, the accuracy is improved,
 but the time required to reconstruct and display results is increased. 
@@ -35,12 +34,12 @@ with the fewest nodes is desirable. This way accuracy can be increased, and
 computing time can be decreased.
 
 Due to the propagation of current in EIT, sensitivity is much higher near the
-electrodes relative to in the centre of the model. This results in an inverse problem
+electrodes relative to the centre of the model. This results in an inverse problem
 that is severely ill-posed,
 and an uneven sensitivity distribution in the model. 
 An accurate calculation of the jacobian is required to solve the inverse
-problem accurately, but changes in errors in regions with high sensitivity 
-will disproportionately affect the sensitivity error. 
+problem accurately, and errors in regions with high sensitivity 
+will disproportionately affect the sensitivity error and the resulting reconstructed image.
 
 %the solution of an inverse problem.
 %EIT image reconstruction requires 
@@ -57,12 +56,13 @@ will disproportionately affect the sensitivity error.
 %added, so a high mesh density is often desired to achieve an 
 %accurate solution. 
 
-It has generally been recommended in the EIT literature 
+It has generally been recommended in EIT literature 
 that meshes be refined near electrodes, where the electric 
-field and sensitivity are largest~\parencite{adler_electrical_2017}. 
+field and sensitivity are largest~\parencite{adler_electrical_2017} 
+but no thorough analysis has been made to determine how much 
+refinement is required. 
 This recommendation gives rise to two questions: 
-1) No thorough analysis has been made to determine how much 
-refinement is required. Given a ``mesh element budget'', what should
+1) Given a ``mesh element budget,'' what should
 balance of nodes be between the centre of the model and the electrodes? And 
 2) How do different freely available meshing tools that are
 commonly used with EIT compare when used to refine 3D meshes?
@@ -116,8 +116,8 @@ meshed with Netgen (version 5.3.1)~\parencite{schoberl_netgen_1997} and Gmsh
 meshing software.
 Current was injected between adjacent electrodes and the voltage was measured between the remaining
 two electrodes.
-For 3D meshes an initial analysis was done building on work from 
-Grychtol and Adler~\parencite{grychtol_fem_2013} where mesh density was
+For 3D meshes an initial analysis was done building on work from
+\citeauthorandyear{grychtol_fem_2013} where mesh density was
 set by specifying the maximum edge lengths permitted on electrode surfaces
 and in the volume of the FEM.
 Results were compared against those generated using ultra-fine meshes. 
@@ -147,8 +147,8 @@ ID indicated the number of subdivisions per electrode edge.
 In Netgen the mesh decay was not easily controlled by selecting a refinement 
 level from 1 to 5, but in Gmsh the size was set 
 to increase evenly from the surface of the electrode to the centre of the model.
-It should be possible to replicate this mesh density distributionin Netgen by using a 
-seperate mesh density file that specifies the required density at each point in the geometry,
+It should be possible to replicate this mesh density distribution Netgen by using a 
+separate mesh density file that specifies the required density at each point in the geometry,
 but this technique is not widely used due to its complexity.
 \Fref{fig:sample_meshes} shows example meshes of coarse, fine and refined
 meshes. \Fref{fig:electrode_mesh_size} shows the generated mesh structure for 
@@ -255,12 +255,15 @@ columns give parameters from the resulting meshes.}
 %The potential distribution \VB\ is used to visualize the current flow
 %around the measuring electrodes.
 % NOT CURRENTLY LOOKING AT THE CURRENT FLOW! seems to be a repeat of the same stuff
-To calculate the sensitivity of each measurement to a change in conductivity of each element
-we use the adjoint method \parencite{polydorides_electrode_2002}. 
+To calculate the sensitivity of each measurement ($\partial v_j$) to a change in conductivity 
+($\partial \sigma_i$)
+of each element
+we use the adjoint method \parencite{polydorides_electrode_2002} where the sensitivity is given by
+the jacoabian ($JB$).
 \begin{equation}
   \JB_{ij}=\frac{\partial v_j}{\partial \sigma_i}
 \end{equation}
-A sensitivity was normalized by dividing the sensitivity value for each element 
+The sensitivity was normalized by dividing the sensitivity value for each element 
 by the element's volume. 
 The average sensitivity of 15 planes evenly spaced between the top and bottom edges of the electrodes
 was used to generate a sensitivity image.
@@ -281,8 +284,8 @@ the centre of the model (C), adjacent to the electrode (E) and between the centr
 (I). The resulting sensitivity for the reference mesh calculated with Gmsh and the 
 selected regions of interest are presented in \fref{fig:roiMethods}.
 
-To calculate the sensitivity error, the difference in sensitivity wasa computed between the 
-reference model and the refoned models to give the total error in sensitivity.
+To calculate the sensitivity error, the difference in sensitivity was computed between the 
+reference model and the refined models to give the total error in sensitivity.
 The normalized sensitivity error is calculated as the absolute sensitivity error 
 divided by the total sensitivity error
 for the selected region.
@@ -354,7 +357,7 @@ The total sensitivity error across all meshes is plotted vs. the balance point i
 \fref{fig:balance_sens}. For meshes generated with Gmsh the minimum error was 
 achieved when the node balance point was approximately 85\% of the model radius corresponding
 to model M15-B. 
-For Netgen generated meshes the minimum sensitivity was achieved in model M13-A at a balance point
+For Netgen generated meshes, the minimum sensitivity was achieved in model M13-A at a balance point
 of approximately 70\%. Gmsh achieved a lower sensitivity error measured against
 the respective reference mesh. For meshes using Netgen refinement, the balance point did not
 increase evenly as the electrode density was increased and the internal density decreased. 
@@ -391,7 +394,7 @@ at less than 0.2\%.
 
 We consider several questions on the requirement of FEM refinement near
 electrodes and the available tools for mesh refinement in EIT. 
-1) Given a ``FEM element budget'', what should
+1) Given a ``FEM element budget,'' what should
 balance of nodes be between the centre of the model and the electrodes?
 2) How do different freely available meshing tools that are
 commonly used with EIT compare when used to refine 3D meshes?
@@ -404,7 +407,7 @@ a number of commercial and free products available. We compare two programs
 used widely in EIT.
 Our results show that Netgen and Gmsh control mesh refinement differently 
 and the same input parameters result in meshes with different numbers of nodes. 
-\fref{fig:electrode_mesh_size}, depicts the difference in
+\fref{fig:electrode_mesh_size} depicts the difference in
 mesh dissipation rates between Netgen and Gmsh. The mesh size in Gmsh increased
 gradually from the surface of the electrode  towards the centre of the model,
 whereas the mesh size in Netgen increased much more quickly from the edges of the
@@ -414,7 +417,7 @@ to achieve a smooth transition between the electrode and internal regions of the
 
 To analyze the benefit of electrode refinement and the difference between 
 Netgen and Gmsh refinement techniques we consider
-a sequence of refined meshes compared to a ``gold standard'', uniformly fine
+a sequence of refined meshes compared to a ``gold standard,'' uniformly fine
 FEM solution. The models were refined either globally or from the electrode surface, 
 and the error in the sensitivity matrix $\bf J$ 
 %voltage measurement,  and mesh quality %current distribution and sensitivity
@@ -428,7 +431,8 @@ due to the smaller number of nodes in the model.
 
 Using the balance point analysis, we were able to determine the optimal distribution
 of nodes to minimize sensitivity in both Gmsh and Netgen. The minimum total sensitivity 
-from \fref{fig:balance_sens} was approximately 70\% for Netgen. This was mainly 
+error was achieved with a balance point of approximately 70\% for Netgen. This can be seen in \fref{fig:balance_sens}.
+This was mainly 
 due to the rapid dissipation of node density away from the electrodes. Increasing 
 the refinement near the electrode reduced
 error in region E, but in region I there were insufficient
@@ -441,19 +445,20 @@ between the electrode surface and the centre of the model, there
 was a higher density of nodes that was maintained in regions E and I as the 
 electrode refinement increased. The error in the centre of the model 
 was higher in Gmsh meshes, but since this is where the sensitivity is 
-lowest the total sensitivity error was much lower. 
+lowest, the total sensitivity error remained lower. 
 
-The ability to selectively control the mesh refinement in regions in Gmsh also allows 
+The ability to selectively control mesh refinement in Gmsh also allows 
 users to generate complex meshes and control mesh density surrounding internal structures 
-and electrodes an example mesh is shown in \fref{fig:adv_mesh} where a model was
-created of
+and electrodes. An example mesh is shown in \fref{fig:adv_mesh} 
+that depicts 
 a probe entering a bone from the surrounding tissue. 
 These additions fill an important need in EIT to allow for more accurate models 
-of regions surrounding internal structures and electrodes, and 
+of regions surrounding internal structures and electrodes.
 
 \begin{figure}[H]
   \includegraphics[width=\columnwidth]{chapter4-mesh_refinement/imgs/advanced_mesh_combined.pdf}
-    \caption[Advanced mesh example of an internal probe]{\label{fig:adv_mesh} Example FEMs of a probe entering a bone from the surrounding 
+    \caption[Advanced mesh example of an internal probe]{\label{fig:adv_mesh} Example 
+    meshes of a probe entering a bone from the surrounding 
     tissue. Refinement is specified around the electrodes and tissue interfaces near the probe.}
 \end{figure}
 
@@ -466,13 +471,13 @@ as the maximum node density was not always higher despite specifying a smaller m
 In Gmsh the mesh density was closer to the specified values, typically resulting in more
 nodes in the refined meshes. 
 
-Across both analyses errors away from the refined areas may be higher,
-but the ability to refine meshes selectively near regions where high sensitivity 
-is required may allow for reduced measurement error while still allowing for quicker 
+The ability to refine meshes selectively in regions where high sensitivity accuracy
+is required may allow for reduced reconstruction error while reducing 
 meshing times.
 As more electrodes are added and the model complexity is increased, we expect that 
-refinement around the electrodes will continue to reduce total sensitivity error. However 
-the node balance analysis will not be possible for irregularly shaped models.
+refinement around the electrodes will continue to reduce total sensitivity error. 
+While this technique can give a starting point to determine the refinement requirement 
+on complex geometries, this analysis cannot be directly applied to arbitrary models. 
 The node balance analysis provides a straightforward method to determine the 
 ideal placement for a given number of nodes to reduce model errors.
 
@@ -495,23 +500,23 @@ ideal placement for a given number of nodes to reduce model errors.
 
 \section{Summary}
 In this chapter we examine the requirement for mesh refinement around 
-electrodes in Electrical Impedance Tomography (EIT). 
+electrodes in EIT. 
 While it has been recommended that  models be refined around the electrodes, where current
 density and sensitivity are highest,  the level of refinement required is poorly understood. 
 Using a set number of nodes, we investigate the optimal distribution 
 between the electrodes and 
 the volume of a model. 
-A balance point is used to measure the difference in distribution between the electrode and the centre of
+A balance point is used to measure the difference in node distribution between the electrode and the centre of
 the model.
 To calculate this, all nodes contained between the surface of a selected electrode and the centre of the model 
 were identified and the mean position of nodes along the container axis was computed. 
 %A balance point was defined as the mean distance of all nodes along the axis 
 %of a container encompassing all points between the centre of the model and the surface of a selected electrode.
 We compare refinement strategies across commonly used meshing software in EIT and compare the 
-model sensitivity error to an ultra-fine reference mesh. 
+calculated sensitivity error to results on an ultra-fine reference mesh. 
 In a tank model, for a fixed number of nodes, error in the sensitivity calculation is minimized 
-when the balance point of the nodes is n  85\% of the tank radius and the node density dissipates evenly 
+when the balance point of the nodes is 85\% of the tank radius and the node density dissipates evenly 
 from the electrode surface to the centre of the model. Using this method sensitivity error was decreased 
-in all regions with high sensitivity. This node distribution technique  enables the generation  of accurate 
-meshes with fewer nodes that can reduce measurement error and computing time. 
+in regions with high sensitivity. This node distribution technique  enables the generation  of accurate 
+meshes with fewer nodes that can reduce reconstruction error and meshing time. 
 %\end{abstract}

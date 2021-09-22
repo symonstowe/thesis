@@ -7,22 +7,22 @@
  Applications of Electrical Impedance Tomography (EIT 2021)~\parencite{stowe_using_2021}.} 
 
 \section{Introduction}
-Internal electrode have been shown several times to improve sensitivity in the internal regions 
+Internal electrodes have been shown several times to improve sensitivity in the internal regions 
 of a model, and improve reconstruction accuracy
 \parencite{nasehi_tehrani_modelling_2012,nasehi_tehrani_evaluation_2012,nguyen_electrical_2020,pilkington_utilization_1989,schuessler_utility_1995}.
-When used in a clinical setting they have shown an increase in sensitivity to cardiosynchronous
+When used in a clinical setting, they have shown an increase in sensitivity to cardiosynchronous
 EIT signals in most subjects \parencite{czaplik_application_2014}, but they have not been widely used 
 in real-world settings. 
 Image reconstructions using internal electrodes are challenging and have not yet 
 been used consistently \emph{in-vivo}.
-One of the main factors that may contribe to confounding real-world EIT recordings is movment 
-of the internal probe. 
-It is not clear how much changes in location between the probe impact EIT measurements.
+One of the main factors that may contribute to confounding real-world EIT recordings is movement 
+of the internal probe, although 
+it is not clear how much movement of the probe impacts EIT measurements.
 Typically when reconstructing EIT images, using difference imaging reduces the impact of 
-systematic errors, but electrodes on an internal probe can move quickly and may change location 
+systematic errors, but electrodes on an internal probe can move suddenly and may change location 
 during measurements. 
 The effect of this electrode motion is not well understood and currently no analysis exists 
-that explores the effect of internal probe movment on reconstructed images. 
+that explores the effect of internal probe movement on reconstructed images 
 \parencite{nguyen_review_2012}. 
 This chapter presents an analysis of the impact of internal probe movement on 
 EIT reconstructions using internal electrodes, and introduces a technique to correct for probe 
@@ -34,24 +34,23 @@ is movement; both the movement of
 body structures and the movement of electrodes contribute significantly to the measured
 impedance and the resulting reconstructed 
 image~\parencite{adler_origins_2017,proenca_influence_2015}.
-The previous chapters support that more accurate meshing and internal electrodes may
-help to identify the movement of structures and organs, and isolate their impact on
+The previous chapters support that more accurate meshing and adding internal electrodes may
+help to identify structures and organs, and isolate their impact on
 reconstructed images, but the problem of electrode motion is amplified when internal
 electrodes are used. 
 Internal electrodes placed on a probe are challenging to locate within a subject
-due to variation in individual geometries. Incorrectly modelling the electrode 
-locations can introduce an artefact in the image~\parencite{boyle_impact_2011}, 
-but in time difference EIT these effects are reduced~\parencite{adler_electrical_2017}. 
-The larger problem appears 
-to be the 
+due to variation in individual geometries and incorrectly modelling the electrode 
+locations can introduce an artefact in the image.~\parencite{boyle_impact_2011}. 
+In time difference EIT these effects are reduced~\parencite{adler_electrical_2017}
+but the larger problem appears to be the 
 movement of the internal probe relative to the external electrodes between
 measurements. Recent work by~\citeauthorandyear{nguyen_electrical_2020}
-reviewed the potential aplication of internal electrodes in cardio 
+reviewed the potential application of internal electrodes in cardio 
 radiofrequency ablation and discussed the need for an analysis 
-of the effect of heart motion on the internal electrode, and a solution 
+of the effect of motion on the internal electrode, and a solution 
 to correct for its impact on EIT reconstructions.
 
-Movement correction algorithms using the movement jacobian have been 
+Movement correction algorithms using a movement jacobian have been 
 designed in 2D 
 and 3D~\parencite{gomez-laberge_direct_2007,soleimani_imaging_2006,gomez-laberge_direct_2008}
 and used to reconstruct electrode movement on 3D models with a 2D arrangement 
@@ -59,23 +58,22 @@ of electrodes~\parencite{boyle_geophysical_2016}.
 There are several available methods to calculate the movement 
 jacobian~\parencite{boyle_methods_2017}. The simplest of which,
 the na\"{i}ve perturbation method~\parencite{gomez-laberge_direct_2008},
-has been used in this chapter as a proof of concept.  
-A more detailed explanation of this jacobian calculation method is presented in 
-\fref{sec:motion_correction} of the background.
+has been used in this chapter for this proof of concept.  
+
 As an internal probe moves towards one side of a model the distance between the 
 probe and the external electrodes changes. This results in lower 
 impedance where the distance 
 has decreased, and a higher impedance where the distance has increased. Without knowing 
 the new probe location we can reduce the effect of this error, but there still remains 
 a mismatch between the modelled and actual probe locations. 
-The artefact that is reconstructed can give hints regarding the motion of electrodes,
+The resulting artefact that is reconstructed can give hints regarding the motion of electrodes,
 although it can be difficult to separate the effect of electrode movement 
 from biological impedance changes of interest~\parencite{boyle_geophysical_2016}. 
 
 This chapter presents a method that builds on currently available
 algorithms, to create a new, corrected model
 that helps to compensate for the effect of electrode movement.  
-The known shape of the artefact due to movement of the probe is used to 
+The known shape of an artefact due to movement of the probe is used to 
 derive the probe location, and create a corrected model to improve 
 reconstruction accuracy in the presence of probe motion.
 
@@ -84,20 +82,20 @@ image reconstructions, and then to test this technique in an animal model.
 Although simulations in 2D, and now in 3D, show that internal electrodes can provide 
 a desirable increase in sensitivity, the benefit has not been realized in real-world
 recordings. 
-The relatively large amount of promosing simulation work compared to limited real-world 
-results suggest that this is a challening problem. 
+The relatively large amount of promising simulation work compared to the limited real-world 
+results suggest that this is a challenging problem. 
 It has been suggested that error due to electrode motion may be a major contributing 
-factor to the the EIT signal on internal electrodes \parencite{nguyen_electrical_2020},
+factor to the EIT signal on internal electrodes \parencite{nguyen_electrical_2020},
 and we believe this may be one of the largest sources of error in real-world 
 EIT measurements. 
-In this chapter we investigate the impact of motion on internal electrode EIT and explore 
-techniques to solve this problem and reconstruct images in the presence of electrode motion.
+We investigate the impact of motion on internal electrodes and explore 
+techniques to solve this problem.
 This chapter presents a novel method to correct for electrode displacement artefacts, and evaluates 
-how it is able to minimize electrode motion errors.
+how it is able to improve image reconstruction.
 This new technique is compared to 
 established techniques for 3D EIT image reconstruction 
-to reconstructions on a limited number of 
-subjects in an animal model.
+and used  to reconstruct ventilation images 
+in an animal model for a limited number of subjects.
 
 \section{Methods}
 This chapter describes the analysis for both: a simulation study correcting for probe motion 
@@ -105,15 +103,15 @@ in a tank model, and preliminary \emph{in-vivo} recordings that were conducted
 in conjunction with a larger experimental protocol. 
 
 \subsection{Simulations}
-To model electrode motion measure the effect on reconstruction accuracy simulations 
-in a tank model were used.
+ Simulations 
+in a tank model were used to model electrode motion and measure its effect on reconstruction accuracy.
 Simulations were done using EIDORS (v3.10)~\parencite{adler_eidors_2017}
-using Matlab 2019b (Matworks, Natick, MA, USA).
+and Matlab 2019b (Matworks, Natick, MA, USA).
 Within EIDORS, meshes were generated using 
 Netgen (version 5.3.1)~\parencite{schoberl_netgen_1997}.
 
-\subsubsection{Tank models}
-On a tank model 28 external electrodes were placed in two planes of 14. 
+\subsubsection{Tank Model}
+28 external electrodes were placed on a tank model in two planes of 14. 
 4 internal electrodes were placed evenly between the top and bottom external electrode planes. 
 The tank radius and height were 1 m, and the external electrode radius was 5 cm. 
 The external electrode planes were placed at a height of 0.3 m and 0.7 m on the tank. 
@@ -143,8 +141,9 @@ are challenging to model and many different techniques are used.
 When using internal electrodes on a complex model, it is currently easiest 
 to add electrodes along a hollow tube cut through the centre, since 
 a small circle can be specified in EIDORS functions that are designed to make extruded 
-models. This circle when extruded up with the boundary will form a small hole representing 
-the probe where electrodes can be placed.
+models. This circle, when extruded up with the boundary, will form 
+a small hole at the
+probe location where electrodes can be placed.
 
 To specify a conductive region, elements within a radius were assigned a conductivity 
 of twice the background conductivity of the tank model.
@@ -153,7 +152,7 @@ The radius of the target was 20 cm.
 \Fref{fig:probe_types} shows the conductive target for both internal probe types.
 
 \subsubsection{Measurements}
-The skip 4 currnet injection and measuremnt pattern was used as it can be 
+The skip 4 current injection and measurement pattern was used as it can be 
 easily implemented on most EIT systems, and was shown to have a very even 
 sensitivity distribution in 3D EIT \parencite{grychtol_3d_2016}.
 %Despite sensitivity advantages ascribed to custom injection and 
@@ -167,13 +166,13 @@ with the probe was shifted by 1, 5, and 10 percent of the tank radius in a rando
 direction. The direction was randomized between trials but was consistent for 
 each of the 1, 5 and 10 percent probe error models that were compared. 
 
-\subsection{Movement correction}
+\subsection{Movement Correction}
 \label{sec:3_methods}
 
 As shown in \fref{sec:inv_prob}, the jacobian in typical EIT reconstruction 
 represents the sensitivity of the voltage measurements to a change in conductivity. 
 In this chapter we will refer to this as the conductivity jacobian ($J_C$). 
-A similar formulation can be used for the movment, but instead of the sensitivity 
+A similar formulation can be used for the movement, but instead of the sensitivity 
 to change in conductivity, we want the jacobian to represent the 
 change in measured voltage 
 sensitivity due to movement of the probe. to calculate the movement jacobian we can use:
@@ -182,8 +181,8 @@ sensitivity due to movement of the probe. to calculate the movement jacobian we 
 \end{equation}
 where $\mathbf{r}$ is the change in position of an electrode $l$.
 The movement jacobian is a derivative of the measurements with respect to the movement.
-To aproximate the movement derivative we can use a perturbation to 
-shift each electrode by a small amount (0.001 m), and calculating the 
+To approximate the movement derivative we can use a perturbation to 
+shift each electrode on the internal probe by a small amount (0.001 m), and then calculate the 
 change in voltage measurements \parencite{gomez-laberge_direct_2008}.
 
 The movement correction jacobian was calculated using the methods presented by
@@ -239,11 +238,11 @@ in an image can be generated.
 %and \fref{eq:motion_rm}. 
 %
 
-An image ($X$) is reconstructed using 
-the measurements ($b$) and reconstruction matrix ($R$) as follows:
+An image ($X_N$) is reconstructed using 
+the measurements ($b$) and reconstruction matrix ($R_N$) as follows:
 
 \begin{equation}
-	X = bR
+	X_N = bR_N
 \end{equation}
 
 Three images: $X_C$, $X_M$ and $X_N$ were reconstructed from their 
@@ -251,15 +250,15 @@ respective reconstruction matrix.
 
 A new movement correction strategy had been built 
 around the reconstructed image $X_N$.
-As a probe is moved towards electrodes on the the edge of the model 
-conductivity is decreased and this is shown as a conductive object in the reconstructed 
+As a probe is moved towards electrodes on the edge of the model,
+conductivity is increased where the distance is decreased resulting in a conductive object in the reconstructed 
 image. Using $R_N$ we are able to reconstruct the 
 size and shape of the artefact due to only electrode motion,
 and determine the approximate direction and amplitude of
 the probe movement.
 In the reconstructed image 
 showing only the motion artefact,
-the centre of mass of the positive change is located. 
+the centre of mass of the conductive artefact is located. 
 This is assumed to be the direction of the motion. The amplitude of the electrode 
 motion is estimated as half of the distance between the 
 conductive artefact and the probe. This method is illustrated in
@@ -271,32 +270,32 @@ electrode position in the reconstructed image.
     \centering
    \includegraphics[width=\textwidth]{chapter7-internal_elec_motion/imgs/recon_methods.pdf} 
    \caption[Motion correction methods]{\label{fig:motion_correction_methods} 
-   This figure shows the 3 scenarios of the initial image reconstruciton. 
+   This figure shows the 3 scenarios of the initial image reconstruction. 
    Image (A) shows the image reconstructed using the typical conductivity jacobian 
-   from \fref{eq:regular_rm}. Image (B) shows the image reconstruced using the movment 
-   jacobian ans equation \fref{eq:motion_rm}. Finally image (C) shows the 
+   from \fref{eq:regular_rm}. Image (B) shows the image reconstructed using the movement 
+   jacobian and equation \fref{eq:motion_rm}. Finally image (C) shows the 
    isolated image artefact reconstructed using the reconstruction matrix in 
-   \fref{eq:noise_rm}
+   \fref{eq:noise_rm}.
 	The centre of mass of the conductive object in (C) is used to
 	estimate the probe location and direction of movement. The green arrow indicates the 
 	calculated direction of movement (multiplied by 5 for visibility).
-	The black line indicates the outline of the region of conductivity at the imaged plane.
+	The black line indicates the outline of the true target location.
 	The images depict an average of 10 slices between the external electrode planes.}
 \end{figure}
 
 Using the probe location estimate calculated from $X_N$,
 a new model was reconstructed with the probe repositioned 
-to the reconstructed location. 
+to the identified location. 
 This model was then used to calculate a new reconstruction matrix 
 using \fref{eq:motion_rm}
-with an updated jacobian based on the new probe location. 
+an updated movement jacobian based on the new probe location. 
 
 
-\subsection{Image comparison}
+\subsection{Image Comparison}
 To simplify processing of the reconstructions, 10 images between the 
 external electrode planes were averaged together to generate a 2D 
 representation of the 3D data. This did not allow for analysis of movement in the vertical 
-direction, but we did not expect this to be a major contribution in real-world data.
+direction, but we do not expect this to be a major contribution in real-world data.
 The reconstructed images were compared in two ways. First, the accuracy of the reconstruction
 was evaluated by computing the Jaccard index \parencite{jaccard_distribution_1912} 
 between the actual and imaged boundaries of the 
@@ -312,15 +311,16 @@ following equation:
 Where $A_{\text{object}}$ is the amplitude of the object, $A_{\text{image}}$ is the amplitude 
 of the image, and the ratio is subtracted from 1 so that a noise estimate 
 of 0 corresponds with 
-all of the image signal originating from the conductive target.
+all of the image signal originating from the conductive target. 
+In this case a low noise estimate is better.
 
-\subsection{\emph{In-vivo} recordings}
+\subsection{\emph{In-vivo} Recordings}
 This experiment was approved as an amendment to an existing protocol (2018-2131) 
 by the Université de Sherbrooke Ethics Board. The pregnant ewe carrying two lambs was 
 premedicated using an intramuscular injection of 10 mg/kg of ketamine and intubated. 
 Anesthesia was maintained using 2--4 \% isoflurane in conjunction with conventional 
 mechanical ventilation (CMV). Lambs were birthed prematurely at 120 days of 
-gestation (147 days normal gestation) through caesarean section. 
+gestation (normal gestation is 147 days) through caesarean section. 
 One lamb was ventilated with either CMV or total liquid ventilation (TLV) for 6 hours. 
 The other lamb served as a paired control to assess 
 lung and cerebral inflammation resulting from ventilation. 
@@ -331,7 +331,7 @@ A skip 4 measurement pattern was used with an injection current
 of 3 mA at 30 kHz. Electrodes 29 to 32 were connected to the internal
 electrode probe. 
 
-\subsubsection{Internal electrode probe design}
+\subsubsection{Internal Electrode Probe Design}
 The internal electrode probe consisted of four brass electrodes on a flexible tube. 
 Each electrode was 1 cm in length and the spacing between electrodes was 2 cm. 
 The electrodes were created from
@@ -352,11 +352,13 @@ The tube radius was 0.5 cm. The constructed probe is shown in \fref{fig:probe_de
 	of the tube to connect to the EIT system.}
  \end{figure}
 
-\subsubsection{Electrode Placment}
-The ewes were shaved and 28 silver-silver chloride electrodes were placed in 2 rows immedeately behind the front
-legs with 10 cm seperation and equal spacing around the thorax. 
-The esophageal probe was alligned with the electrodes externally and the required
-depth was marked. The electrode probe was then coated in a conductive gel for lubraction and inserted in the 
+\subsubsection{Electrode Placement}
+The ewes were shaved and 28 silver-silver chloride electrodes were placed in 2 rows immediately behind the front
+legs with 10 cm separation and equal spacing around the thorax. 
+The esophageal probe was aligned with the electrodes externally and the required
+insertion depth was marked. The electrode probe was then coated in a conductive gel for lubrication and to ensure good contact with the 
+esophageal wall,
+then inserted in the 
 esophagus up to the marked point.
 
 \subsubsection{Ovine Mesh}
@@ -365,7 +367,7 @@ An internal probe was added to an ovine mesh by adapting the
 function in EIDORS~\parencite{adler_eidors_2017}. A circular region was added to the
 library geometry, and was extruded upwards to make a hole at the probe location. 
 The probe was inserted into the mesh just anterior to where the spine would be,
-and posterior to the definted lung region. 
+and posterior to the defined lung region. 
 
 The location of the probe in the model relative to lung and heart 
 regions is indicated in \fref{fig:ovine_anatomy}. 
@@ -402,14 +404,14 @@ and has been shown to perform well in 3D configurations of external electrodes
 
 To reconstruct images with GREIT 500 training targets with a size of 5 cm were specified, and a noise figure
 of 0.5 was used.
-images were reconstructed at 10 slices between the electrode planes and summed together to form one 
+Images were reconstructed at 10 slices between the electrode planes and summed together to form one 
 display image representing the 3D volume.
 
-\subsubsection{Pulsatile amplitude}
+\subsubsection{Pulsatile Amplitude}
 The goal of this analysis is to quantify the sensitivity increase with regard to perfusion. 
 Although the cardiosynchronous signal may have many sources, we use the 
-amplitude of the cardiac-frequency in recorded EIT data as a proxy for sensitivity to 
-perfusion related changes. 
+amplitude of the cardiac frequency in recorded EIT data as a proxy for sensitivity to 
+perfusion-related changes. 
 
 To measure the advantage provided by internal electrodes with regard to cardiosynchronous
 signal detection, 
@@ -421,7 +423,7 @@ low-frequency amplitude in the FFT of the detrended signal.
 This was repeated for all 12 recordings across 3 animals.
 
 \section{Results}
-The following section presents the results for both simulation and 
+The following sections present the results for both simulation and 
 \emph{in-vivo} work.
 
 \subsection{Simulation}
@@ -437,19 +439,19 @@ in the results.
 
 \Fref{fig:probe_location_correction} shows the result of the three reconstruction methods. The boundaries 
 of the reconstructed and actual targets are outlined to highlight the performance.
-For all rows of the figure the online of the ``true'' conductive region is slightly different. 
+For all rows of the figure, the outline of the ``true'' conductive region is slightly different. 
 This is because when the internal probe is placed in a new location, the entire internal mesh is
-slightly different. This resultes in a light change in the number of elecments that are 
+slightly different. This results in a slight change in the number of elements that are 
 in the target region of the model.
 All reconstruction techniques were able to reconstruct the object correctly with 1\% 
-movement, but there is more blurring and attitive noise in the reconstruction without motion 
-correction. With 1\% movement both movement correction techniques are able to accurately 
+movement, but there is more blurring and additive noise in the reconstruction without motion 
+correction. With 1\% movement, both movement correction techniques are able to accurately 
 reconstruct the probe location, but there is a slightly lower level of noise when using the 
 new correction technique. 
-Ahen the probe is moved by 5\% there is a more pronounced difference between reconstruction 
-techniques. When no motion correction is used the amplitude of the artefact is larger than 
-the amplitude of the reconstructed image. With basic motino correction the conductive object is
-identified correctly, but there is additional noise present in the image. The new techniqe
+When the probe is moved by 5\%, there is a more pronounced difference between reconstruction 
+techniques. When no motion correction is used, the amplitude of the artefact is larger than 
+the amplitude of the reconstructed image. With basic motion correction the conductive object is
+identified correctly, but there is additional noise present in the image. The new technique
 reconstructs the image accurately and reduces most of the background noise introduced by 
 probe movement. 
 The new method is the only technique able to reconstruct the correct target location with 
@@ -476,14 +478,14 @@ technique. For Jaccard index, a score closer to 1 is better.}
 For movement of 1\% of the tank boundary, motion correction using only the 
 movement jacobian was roughly equivalent to the probe location correction algorithm.
 Across all other scenarios, the probe location correction  algorithm achieved a higher 
-Jaccard score. When intrepreting the Jaccard score, a value of 1 indicates a perfect match
+Jaccard score. When interpreting the Jaccard score, a value of 1 indicates a perfect match
 between the actual and reconstructed boundary and a score of 0 indicates that there is no 
 overlap between the actual and reconstructed locations.
 Across all scenarios the new technique to correct for motion had the lowest 
 noise estimate score.
-When other techniques were used additional objects were present in the reconstrucionts 
+When other techniques were used additional objects were present in the reconstructions 
 outside of the target objects. When comparing the noise scores, a value closer to 0 is 
-better. A value over 1 indicates that the brightest object in the image was not the actual image. 
+better. A value over 1 indicates that the brightest object in the image was not the actual target. 
 The way that the noise estimate was calculated always assumed the brightest object was the 
 reconstructed image, so no noise score over 1 were recorded.
 
@@ -527,7 +529,7 @@ of the tank radius.
 
 \subsection{\emph{In-vivo}}
 Recordings in each of the three ewes are presented in this section.
-Reconstructions with internal electrodes are shown in
+Reconstructions with internal electrodes are shown
 \fref{fig:internal_reconstructions} for a selected breath during a 
 baseline recording in each subject.
 
@@ -557,16 +559,19 @@ signal relative to ventilation when internal electrodes are used.
 	\includegraphics[width=\textwidth]{chapter7-internal_elec_motion/imgs/amplitude_ratio.pdf} 
 	\caption[Amplitude of the cardiosynchronous signal]{\label{fig:amplitude_ratio} 
 	The cardiosynchronous signal component was divided by the ventilation frequency 
-	componenent to compare the detectability of the pulsatile changes. The ratio was compared 
-	for measuremnts using only external electrodes, all electrodes, and internal electrodes only.}
+	component to compare the detectability of the pulsatile changes. The ratio was compared 
+	for measurements using only external electrodes, all electrodes, and internal electrodes only.}
 \end{figure}
 
 \section{Discussion}
 
-This chapter aimed to provide a technique to reduce noise due to motion on internal
-electrodes when reconstructing images in 3D, to demonstrate the noise reduction technique
-\emph{in-vivo}. The new technique to reconstruct images in the presence of motion 
-on internal electrodes reconstructed an image of a conductive target 
+This chapter aimed to provide a technique to reduce noise due to the motion of internal
+electrodes when reconstructing images in 3D, and to demonstrate the 
+noise reduction technique
+
+\emph{in-vivo}. The new technique to reconstruct images 
+with 
+internal electrode motion reconstructed an image of a conductive target 
 more accurately and with less noise in the surrounding image than currently
 available reconstruction techniques. \emph{In-vivo}
 reconstructions showed a slight improvement in lung distinguishability when correcting
@@ -576,7 +581,9 @@ model showing an increased cardiosynchronous component on the internal electrode
 measurements~\parencite{czaplik_application_2014}.
 
 It was found that GREIT performed poorly when reconstructing data with internal electrodes.
-The figures of merit for GREIT were designed and optimized to work with external electrodes 
+It is thought this is because 
+the figures of merit for GREIT were designed and optimized 
+to work with external electrodes 
 where sensitivity is low in the centre of the model and high at the 
 edges~\parencite{adler_greit_2009}. An adaptation to GREIT that is able to 
 account for internal electrodes and motion of an internal probe is planned as a
@@ -590,7 +597,7 @@ anatomical models using a hollow region in the centre of the model was created f
 project. Code to generate this model with internal electrodes is planned to be included in a
 future release of EIDORS.
 
-The noise estimate score calculations were not perfect representations of the noise
+The noise estimate score calculations were not an ideal representation of the noise
 in the images due to the way the reconstructed object was identified.  Since the
 brightest object was always identified as reconstructed the object, the noise estimate was
 artificially low in some cases. 
@@ -629,9 +636,17 @@ of the model radius may be helpful. At this
 level of movement, the benefits of 
 the probe localization technique are 
 not substantial. 
-Additionally, in the images presented probe movment did not 
+Additionally, in the images presented probe movement did not 
 appear to be large. It is not yet clear what the typical movement of the electrode probe 
-is expected to be in the esophagus. 
+is expected to be in the esophagus. To verify the position in an 
+animal model future trials could use an accelerometer in the electrode 
+probe to give a measure of probe movement and determine the accuracy of the probe position 
+calculation in real-world applications.
+
+When using internal electrodes to image blood flow, the perfusion of the esophagus itself could
+contribute to the overall signal measured. Previous research in cats has shown that the esophageal 
+perfusion is very small relative to other organs in the abdomen \parencite{hollwarth_esophageal_1986}
+and we do not expect a large contribution to the perfusion signal from the esophagus.
 
 Previous research has also 
 reconstructed for motion direction directly using the movement
@@ -645,7 +660,11 @@ was inadequate for electrodes
 placed on the breathing and feeding tubes~\parencite{czaplik_application_2014}.
 The electrodes used were shown to have a good contact impedance on the SenTec Pioneer
 Set interface, but the current design protrudes slightly from the tube and may be challenging to 
-integrate into a clinical esophageal or tracheal tube.
+integrate into a clinical esophageal or tracheal tube. Additionally, given that in a clinical setting 
+current injection in the thorax may present safety concerns, it is also important to quantify the 
+sensitivity increase when the internal probe is used for voltage measurements only. Future 
+simulations will focus not only on assessing the safety of internal electrodes, 
+but also evaluating the utility of internal electrodes if no internal current injections are possible.
 
 \citeauthorandyear{sanchez_vivo_2013} used an array of internal electrodes in the lung 
 during biopsy procedures, and suggested that the increased proximity to the 
@@ -671,10 +690,11 @@ Probe displacement introduces large errors when using
 reconstruction algorithms that do not account for movement. This chapter presents
 a new technique designed to reduce the effect of probe motion.
 This new method 
-was found to outperform existing methods with regards to reconstruction 
-accuracy and background noise in simulations on a tank model. 
+was found to  reconstruct a target object more 
+accurately and with less background noise in a tank model compared to existing 
+methods. 
 Internal electrodes in conjunction with a 3D external configuration were also 
 used \emph{in-vivo} to measure ventilation. 
-Images of breaths across three subjects showed an improvement to lung distinguishability
+Images of breaths across three subjects showed an improvement in lung distinguishability
 when correcting for motion, and the average ratio of cardiosynchronous
 to pulmonary signal was increased when using internal electrodes. 

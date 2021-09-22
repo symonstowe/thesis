@@ -1,7 +1,7 @@
 \section{Electrical Impedance Tomography}
 
 Most EIT systems consist of: 
-a current source to inject a current between two electrodes;
+a current source to inject current between two electrodes;
 a system to measure differential voltages between pairs of electrodes; and
 electrodes, applied to the body surface.
 This section further discusses each of these aspects of EIT 
@@ -35,7 +35,7 @@ are largely affected by this impedance on injecting electrodes typically have a
 phase shift and are often removed before reconstruction. 
 
 Changing contact impedance has a large effect on EIT measurements 
-can be influenced by changes in posture or pressure on electrodes 
+and can be influenced by changes in posture or pressure on electrodes 
 \parencite{coulombe_parametric_2005}.
 Contact impedance is often improved on electrodes by adding a
 conductive gel \parencite{waldmann_performance_2017}, but it can decrease 
@@ -63,7 +63,7 @@ frequencies between 10 kHz and 1 Mhz~\parencite{holder_electrical_2004}.
 The selection of current amplitudes is primarily selected based on 
 considerations to patient safety \parencite{adler_electrical_2017}.
 The guideline defined by IEC 60601-1 
-\parencite{international_electrotechnical_commission_iec_2021}, set a limit 
+\parencite{international_electrotechnical_commission_iec_2021}, sets a limit 
 of 10 mA on current across all electrodes at 100 kHz, and lower limits 
 at lower frequencies. 
 For EIT, frequencies between 20--200 kHz are often used with 
@@ -91,7 +91,8 @@ voltages are measured again. This results in voltage measurements on each electr
 pair for every current injection. For a 16-electrode system, this results in 
 256 measurements in each frame. For a 32-electrode system, there are 1024. As mentioned in 
 \fref{sec:electrodes}, voltage measurements made on the stimulating electrodes
-are often removed resulting in 208 measurements per frame on a 16-electrode system, and 928 measurements per frame on a 32-electrode system.  
+are often removed resulting in 208 measurements per frame on a 16-electrode system, and 928 
+measurements per frame on a 32-electrode system.  
 
 \begin{figure}[H]
     \includegraphics[width=\textwidth]{chapter2-background/imgs/common_stim_meas_patterns.pdf}
@@ -132,10 +133,10 @@ Most frequencies used to differentiate between different tissue types are at hig
 where current starts to flow across the cell membranes. 
 These high frequencies are out of the range of most current EIT systems, and 
 frequency changes due to different lower frequencies are limited~\parencite{adler_electrical_2017}.
-This thesis uses time-difference EIT to image changes in movement and fluid volumes in the thorax.
+This thesis uses time-difference EIT to image changes in fluid volumes and movement in the thorax.
 
 \subsection{Forward Problem} \label{sec:fwd}
-In simulations, there is a model with known geometry and impedance and we wish to solve for the 
+In simulation, typically we have a model with known geometry and impedance and we wish to solve for the 
 voltage at the electrodes, due to a stimulation current. 
 This is called the forward problem. 
 A model used to calculate a solution for the forward problem is called a forward 
@@ -233,7 +234,7 @@ in modelling have been shown to give large errors in the reconstructed
 images \parencite{kolehmainen_assessment_1997}. 
 
 \subsection{Inverse Problem} \label{sec:inv_prob}
-To reconstruct images, we must solve for impedance distribution from known voltage measurements. 
+To reconstruct images we must solve for impedance distribution from known voltage measurements. 
 This is known as the inverse problem. 
 The ability to reconstruct impedance distributions from a known voltage distribution is challenging 
 and relies on the assumption that the relationship between voltage and conductivity is 
@@ -246,17 +247,22 @@ The sensitivity of EIT is often represented by a jacobian matrix, $\mathbf{J}$,
 which gives the change in measurement relative to another factor. To reconstruct 
 a conductivity distribution, a conductivity jacobian, $\mathbf{J}_C$, is used
 which links the change 
-in boundary voltage measurements to the change in impedance. It can be represented by 
+in boundary voltage measurements ($U$) to the change in impedance($\sigma$). It can be represented by 
 \begin{equation} \label{eq:jacobian_c}
 	[\mathbf{J}_C]_{ij} = \frac{\partial U_i}{\partial \sigma_j}. 
 \end{equation}
 The jacobian gives the relationship between the conductivity of each voxel and the resulting
 measurements \parencite{holder_electrical_2004}.
 In practice the jacobian can be calculated using the adjoint 
-field \parencite{vauhkonen_three-dimensional_1999}. 
+field \parencite{vauhkonen_three-dimensional_1999}. The formulation of sensitivity gives rise to 
+the units of $\frac{\Delta \text{V}}{\Delta \frac{\text{S}}{\text{m}}}$. Errors in sensitivity 
+calculation can negatively impact the reconstruction. Errors in regions of high sensitivity near
+the electrodes are especially problematic as they will propagate affecting regions with low
+sensitivity as well. For this reason it is important to correctly calculate the sensitivity matrix,
+or jacobian, especially in regions of high sensitivity. 
 
 \subsubsection{Regularization}
-The sensitivity of measurements to changes is vastly different throughout the model. 
+The sensitivity of measurements to changes in conductivity is vastly different throughout a model. 
 Near electrodes, where the current density is high, there is high sensitivity to conductivity 
 changes but there is limited sensitivity away from the electrodes. This contributes 
 to the ill-posed nature of the inverse problem \parencite{holder_electrical_2004}.
@@ -274,11 +280,11 @@ voxel ($\Delta \mathbf{\hat{\sigma}}$) for a given set of difference measurement
 	\Delta \mathbf{\hat{\sigma}} = \mathbf{J}^T \mathbf{\Sigma}_n 
 	(\mathbf{J} \mathbf{\Sigma}_p \mathbf{J}^T + \mathbf{\Sigma}_p)^{-1} \mathbf{b}. 
 \end{equation}
-Where $\mathbf{\Sigma}_n$ and $\mathbf{\Sigma}_p$ are covariance matricies that 
+Where $\mathbf{\Sigma}_n$ and $\mathbf{\Sigma}_p$ are covariance matrices that 
 incorporate \emph{a priori} information. 
-$\mathbf{\Sigma}_n$ representes covarience in the data space and weights noise 
+$\mathbf{\Sigma}_n$ represents covariance in the data space and weights noise 
 contribution to reconstructed images, and
-$\mathbf{\Sigma}_n$ representes covariance in the image space, and 
+$\mathbf{\Sigma}_n$ represents covariance in the image space, and 
 controls regularization \parencite{adler_electrical_1996}.
 The term $ \mathbf{J}^T  \mathbf{\Sigma}_n
 (\mathbf{J} \mathbf{\Sigma}_p \mathbf{J}^T + \mathbf{\Sigma}_p)^{-1} $ is also called the 
@@ -289,15 +295,18 @@ Conductivity distributions can be solved using the reconstruction matrix using t
 \begin{equation} \label{eq:rm_solve}
 	\Delta \mathbf{\hat{\sigma}} = \mathbf{R} \mathbf{b}. 
 \end{equation}
+In reconstructed EIT images, the conductivity is typically represented in arbitrary units 
+of $\Delta \text{Z}$ representing a change in impedance. Due to the reconstruction algorithms, it is not
+feasible to calculate the units of conductivity from the reconstructed image. 
 
 There are several techniques used to calculate error weighting and prior information represented by 
-$\mathbf{W}$,
+$\mathbf{\Sigma}_n$ and $\mathbf{\Sigma}_p$,
 such as the NOSER algorithm \parencite{cheney_noser_1990}. There are also 
 techniques that have been specifically designed 
 to compensate for the limitations and characteristics of EIT systems 
 such as GREIT \parencite{adler_greit_2009}.
 
-\subsubsection{Image Reconstruction with GREIT}
+\subsubsection{Image Reconstruction With GREIT}
 
 GREIT (Graz consensus Reconstruction algorithm for EIT) is 
 a consensus algorithm that is used to reconstruct EIT images 
@@ -386,7 +395,7 @@ accuracy improvements of up to 30\% for small
 targets \parencite{pilkington_utilization_1989}.
 Recent simulations in 2D have shown an increase in reconstruction 
 accuracy, amplitude response, position error, and resolution
-\parencite{nasehi_tehrani_modelling_2012,nasehi_tehrani_evaluation_2012}
+\parencite{nasehi_tehrani_modelling_2012,nasehi_tehrani_evaluation_2012}.
 
 A clinical evaluation of EIT found that the amplitude of cardiosynchronous signals 
 in EIT measurements was 6 times larger when placing 2 of 16 total electrodes in 
@@ -400,9 +409,25 @@ internal electrodes
 
 Despite several promising simulation results using internal electrodes, the clinical advantage
 has not been realized. 
-*****
-but internal electrodes have not been widely used clinically. 
-**** Conversations with collegues *** at least 2 sentences.
+Internal electrodes are a challenging problem. Simulation studies 
+in 2D have shown that internal electrodes should improve sensitivity, 
+but there have been no studies that show these improvements in reconstruction 
+accuracy in-vivo. Conversations with colleagues suggest that the high 
+sensitivity near the internal probe it one of the causes of this issue, 
+and recently published work has suggested that movement of the internal 
+probe may contribute significantly to this 
+error \parencite{nguyen_electrical_2020}. 
+Some other factors that may contribute to the error using 
+internal electrodes are the imbalance of sensitivity that 
+worsens the ill-posed nature of EIT image reconstruction and 
+contact of the internal electrodes on the esophagus. 
+\Fref{chap:chapter-7} aims to determine the contribution of motion of the 
+internal probe of on reconstructions using internal electrodes and 
+presents a technique to correct for error introduced by motion of the 
+internal probe. This thesis presents uses this correction technique to 
+generate reconstructions of ventilation in-vivo, and compares currently 
+available reconstruction algorithms. 
+
 While studies show an increased sensitivity to cardiosynchronous
 EIT signals, the source of these signals is not clear, and the impact of movement 
 on the internal electrodes is not known. 

@@ -10,28 +10,33 @@
 
 \section{Introduction}
 One major challenge of EIT imaging is that the geometry of the 
-external boundary where the elctrodes are placed is unknown. 
-Medical images of patients can provide additional spatial information 
+external boundary where the electrodes are placed is unknown. 
+Medical images of patients (such as CT images) can provide 
+additional spatial information 
 on patient geometry for the external boundary and location of organs. 
-Recent work has shown that using a custom mesh has improved 
-EIT estimate of lung inhomogeneity \parencite{yang_lung_2021} in 
-ARDS patients, but generating custom meshes manually is not always feasible. 
-Automatic segmentation is also not always reliable. 
+Recent work has shown that using a custom mesh can improve
+EIT estimates of lung inhomogeneity \parencite{yang_lung_2021} in 
+ARDS patients, but generating custom meshes manually is not always feasible,
+and automatic segmentation of CT images is not always reliable. 
 This chapter uses diagnostic CT images from 4 subjects to design and test 
-a tool to create custom meshes from CT geometry. 
-Manual segmentation can be very time consuming, but automatic segmentation is 
-not always perfect and can result in errors which could result in inaccurate meshes. 
-In this chapter we combine automatic image segmentation with a manual validation stage 
-to identify an accurate boundary for the body surface and lungs. 
+a tool to create custom meshes for each patient. 
+Manual segmentation of CT images can be very time consuming, 
+but unsupervised automatic segmentation does not always perform reliably 
+and can result in inaccurate meshes. 
+In this chapter we combine automatic image 
+segmentation with a manual validation stage 
+to identify an accurate boundary of the body surface and lungs. 
 Once the segmentation is verified, a mesh with custom lung regions is generated to 
 allow for EIT reconstruction on a personalized mesh. 
-A personalized mesh is expected to improve sensitivity to impedance changes in specific
-regions, and higher spatial accuracy. Higher spatial accuracy in 
+A personalized mesh is expected to increase spatial accuracy 
+in reconstructed EIT images. 
+Higher spatial accuracy in 
 identified organs and regions of interest could allow for 
 easier isolation of the perfusion signal, and more accurate 
-measures of ventilation with EIT.
+measures of perfusion and ventilation with EIT.
 Motivated by the work presented by \citeauthorandyear{yang_lung_2021},
-the work in this chapter focuses using custom meshes to improve sensitivity 
+the work in this chapter focuses using custom meshes to improve measures 
+of ventilation
 in the lungs.  We hypothesize this might be able to  
 better guide ventilation and improve treatment outcomes 
 for patients with acute respiratory distress syndrome (\acrshort{ards}).
@@ -78,20 +83,20 @@ images~\parencite{grychtol_impact_2012}. The correct
 lung boundary is also required to calculate metrics like GI
 index~\parencite{zhao_evaluation_2009}.
 Incorrectly modelling the boundary and lung area when investigating 
-regional homogeneity can lead to an incorrect GI 
+regional homogeneity can also lead to an incorrect GI 
 estimate \parencite{yang_lung_2021}. 
 \citeauthorandyear{yang_lung_2021} found that 
 a mesh with custom segmented external and lung boundaries 
-was more sensitivite to changes in lung condition using GI 
+was more sensitive to changes in lung condition using GI 
 compared with generic models.
 This suggests a custom mesh with more defined lung regions 
 may also improve sensitivity to lung-based pulsatility and 
 improve measures of perfusion. 
-While GI index is a valuable paremeter, is does not 
+While GI index is a valuable parameter, it does not 
 give a direct indication of the spatial information in EIT reconstructions.
-In this chapter the center of ventilation is used instead 
+In this chapter the centre of ventilation is used instead 
 to compare between EIT recordings and the ventilated region extracted
-from CT iamges. This metric is used to determine if 
+from CT images. This metric is used to determine if 
 a ventilation parameter measured on a custom mesh can be more accurate than 
 when generic meshes are used.
 
@@ -105,16 +110,16 @@ true boundary of the lungs. \Fref{fig:raw-ct} depicts unprocessed CT slices
 of the 4\textsuperscript{th} intercostal space from 4 subjects with
 ARDS. This figure highlights the challenges  of automatically 
 segmenting lung tissue across several subjects. 
-In some CT images, the arms obscure the external boundary; in other 
-CT images partial or total occlusions 
+In some CT images, the arms obscure the external boundary; in 
+others, partial or total occlusions 
 mask the true lung boundary.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{chapter5-CT_to_mesh/imgs/raw_ct_imgs.png}
 	\caption[Raw CT images at the 4\textsuperscript{th} intersoctal space]{\label{fig:raw-ct}%
-	Raw CT data from 4 subjects  taken at the 4\textsuperscript{th} intercostal space.
-	This image highlights the challenges with automatic segmentation of the lung and external boundary. 
+	This figure shows raw CT data from 4 subjects  taken at the 4\textsuperscript{th} intercostal space.
+	These images highlight the challenges with automatic segmentation of the lung and external boundary. 
 	In some subjects the external boundary is obscured by the arms, and in other subjects the 
 	true lung boundary is masked by occlusions.
 	}
@@ -127,19 +132,19 @@ This tool processes and automatically segments the external and lung boundaries
 in diagnostic CT images, 
 then presents them for manual correction 
 to create custom EIT models. 
-The goal of this chapter is to generate custom models that improve sensitivity 
-in the lung regions to produce custom, accurate 
-meshes. 
-These meshes may facilitate real-time, individualized ventilation
+The goal of this chapter is to generate custom models that improve reconstruction 
+accuracy
+in the lung regions. 
+These models may facilitate real time, individualized ventilation
 monitoring for ARDS patients.  
 
 \section{Methods}
-This section presents the methodolgy for:
+This section presents the methodology for:
 \begin{itemize}
 	\item Automatic segmentation of diagnostic CT images (\fref{sec:auto-segment})
 	\item Design of a manual segmentation correction tool (\fref{sec:correct-segment})
 	\item Mesh generation (\fref{sec:mesh-gen})
-	\item Comparison of ventilation center of mass 
+	\item Comparison of ventilation centre of mass 
 	between generic and custom EIT models (\fref{sec:gi-scores})
 \end{itemize}
 
@@ -158,10 +163,9 @@ This section presents the methodolgy for:
 
 \Fref{fig:segment_overview} shows a summary of the mesh generation process from raw diagnostic CT 
 data to a custom mesh based on the geometry of the patient.
-First, CT images are acquired, then verified or corrected, and finally a custom mesh is created.
-For image segmentation and the manual correction interface,
+First, CT images are acquired and automatically segmented. Then they are verified or corrected, and a custom mesh is created.
 Matlab 2021a (Mathworks, USA) with the 
-image-processing toolbox was used.
+image-processing toolbox was used for the image segmentation and manual correction interface.
 Mesh generation and reconstruction was performed with 
 EIDORS 3.10~\parencite{adler_eidors_2017} using Matlab 2019b.
 At the time of writing Matlab 2019b was required to 
@@ -173,26 +177,25 @@ graphical user interface \acrshort{gui}.
 Automatic segmentation of lung regions in ARDS patients is challenging due to the variability
 in lung tissue intensity, and the presence of fluid or collapsed lung regions. 
 In some patients the lung regions were not visible in the image and even manual
-correction of the segmentation required estimation. 
-This automatic technique identifies the chest cavity using several adjacent slices to
+correction of the segmentation required approximation. 
+This project uses an automatic technique to identify the chest cavity using several adjacent vertical CT images to
 locate the ribs.
 Even when no lung is visible in the image, this produces a starting point
 close to the expected boundary which reduces correction time. 
-This tool is designed to segment the true lung boundary as closely as possible to 
-simplify manual correction.
+This tool is designed to approximate the true lung boundary as closely as possible to 
+simplify manual correction if the lungs cannot be segmented.
 If no ribs or lung are detected, ellipses are placed within the boundary 
 close to the expected lung location that 
 can be corrected manually.
 
-The automatic segmentation uses a diagnostic CT image 
+The automatic segmentation step uses a diagnostic CT image 
 with the slice corresponding to the 4\textsuperscript{th} intercostal space 
 identified. 
 To begin segmentation, the user must select the series of CT images they 
 wish to segment, and the frame number that corresponds to the 4th intercostal 
 space. For the 4 test subjects, the 4\textsuperscript{th} 
 intercostal space was identified manually using
-3D Slicer 4~\parencite{fedorov_3d_2012}, as the space between the
-4\textsuperscript{th} and 5\textsuperscript{th} ribs underneath the arm.
+3D Slicer 4~\parencite{fedorov_3d_2012}. 
 This location corresponded to the electrode belt placement for EIT measurements.
 
 A detailed algorithmic outline of the automatic segmentation process is 
@@ -311,8 +314,8 @@ Although the automatic segmentation was carefully designed to accurately segment
 lungs, there were often cases where manual correction was required. To ensure accurate
 models were generated, an interface for manual correction was created. 
 This tool allowed the user to correct the boundary for a selected CT slice. 
-60 control points were overyaled on the CT slice to facilitate correction; 
-20 points for each of the lungs and for the external 
+Sixty control points were overlaid on the CT slice to facilitate correction; 
+Twenty points for each of the lungs and for the external 
 boundary.
 
 The segmentation correction tool was designed to save the segmentation with information
@@ -330,7 +333,7 @@ next loaded.
 An option was also added to manually input an adjustment value for the automatic
 segmentation of the ribs. If no ribs were detected during automatic segmentation,
 an adjustment value could be added to increase or decrease the image 
-binarization threthold. 
+binarization threshold. 
 This was not needed as the ribs were successfully identified in all test patients.
 The software was also designed to give informative error messages 
 to enable troubleshooting, letting the user know if no ribs or no lungs 
@@ -341,7 +344,7 @@ were detected.
 	% Use the following line with your images (pdf preferred)
 	\includegraphics[width=\textwidth]{chapter5-CT_to_mesh/imgs/SegmentationAppSetup.pdf}
 	\caption[Manual segmentation data loading]{\label{fig:seg_load}%
-	The data loading stages for the manual segmentation program are shown.
+	The data loading stages for the manual segmentation program are shown above.
 	A) A folder of patient data is selected. B) The desired CT data series is selected.
 	C) The initial segmentation frame of the 4\textsuperscript{th} intercostal space 
 	is loaded from the patient settings file or input by the user. Optionally, an 
@@ -362,7 +365,7 @@ the automatic segmentation. To segment, the user would click \emph{Edit Segment}
 then select and move each point that required correction. The first click by the user
 selected the nearest point, and the subsequent click placed the point at the new location. 
 Buttons on the side allowed the user to 
-select the CT slice for correction, save the segmentation, and generate a mesh. 
+select the vertical CT slice for correction, save the segmentation, and generate a mesh. 
 
 \begin{figure}[H]
 	\centering
@@ -401,11 +404,11 @@ The \verb!mk_extruded_model!
 function~\parencite{grychtol_fem_2013}
 in EIDORS v3.10~\parencite{adler_eidors_2017} was used to extrude the boundary 
 of a single segmentation to a height of 20 cm.
-The 4\textsuperscript{th} intercostal space segmentation was used for extrusion.
+The segmentation corresponding to the 4\textsuperscript{th} intercostal space was used for extrusion.
 The lungs were specified 2 ways, the first method extruded 2D lung boundaries to form a 3D 
 lung region, 
-and the second specified the actual 3D lung boundary from the segmentation results.  
-To select a 3D lung, we selected all elements of the extruded mesh contained whin an 
+and the second specified a 3D lung boundary  that varied over the height of the model based on the segmentation results.  
+To create an accurate 3D lung, we selected all elements of the extruded mesh contained within an 
 alpha shape representation of the lung segmentation with an alpha value of 2 cm.
 
 To generate a generic mesh for comparison the \verb!mk_library_model! function in 
@@ -416,7 +419,7 @@ and a generic model of a human thorax. The conductivity of the lung regions was 
 All images were reconstructed using GREIT for 2D
 imaging ~\parencite{adler_greit_2009}. For the GREIT 
 reconstructions the noise figure weighting was set to 0.5, 
-500 targets with a radius of 5 cm were used for training targets.
+and 500 targets with a radius of 5 cm were used for training.
 
 \subsection{Evaluation on ARDS Patients} \label{sec:gi-scores}
 
@@ -424,7 +427,7 @@ Diagnostic CT images were acquired from the
 intensive care unit (ICU)
 at the Sichuan Provincial People's Hospital
 in Chengdu, China.
-The resarch was approved
+The research was approved
 by the Ethics Committee of Sichuan Academy 
 of Medical Sciences \& Sichuan Provincial People's Hospital
 (protocol \#201617). 
@@ -436,18 +439,19 @@ with a 2D arrangement of 16 electrodes placed at the
 4\textsuperscript{th} intercostal space. 
 All patients were mechanically ventilated
 at the time of recordings, but the exact 
-ventilation parameters were unknown.
+ventilation parameters are unknown.
 
 To evaluate the effect of the custom models on lung sensitivity,
-the centre of mass was computed for both the ventilation region detected in 
+the centre of mass was computed for both the ventilated region detected in 
 CT images, and the breath volume reconstructed in CT images. 
 The centre of mass was calculated from EIT images by removing all 
 positive changes in the image, then locating the centre of mass 
-of all pixels that were over 50\% of the ventilation signal amplitude. 
+of all pixels that were greater than 50\% of the ventilation signal amplitude. 
 The breath used for the calculation was an ensemble average
 of all breaths in the recording.
 The error in the centre of mass was calculated between the EIT reconstructed breath 
 and the CT segmentation, in number of pixels.
+In this chapter a pixel represents between 0.5-2cm depending on the patient size. 
 
 %The GI index was also calculated
 %between the generic and custom models with 2D extruded geometry.
@@ -518,39 +522,81 @@ for subject C (in \fref{fig:lung-seg-results}).
 	}
 \end{figure}
 
-For each patient there was a single EIT recording ranging from 30 -- 60 seconds in length.
-To determine the improvement for the new customized meshes the ventilation pattern 
-from the CT image was compared to the reconstructed ventilation on 4 types of models.
+For each patient there was a single EIT recording ranging from 30 -- 60 seconds 
+in length.
+The ventilation pattern 
+from the CT image was compared to the reconstructed ventilation 
+on 4 types of models.
 The 4 types of meshes compared are pictured in \fref{fig:fem-results}. The first mesh was
 cylindrical with approximate lung regions, the second mesh was a generic model 
 for an adult thorax, and the final two meshes were created from the segmentations. 
 To compare the performance across all models, the centre of mass  was 
 compared between the CT-imaged ventilation and the EIT-imaged ventilation.
-The mesh with 2D extruded lung regions resulted in a mesh that most closely matched 
-the segmentation, since selecting a 3D lung regions caused some of the
+The mesh with 3D extruded lung regions resulted in a mesh that most closely matched 
+the segmentation, since selecting a complex 3D lung region caused some of the
 spatial information from the lung segmentation to be lost.
 
-\begin{figure}[H]
-	\centering
-	% Use the following line with your images (pdf preferred)
-	\includegraphics[width=\textwidth]{chapter5-CT_to_mesh/imgs/center_of_vent_PT04.pdf}
-	\caption[Example ventilation distributions]{\label{fig:c-of-m-results}%
-	Example ventilation distribution for subject C (from \fref{fig:lung-seg-results}).
-	Column A and B are the generic models from the EIDORS library. 
-	Columns C and D show the custom models with 2D lungs (C) and 3D lung regions (D).
-	Column E shows the distribution of the ventilated lung as segmented from the CT image. 
-	}
-\end{figure}
-
-Reconstructed images in \fref{fig:c-of-m-results}
+Reconstructed images in \fref{fig:c-of-m-results_a}, 
+\fref{fig:c-of-m-results_b},
+\fref{fig:c-of-m-results_c} and
+\fref{fig:c-of-m-results_d}
 show a small difference in ventilated regions 
 and centre of mass between custom and generic models. There is a 
 noticeable change in ventilation distribution using the circular model, but the 
 generic thorax model and the custom models show very similar results. 
 There is also a slight shape difference in the ventilation distribution between the generic thorax model 
-and custom models, but there is very little measurable difference. 
+and custom models, but there is little measurable difference. 
 
-Error in the centre of mass was calculated across across all models for each subject 
+\begin{figure}[H]
+	\centering
+	% Use the following line with your images (pdf preferred)
+	\includegraphics[width=\textwidth]{chapter5-CT_to_mesh/imgs/center_of_vent_PT02.pdf}
+	\caption[Example ventilation distributions A]{\label{fig:c-of-m-results_a}%
+	Example ventilation distribution for subject A (from \fref{fig:lung-seg-results}).
+	Column A and B are the generic models from the EIDORS library. 
+	Columns C and D show the custom models with extruded 3D lungs (C) and complex 3D lung regions (D).
+	Column E shows the distribution of the ventilated lung as segmented from the CT image. 
+	}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	% Use the following line with your images (pdf preferred)
+	\includegraphics[width=\textwidth]{chapter5-CT_to_mesh/imgs/center_of_vent_PT03.pdf}
+	\caption[Example ventilation distributions B]{\label{fig:c-of-m-results_b}%
+	Example ventilation distribution for subject B (from \fref{fig:lung-seg-results}).
+	Column A and B are the generic models from the EIDORS library. 
+	Columns C and D show the custom models with extruded 3D lungs (C) and complex 3D lung regions (D).
+	Column E shows the distribution of the ventilated lung as segmented from the CT image. 
+	}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	% Use the following line with your images (pdf preferred)
+	\includegraphics[width=\textwidth]{chapter5-CT_to_mesh/imgs/center_of_vent_PT04.pdf}
+	\caption[Example ventilation distributions C]{\label{fig:c-of-m-results_c}%
+	Example ventilation distribution for subject C (from \fref{fig:lung-seg-results}).
+	Column A and B are the generic models from the EIDORS library. 
+	Columns C and D show the custom models with extruded 3D lungs (C) and complex 3D lung regions (D).
+	Column E shows the distribution of the ventilated lung as segmented from the CT image. 
+	}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	% Use the following line with your images (pdf preferred)
+	\includegraphics[width=\textwidth]{chapter5-CT_to_mesh/imgs/center_of_vent_PT05.pdf}
+	\caption[Example ventilation distributions D]{\label{fig:c-of-m-results_d}%
+	Example ventilation distribution for subject D (from \fref{fig:lung-seg-results}).
+	Column A and B are the generic models from the EIDORS library. 
+	Columns C and D show the custom models with extruded 3D lungs (C) and complex 3D lung regions (D).
+	Column E shows the distribution of the ventilated lung as segmented from the CT image. 
+	}
+\end{figure}
+
+
+Error in the centre of mass was calculated across all models for each subject 
 as shown in \fref{fig:c-of-m-error}. 
 The error is estimated as the distance in pixels 
 between the centre of mass of the ventilated lung from the CT estimate and the 
@@ -560,32 +606,31 @@ centre of mass of the reconstructed breath.
 	\centering
 	% Use the following line with your images (pdf preferred)
 	\includegraphics[width=\textwidth]{chapter5-CT_to_mesh/imgs/error_boxplot.pdf}
-	\caption[Example ventilation distributions]{\label{fig:c-of-m-error}%
-	Example ventilation distribution for subject C (from \fref{fig:lung-seg-results}).
-	Column A and B are the generic models from the EIDORS library. 
-	Columns C and D show the custom models with 2D lungs (C) and 3D lung regions (D).
-	Column E shows the distribution of the ventilated lung as segmented from the CT image. 
+	\caption[Center of mass error]{\label{fig:c-of-m-error}%
+	This figure shows error in the centre of mass measured in pixels for each of the 4 model types investigated.
+	From left to right are the circular, generic, 3D extruded, and complex 3D lung region models. 
+	One pixel represents between 0.5-2cm depending on the patient and CT configuration.
 	}
 \end{figure}
 
 Based on this small sample size it seems that the custom extruded models show some improvement 
 over generic EIT models. 
 All body-shaped models performed better than the cylindrical model 
-as measured by error in the center of ventilation,
-and there was little difference between the generic model and the model with 3D lung regions. 
+as measured by error in the centre of ventilation,
+and there was little difference between the generic model and the model with complex 3D lung regions. 
 %The centre of mass error was not significantly different across all models for each of the subjects. 
 %The average error for the circular model was slightly higher than the customized geometry, but for 
 %all models the centre of mass, and shape of the ventilation distribution was similar. It is not clear 
 %that custom models improved reconstruction accuracy of breath reconstructions in the EIT images. 
-There are several potential factors that could contribue to the similarity in performance across
+There are several potential factors that could contribute to the similarity in performance across
 most models. 
 
 \section{Discussion}
 The goal of this chapter was to create a tool to automatically segment CT images 
-to improve lung sensitivity. 
+to improve lung reconstruction accuracy. 
 We believe this may help to enhance individualized ventilation monitoring for ARDS patients. 
 An automatic segmentation algorithm was developed to give a baseline segmentation of the lungs which 
-gave an accurate starting point of the true lung boundary. A tool for manual correction was designed 
+gave an approximate starting point for the true lung boundary. A tool for manual correction was designed 
 that enabled quick, accurate corrections of automatically generated CT images. 
 Segmented images were used to generate meshes with accurate boundary  shapes and lung outlines. 
 
@@ -594,20 +639,22 @@ Segmented images were used to generate meshes with accurate boundary  shapes and
 %did not show this improvement. 
 Previous studies looked at the effect of model accuracy on GI index and found that a more 
 accurate body surface and lung boundary improved results \parencite{yang_lung_2021}. 
-The results presented here show only a small improvement when examining difference in  center
+The results presented here show only a small improvement when examining difference in  the centre
 of ventilation. A large sample size is required to determine if the improvement is consistent.
 One factor that was different between the two studies was the value 
-of lung conductivity. \citeauthorandyear{yang_lung_2021} used a conductivity value of 1.3 for the lung 
-tissue relative to the model background. This is atypical since the conductivity of lung tissue is 
-considerably lower than other tissues in the body. In this chapter a lung conductivity of 0.7 was 
-used in the model, using a value of 
+of lung conductivity. \citeauthorandyear{yang_lung_2021} used a conductivity value of 1.3 times the background conductivity for the lung 
+tissue. This is atypical since the conductivity of lung tissue is 
+considerably lower than other tissues in the body. 
+In this chapter a lung conductivity of 70\% of the 
+background conductivity was
+used. Using a value of 
 1.3 times the background 
 conductivity did not decrease the centre of mass error across custom models.
-There was also a difference in center of ventilation error when comparing 
+There was also a difference in the centre of ventilation error when comparing 
 between both custom models. One potential reason is that when selecting the elements that were
-contained within the 3D lung regions, the boundary of the lungs was distorted slightly and a less acurate
+contained within the complex 3D lung regions, the boundary of the lungs was distorted slightly and a less accurate
 representation of the lungs was given. 
-If images were acquired with a 3D arrangement of electrodes, the use of a 3D volume to represent the lungs 
+If images were acquired with a 3D arrangement of electrodes, the use of a complex 3D volume to represent the lungs 
 could have more of an effect.
 
 There are several other factors that may contribute to the mismatch between the 
@@ -617,15 +664,15 @@ was not known. The EIT belt was not in position during the CT scan, so  there wa
 patient position and posture were slightly changed. Although this may contribute to a slightly different
 shape of the thorax, it is not likely to drastically change the boundary of the chest cavity. 
 One of the larger factors is likely the unknown locations of the electrodes. Since the exact location 
-of the electrode is unknown, the 16 electrodes were placed evenly around the thorax. 
-Incorrect electrode locations can have a large impact on the resulting EIT
-image, resulting in artefact and lower reconstruction accuracy \parencite{boyle_impact_2011}.
+of the electrode is unknown, the 16 electrodes were  places evenly around the thorax in the model. 
+Modelling the electrode locations incorrectly can have a large impact on the resulting EIT
+image, causing artefact and lower reconstruction accuracy \parencite{boyle_impact_2011}.
 Since the CT images acquired 
 contain spatial information, there is potential to improve accuracy of the 
 electrode placement on the models. The EIT system that was used has several available belts with 
 different electrode spacing and points of attachment. If the user was able to select 
-the belt used and the attachment point or tightness in the software, 
-the electrode locations could be more easily 
+the belt used and the electrode spacing in the software, 
+the electrode locations could be more accurately
 approximated. Alternatively, an image or CT with the electrode belt in place could allow
 precise estimation of the electrode location and spacing. It may also 
 be feasible to reconstruct the electrode location partially using a movement jacobian 
@@ -639,44 +686,53 @@ from 4 patients, and validation across a wider dataset is required to ensure sta
 of the automatic segmentation and ease of editing. Improvements to the appearance of the interface and 
 documentation must also be added before the software is easy to use in a clinical setting. 
 Work is currently underway to obtain several more sets of CT and EIT data to validate the automatic 
-segmentation and manual correction steps. 
+segmentation and manual correction steps. Once the number of patients is increased, 
+the project will use these meshes to build a library of meshes that can be extended for 
+use on patients without CT. A library of meshes coupled with machine learning based on physical 
+attributes could allow for custom meshes to be used on patients even when no CT data is available. 
 
-It was noted in the reconstructions that when using the 3D lung region model there was a
-slight reduction in the amplitude of a conductive artefact that appeared in the center of
-the images. It is possible that the the 3D aspect of the model allows the 3D path of the current
+When using the complex 3D lung region model, there was a
+slight reduction in the amplitude of a conductive artefact that appeared in the centre of
+the images. It is possible that the 3D aspect of the model allows the 3D path of the current
 to be modelled more accurately~\parencite{adler_electrical_2017}, but the 
 extent of the benefit is limited when using a 2D arrangement of 
-electrodes~\parencite{grychtol_3d_2016}.
+electrodes~\parencite{grychtol_3d_2016}. The segmentation techniques could be used to 
+create an even further customized model with different conductivity regions assigned to 
+fluid in the lungs and collapsed regions. While this could give more spatially accurate 
+reconstructions, we still do not expect a high degree of spatial accuracy using EIT. The 
+advantage of EIT is primarily the high temporal resolution. Additionally, 
+the collapsed regions and liquid in the lung may move over time. Identifying the entire lung 
+region allows us to track changes in impedance within the lung region.
 
 When creating meshes using the \verb!ng_mk_extruded_model! in EIDORS \parencite{grychtol_fem_2013}, 
 accurate models with a good representation of the boundary are created, but 
 Netgen occasionally fails to mesh the electrodes on models. We presume this is 
 due to irregular and concave curves.
 This occurred several times on the segmented data, so a more robust meshing
-or electrode placement technique will be required. Placing 3D lung boundaries helped to reduce 
+or electrode placement technique will be required. Placing complex 3D lung boundaries helped to reduce 
 errors that were introduced by tight corners on lung segmentations, but electrode and boundary meshing
 errors were still present in this model. 
 
 \section{Summary}
 
-The diagnostic CT images required for ARDS diagnosis are an excellent source of spatial 
-information about the size and locaiton of organs in a subject. 
-A segmentation and boundary 
-editing tool
-was developped to generate accurate meshes of the external and lung
+The diagnostic CT images required for ARDS patients are an excellent source of spatial 
+information about the size and location of organs in a subject. 
+A segmentation and 
+boundary-editing tool
+was developed to generate accurate meshes of the external and lung
 boundaries from CT images. 
 The custom meshes with an extruded boundary show a slight reduction in error 
-when comparing center of ventilation to the CT images.
+when comparing centre of ventilation to the CT images.
 In ARDS patients with very poor lung health, segmentation of the actual lung boundary is 
 challenging. However, with a multi-step process including automatic segmentation and 
 manual verification, we generated accurate customized meshes for 
 a small number of ARDS patients. 
-Small benefits were observed when reconstructing ventiltion images 
+Small benefits were observed when reconstructing ventilation images 
 on custom meshes, and additional steps to improve the modelled electrode 
 locations could help to further improve reconstructions. 
 Work is currently underway to validate and improve the segmentation tool on 
 a larger dataset of ARDS patients. 
-Methods to reduce the impact of sentisitivity to electrode 
+Methods to reduce the impact of sensitivity to electrode 
 location error on reconstructions, or correctly identify 
 correct electrode locations could help to further improve this technique. 
 

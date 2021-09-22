@@ -1,8 +1,8 @@
 \chapter{Background}
 This section presents background on the 
-origin of perfusion signals, reviews the current techniques for lung perfusion and hemodynamic
+origin of perfusion signals, reviews current techniques for lung perfusion and hemodynamic
 monitoring, and provides an overview 
-of the state of EIT as used for thoracic imaging and monitoring.
+of EIT as used for thoracic imaging and monitoring.
 
 \section{Impedance Imaging}
 \label{sec:impedance_imaging}
@@ -11,7 +11,7 @@ Originally introduced as a technique to image below the earth’s surface,
 current was transmitted between two electrodes placed into the ground and any 
 anomalies in subsurface conductivity produced deviation 
 in the equipotential lines. 
-By using multiple locaitons for current injections and measurements, 
+By using multiple locations for current injections and measurements, 
 and the known 
 electrical properties of geological structures, Conrad Schlumberger identified
 features of underground geological structures~\parencite{allaud_schlumberger_1977}.
@@ -28,7 +28,7 @@ brain imaging~\parencite{holder_electrical_1992}.
 \begin{figure}[H]
     \centering
    \includegraphics[width=\textwidth]{chapter2-background/imgs/current_and_equipotential_lines.pdf}
-   \caption[Current and Equipotential lines]{\label{fig:cur_equip_line} 
+   \caption[Current and equipotential lines]{\label{fig:cur_equip_line} 
    (A) A body comprising tissues of different conductivity, (B) Electrodes are placed on the surface 
    and current is injected between a pair or electrodes. The current pathways are indicated 
    by the blue lines. (C) The resulting equipotential lines within the body are shown in red.}
@@ -49,8 +49,8 @@ resulting in a
 measurable variation in impedance during respiration~\parencite{eyuboglu_vivo_1989}. 
 There are also other 
 significant sources of impedance change that make EIT signal interpretation 
-challenging. For example, simulations have attributed up to 20
-percent of the respiratory signal to the effect of 
+challenging. For example, simulations have attributed up to 20\% 
+of the respiratory signal to the effect of 
 chest expansion and movement of the chest 
 wall~\parencite{adler_impedance_1994}.
 
@@ -66,7 +66,7 @@ unclear~\parencite{patterson_impedance_2010,nguyen_review_2012}.
 A continuous flow of blood alone is insufficient 
 to induce a significant impedance change, 
 as the volume and concentration of the conductive medium is unchanged. 
-The movement of structures within the body may contribe 
+The movement of structures within the body may contribute 
 significantly to the measured impedance 
 change \parencite{braun_limitations_2018}.
 Any impedance-based measure of perfusion relies on the cardiosynchronous 
@@ -83,7 +83,7 @@ with blood, and the systole, when contraction of the heart pumps blood to
 the lungs and all other body systems~\parencite{pappano_cardiovascular_2019}. 
 A simplified anatomy of the heart is 
 presented in \fref{fig:anatomical_heart}. 
-Since ECG recordings are frequently used to synchronize 
+Since \acrshort{ecg} recordings are frequently used to synchronize 
 EIT data, it is helpful to look at the timing of the cardiac cycle as it 
 relates to features of ECG traces. An example ECG waveform is pictured in 
 \fref{fig:cardiac_bioimpedance}. 
@@ -91,12 +91,13 @@ relates to features of ECG traces. An example ECG waveform is pictured in
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.6\textwidth]{chapter2-background/imgs/heart_drawing.pdf}
-    \caption[Sketch of the anatomical heart]{ The pathway of the blood
-    from entry to the heart, to the descending aorta is indicated by the
-    letters. Deoxygenated blood enters the heart through the right atrium
+    \caption[Sketch of the anatomical heart]{A sketch of the heart prepared for this thesis
+    shows the pathway of the blood
+    from entry to the heart, to the descending aorta. 
+    Deoxygenated blood enters the heart through the right atrium
     (A), where it is moved to the right ventricle (B). From there it passes through 
     the pulmonary artery (C) into the lungs where it perfuses and is oxygenated. 
-    Blood return from the lungs through the pulmonary veins (D), then enters 
+    Blood returns from the lungs through the pulmonary veins (D), then enters 
     the left atrium (E). Finally, the blood is pumped from the left
     ventricle (F) to the rest of the body through the aorta, and the
     descending aorta (G).}
@@ -112,14 +113,14 @@ Blood enters the atrium
 on the right side of the heart through the
 superior and inferior vena cava and on the left side of the heart, the atrium is 
 filled by oxygenated blood from the lungs through the pulmonary 
-veins~\parencite{pappano_cardiovascular_2019}.
+veins \parencite{pappano_cardiovascular_2019}.
 Next is the atrial contraction during which time the atria pump additional
 blood into the ventricles, and the ventricular volume and pressure 
 are maximized. At the peak of the ventricular volume, the ventricles contract 
 and depolarize which corresponds to the QRS complex~\parencite{pollock_physiology_2021}. 
 On the right side of the heart, deoxygenated blood is pumped 
 to the lungs where it perfuses into the lung tissue; on the left side of 
-the heart oxygenated blood is pumped to the rest of the body through the 
+the heart, oxygenated blood is pumped to the rest of the body through the 
 aorta. The smallest volume in the ventricles occurs after 
 the ventricular repolarization which occurs during the T wave in the ECG.
 
@@ -151,16 +152,18 @@ the ventricular repolarization which occurs during the T wave in the ECG.
 \end{tikzpicture}
 \caption[Example ECG waveform]{ An example ECG waveform to compare electrical signals in the 
 heart to blood volume changes.
-The P wave represents the beginning of the cardiac cycle, when the ventricles begin to fill. The QRS complex
+The P wave represents the beginning of the cardiac cycle, when the ventricles begin to fill. 
+The QRS complex
 corresponds with ventricular depolarization 
 and occurs as the ventricles contract.  The beginning of the QRS complex corresponds with 
 the maximum ventricular volume. The minimum 
-volume in the ventricles occurs after ventricular repolarization, represented by the T wave.}
+volume in the ventricles coincides with the end of the T wave which represents 
+ventricular repolarization.}
 \label{fig:cardiac_bioimpedance}
 \end{figure}
 
 \subsection{Bioimpedance of Perfusion} \label{sec:origins}
-There are several factors that may contribute some part of 
+There are several factors that may contribute to some part of 
 the impedance change during the cardiac cycle. 
 Some of these factors include:
 \begin{itemize}
@@ -175,7 +178,7 @@ Some of these factors include:
     \item Physical deformation of structures due to motion of the heart. The
           motion of the heart can have significant contribution 
           to cardiosynchronous EIT 
-          images~\parencite{proenca_influence_2015,adler_origins_2017}, 
+          images~\parencite{adler_origins_2017}, 
           with simulations showing that heart motion was the 
           main contributor to impedance change originating from
           ventricle~\parencite{proenca_influence_2015}. 
@@ -223,16 +226,16 @@ Perfusion images of the heart can be used to diagnose ischemic
 heart disease \parencite{prvulovich_role_1998}, which is caused by a reduction 
 of blood flow to the heart, typically due to 
 a build-up of plaque in the pulmonary arteries
-\parencite{mendis_global_2011}. Ventilation/perfusion scans can be used in the 
+\parencite{mendis_global_2011}. Ventilation/perfusion (V/Q) scans can be used in the 
 lungs to measure the distribution of perfusion and ventilation in the lungs 
-\parencite{mortensen_lung_2019}. The primary use 
-is to detect mismatches between the ventilation and perfusion to detect pulmonary 
+\parencite{mortensen_lung_2019}. The primary use of V/Q scans
+is to detect mismatches between the ventilation and perfusion to identify pulmonary 
 embolisms \parencite{pioped-investigators_value_1990}.   
 
 Nuclear medicine has been at the forefront of perfusion imaging, but has a long
 acquisition time, and images can be fuzzy and 
 challenging to interpret. 
-Recent developments in \acrfull{ct} and magnetic resonance imaging (\acrshort{mri})
+Recent developments in Computed tomography (\acrshort{ct}) and magnetic resonance imaging (\acrshort{mri})
 yield clearer images and can give metrics 
 regarding blood flow and blood volume over a period of 
 time. 
@@ -251,7 +254,8 @@ explores the advantages and pitfalls of state-of-the-art perfusion monitoring te
 The three primary nuclear medical imaging techniques used for perfusion imaging are 
 single-photon emission computed tomography (\acrshort{spect}), scintigraphy, 
 and positron emission tomography (\acrshort{pet}). 
-Both SPECT and scintigraphy image gamma rays that are emitted from a gamma-emitting radionuclitide
+Both SPECT and scintigraphy image gamma rays that are emitted from a gamma-emitting 
+radionuclitide
 injected into the patient \parencite{mettler_essentials_2006}. 
 The radioisotopes are integrated into drugs 
 that enable them to travel to a specific organ or tissue. 
@@ -286,7 +290,7 @@ required to improve image acquisition time and reduce radiation exposure
 has been shown to give less reliable measures of perfusion \parencite{hur_optimizing_2014}.
 
 PET relies on similar mechanisms to both SPECT and scintigraphy, but uses a different type 
-of radiotracer. PET can be used to image mycardial perfusion using a radiotracer that 
+of radiotracer. PET can be used to image myocardial perfusion using a radiotracer that 
 emits positrons 
 causing gamma rays to be emitted that are detected by gamma cameras. PET has 
 not been used widely due to the higher cost of the system and radiotracers relative to 
@@ -301,12 +305,14 @@ method to image myocardial perfusion \parencite{aljizeeri_ct_2013}.
 
 Contrast-enhanced CT has been used since 1980 to estimate perfusion in the brain 
 \parencite{axel_cerebral_1980}, 
-and has recently been used to image perfusion due to ischemic stroke 
+and has more recently been used to image perfusion due to ischemic stroke 
 \parencite{miles_colour_1991,koenig_perfusion_1998}.
 This technique uses an injection of 25--35 mL 
 of a contrast agent, and the progress of the contrast agent through blood vessels 
-and capillaries near to the brain is imaged over  75--90 seconds. Techniques are typically used to reduce overall 
-radiation exposure, but imaging duration is limited by safety concerns due to radiation exposure
+and capillaries near to the brain is imaged over  75--90 seconds. 
+Techniques are typically used to reduce overall 
+radiation exposure, but imaging duration is limited by 
+safety concerns due to radiation exposure
 \parencite{konstas_theoretic_2009}.
 Constrast-enhanced CT has also been found to be an accurate and cost-effective 
 technique to image myocardial perfusion in cardiovascular disease
@@ -332,16 +338,16 @@ perfusion \parencite{jackson_dynamic_2005}.
 The second technique also uses an injected contrast
 agent. This technique images the transit of a contrast agent as it travels 
 from the blood into a tissue \parencite{sourbron_classic_2013}. In this technique the contrast
-agent is not imaged directly, but it impacts the magnetic properties of 
+agent is not imaged directly, but the injected bolus impacts the magnetic properties of 
 water molecules as it passes resulting in a change in image intensity in regions 
 with contrast agent \parencite{sourbron_classic_2013}. 
-The final technique is atretical spin labelling, which does not rely on 
-an injected contrast agent, but rather applies a  magnetic label to the water 
-in blood and the perfusion is estimated by tracing the flow of this labelled 
+The final technique is arterial spin labelling, which does not rely on 
+an injected contrast agent, but rather applies a  magnetic label to water 
+in the blood. Perfusion is then estimated by tracing the flow of this labelled 
 blood \parencite{koretsky_early_2012}. 
 
 Blood-oxygen-level-dependent imaging (BOLD-contrast imaging) uses blood flow to 
-iamge functional activitiy \parencite{faro_functional_2006}.
+image functional activity \parencite{faro_functional_2006}.
 This technique compares the levels of oxygenated or deoxygenated blood
 that are present in the blood to estimate activity. 
 Active neurons and tissues will have an increased oxygen consumption, 
@@ -374,17 +380,17 @@ lung perfusion since the late 1980s
 \parencite{eyuboglu_vivo_1989,zadehkoochak_pulmonary_1992,brown_blood_1992,frerichs_regional_2002}.
 Since then, various configurations of EIT have been 
 evaluated~\parencite{borges_regional_2012,nguyen_perfusion_2015}.
-Due to the speed and safety of measurement acquisition, EIT might be used to image
+Due to the speed and safety of measurement acquisition, EIT could be used to image
 perfusion in subjects much more frequently than current state-of-the-art techniques.
 
 There are two main ways perfusion-related changes can be imaged with EIT. Like with many 
 perfusion imaging techniques, a contrast agent can be injected to image the transit 
-of blood through vessels and organs, or filtering can be used to extract the portion 
+of blood through vessels and organs, or frequency filtering can be used to extract the portion 
 of the signal related to perfusion.
 To image perfusion using a contrast agent a saline solution is typically used.
 As the concentration of ions in 
-the blood increases, the conducitiviy increases proportionally
-creating measureable contrast
+the blood increases, the conductivity increases proportionally
+creating measurable contrast
 \parencite{sola_non-invasive_2011}.
 Typically a sodium chloride bolus with a concentration between 
 5--20\% is used as a contrast agent for EIT \parencite{nguyen_review_2012}. 
@@ -399,7 +405,7 @@ and SPECT scans.
 When breathing is paused, the signal components related to 
 cardiac activity can be more easily extracted. 
 During apnoea the global impedance signal
-recorded with EIT corresponded to stroke volume
+recorded with EIT has been found to correspond to stroke volume
 %measured using the 
 %thermodilution method with a pulmonary arterial 
 %catheter~
@@ -410,7 +416,7 @@ interest~\parencite{fagerberg_electrical_2009}.
 There is some concern that the perfusion measured 
 during apnoea may not accurately represent 
 true perfusion during regular respiration as the apnoea 
-impacts the regular respiratory cycle~\parencite{leonhardt_electrical_2012}.
+impacts the regular respiratory and cardiovascular cycle~\parencite{leonhardt_electrical_2012}.
 Since 
 apnoea cannot be sustained continuously, there is interest in an alternative method 
 to increase sensitivity to cardiosynchronous changes. 
@@ -418,7 +424,9 @@ to increase sensitivity to cardiosynchronous changes.
 The majority of work on perfusion imaging with EIT has focused on imaging the pulsatile or 
 cardiosynchronous component of EIT data \parencite{nguyen_review_2012}. 
 As discussed in section \fref{sec:origins}, there are many potential sources of 
-the cardiosynchronous signal, and the effect of perfusion-related changes is not well understood. 
+cardiosynchronous signals, and their correlation with 
+perfusion-related changes is not well understood. 
+
 Perfusion had been calculated using digital filtering to extract the related component
 of an EIT signal. 
 \citeauthorandyear{deibele_dynamic_2008} have shown that principal component analysis (PCA) 
